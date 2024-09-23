@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:04:32 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 19:29:30 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 00:44:20 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ struct				s_cmd
 	bool 	invokable;
 
 	int		exit_status;
+
+	char	*err;
 
 	t_eval eval;
 	t_list *tokens;

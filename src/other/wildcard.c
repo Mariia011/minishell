@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:48:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/18 20:15:49 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/09/24 01:15:56 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,8 +150,8 @@ void wildcard_resolve(t_list *tokens, t_shell *shell)
 			if (!empty(survived))
 			{
 				substitute_args(wild, tokens, survived);
-				pop(tokens, wild);
 			}
+			pop(tokens, wild);
 			list_clear(&survived);
 			list_clear(&reqs);
 		}

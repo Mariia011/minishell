@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 18:50:33 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 00:59:46 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ void	__t_command__(t_cmd *cmd)
 	// list_clear(&cmd->tokens);
 	// reset_descriptors(cmd);
 	// free(cmd->descriptors);
-	free(cmd->name);
+	__delete_string(&cmd->name);
+	__delete_string(&cmd->err);
+	__delete_string(&cmd->orig_name);
 	free(cmd);
 }
 

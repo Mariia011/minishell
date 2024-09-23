@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/24 00:31:24 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 00:47:23 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_cmd	*make_command(char *raw_cmd, t_shell *shell)
 	cmd->options = make_list();
 	cmd->args = make_list();
 	cmd->eval = NULL;
+	cmd->err = NULL;
 	cmd->invokable = true;
 	cmd->redirection = 0;
 	cmd->exit_status = 0;
