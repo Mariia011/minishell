@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:35:09 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 15:36:41 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 01:21:09 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@
 // 	curr = first;
 // 	while (curr && curr->prev != last)
 // 	{
-// 		push_back(list, curr->val, NULL);
+// 		push_back(list, curr->val);
 // 		if (is_quoted_token(shell->quoted_tokens, curr))
 // 		{
 // 			save_token(shell, back(list));

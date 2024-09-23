@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:37:44 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/24 00:20:06 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 01:21:28 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	eval_prog(t_cmd *cmd)
 	if (!cmd)
 		__exit(NULL);
 	options_copy = make_list_copy_range(cmd->options, NULL);
-	push_front(options_copy, cmd->name, NULL);
+	push_front(options_copy, cmd->name);
 
 	args_copy = make_list_copy_range(cmd->args, NULL);
 	list_move_back(args_copy, options_copy);

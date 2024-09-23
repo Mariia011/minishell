@@ -6,16 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 22:33:04 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 22:42:50 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 01:20:14 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-
-void	push_back(t_list *list, ...)
+void	va_push_back(t_list *list, ...)
 {
 	va_list	args;
 	char	*arg;
@@ -24,13 +21,13 @@ void	push_back(t_list *list, ...)
 	arg = va_arg(args, char *);
 	while (NULL != arg)
 	{
-		__single__push_back__(list, arg);
+		push_back(list, arg);
 		arg = va_arg(args, char *);
 	}
 	va_end(args);
 }
 
-void	push_front(t_list *list, ...)
+void	va_push_front(t_list *list, ...)
 {
 	va_list	args;
 	char	*arg;
@@ -39,9 +36,8 @@ void	push_front(t_list *list, ...)
 	arg = va_arg(args, char *);
 	while (NULL != arg)
 	{
-		__single__push_front__(list, arg);
+		push_front(list, arg);
 		arg = va_arg(args, char *);
 	}
 	va_end(args);
 }
-#pragma GCC diagnostic pop

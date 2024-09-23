@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:50:58 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 23:48:07 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 01:21:09 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	echo(t_cmd *cmd)
 				back(cmd->options), last_nl));
 	}
 	if (!empty(cmd->options))
-		push_back(cmd->options, "", NULL);
+		push_back(cmd->options, "");
 	echo_arglist(cmd->options);
 	echo_arglist(cmd->args);
 	if (newline)
