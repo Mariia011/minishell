@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:00:33 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/15 01:50:49 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/23 19:38:47 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ enum	e_rdr
 
 enum	e_eval_opcode
 {
+	_nonivokable,
 	_cd,
 	_echo,
 	_env,

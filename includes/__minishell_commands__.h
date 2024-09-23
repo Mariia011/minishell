@@ -6,11 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:04:32 by aamirkha          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/09/23 19:04:30 by aamirkha         ###   ########.fr       */
-=======
-/*   Updated: 2024/09/23 19:09:57 by aamirkha         ###   ########.fr       */
->>>>>>> masha_branch
+/*   Updated: 2024/09/23 19:29:30 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +17,8 @@
 # include "minishell.h"
 # include <cocobolo.h>
 
+#define NOT_FOUND 127
+
 struct				s_cmd
 {
 	t_shell *shell;
@@ -28,7 +26,9 @@ struct				s_cmd
 	char *orig_name;
 	t_list *options;
 	t_list *args;		//here was an attribute deprecated
-	bool 	evaluatable;
+	bool 	invokable;
+
+	int		exit_status;
 
 	t_eval eval;
 	t_list *tokens;

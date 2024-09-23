@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 19:09:45 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 00:31:24 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,11 @@ t_cmd	*make_command(char *raw_cmd, t_shell *shell)
 	cmd->options = make_list();
 	cmd->args = make_list();
 	cmd->eval = NULL;
+	cmd->invokable = true;
 	cmd->redirection = 0;
+	cmd->exit_status = 0;
 	possible_name = tokens->head;
+
 	while (possible_name && possible_name->next && is_redir(possible_name))
 	{
 		possible_name = possible_name->next->next;
@@ -61,8 +64,7 @@ t_cmd	*make_command(char *raw_cmd, t_shell *shell)
 	if (no_name || empty(tokens)
 		|| sort_tokens(cmd, tokens) == -1 || cmd_lookup(cmd) == -1)
 	{
-		__t_command__(cmd);
-		cmd = NULL;
+		cmd->invokable = false;
 	}
 	list_clear(&tokens);
 	return (cmd);

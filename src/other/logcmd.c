@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   history.c                                          :+:      :+:    :+:   */
+/*   logcmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/07 16:36:19 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 23:48:07 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/09/24 00:36:02 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/09/24 00:36:48 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-
-// void	history(t_cmd *cmd)
-// {
-// 	eval_wrapper(cmd, _history);
-// }
-
-void	history(t_cmd *cmd)
+void logcmd(const char * line, t_fd logfile)
 {
-	if (!cmd || !cmd->shell)
-		return ;
-	print_list_enumerate(cmd->shell->history);
-}
+	static size_t x = 1;
 
-#pragma GCC diagnostic pop
+	char *out __attribute__((cleanup(__delete_string))) = __itoa((int)x++);
+
+	out = __strappend(out, ". ", line, NULL);
+
+	__putendl_fd(out, logfile);
+}

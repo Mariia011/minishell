@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 15:34:30 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 00:34:06 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,12 @@ void	eval(t_cmd *cmd)
 {
 	if (NULL == cmd)
 		return ;
-	if (cmd)
-	{
-		cmd->eval(cmd);
-		if (cmd->redirection & redirect_heredoc)
-			unlink(HEREDOC);
-		if (cmd->pid == -1)
-			return ;
-	}
+
+	cmd->eval(cmd);
+	if (cmd->redirection & redirect_heredoc)
+		unlink(HEREDOC);
+	if (cmd->pid == -1)
+		return ;
 	while (-1 != wait(NULL))
 		;
 }

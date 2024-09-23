@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 19:44:46 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 15:25:33 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 00:31:24 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ int	absolute_path_lookup(t_cmd *cmd)
 	else
 	{
 		if (0 == access(cmd->name, F_OK | X_OK))
-			return (set_eval_to_prog_i_love_norminette(cmd));
+		{
+			cmd->eval = eval_prog_preprocess;
+			return 0;
+		}
 		if (0 == access(cmd->name, F_OK))
 			__va_perror(cmd->name, ": Permission denied", NULL);
 		else
