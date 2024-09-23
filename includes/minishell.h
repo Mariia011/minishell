@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/21 21:23:40 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/09/23 19:23:00 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,7 +209,6 @@ int					pop_redirections(t_command *cmd, t_list *tokens, t_cmd_container *contai
 size_t				count_pipes(t_list *tokens, t_shell *shell);
 t_node				*find_next_pipe(t_node *first, t_list *tokens, t_shell *shell);
 int					parenthesis_parse(t_list *tokens, t_shell *shell);
-
 
 #endif // MINISHELL_H
 
