@@ -6,7 +6,11 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:04:32 by aamirkha          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/09/23 19:04:30 by aamirkha         ###   ########.fr       */
+=======
+/*   Updated: 2024/09/23 19:09:57 by aamirkha         ###   ########.fr       */
+>>>>>>> masha_branch
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +28,7 @@ struct				s_cmd
 	char *orig_name;
 	t_list *options;
 	t_list *args;		//here was an attribute deprecated
+	bool 	evaluatable;
 
 	t_eval eval;
 	t_list *tokens;

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 18:49:59 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/23 19:09:45 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ t_cmd	*make_command(char *raw_cmd, t_shell *shell)
 	bool no_name = (possible_name == NULL);
 
 	if (!no_name)
+	{
 		cmd->name = __strdup(possible_name->val);
+		cmd->orig_name = __strdup(possible_name->val);
+	}
 
 	wildcard_resolve(tokens, shell);
 
