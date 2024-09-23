@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:04:32 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 18:49:59 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/23 19:09:57 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ struct				s_cmd
 {
 	t_shell *shell;
 	char *name;
+	char *orig_name;
 	t_list *options;
 	t_list *args;		//here was an attribute deprecated
+	bool 	evaluatable;
 
 	t_eval eval;
 	t_list *tokens;
