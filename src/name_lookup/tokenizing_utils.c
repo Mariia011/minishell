@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:29:11 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/25 01:14:10 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/25 02:49:36 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool	not_space(t_node *node)
 
 bool is_special_symbol(t_node * node, t_shell *shell)
 {
-	return (is_and_node(node, shell) || is_or_node(node, shell) || is_pipe_node(node, shell));
+	return (is_and_node(node, shell) || is_or_node(node, shell) || is_pipe_node(node, shell) || is_redirection_node(node, shell));
 }
 
 bool not_special_symbol(t_node * node, t_shell *shell)
