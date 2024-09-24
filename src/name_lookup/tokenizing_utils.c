@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:29:11 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/23 16:54:32 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:41:38 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ bool	not_space(t_node *node)
 	return (node && !string_equal(node->val, " "));
 }
 
-bool is_a_special_symbol(t_node * node, t_shell *shell)
+bool is_special_symbol(t_node * node, t_shell *shell)
 {
 	return (is_and_node(node, shell) || is_or_node(node, shell) || is_pipe_node(node, shell));
 }
 
-bool not_a_special_symbol(t_node * node, t_shell *shell)
+bool not_special_symbol(t_node * node, t_shell *shell)
 {
-	return (!is_a_special_symbol(node, shell));
+	return (!is_special_symbol(node, shell));
 }
 
 bool	is_redir(t_node *node)

@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_tokens.c                                      :+:      :+:    :+:   */
+/*   shremove_if.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/06 14:54:25 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/24 01:21:09 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/09/24 16:09:43 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/09/24 16:14:05 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	sort_tokens(t_cmd *cmd, t_list *tokens)
+size_t	shremove_if(t_list *list, bool (*p)(t_node *, t_shell *), t_shell *shell)
 {
-	t_node	*token;
+	size_t	removed;
+	t_node	*next;
+	t_node	*first;
 
-	if (!cmd)
-		return (-1);
-	token = front(tokens)->next;
-	while (token && token->val && token->val[0] == '-')
+	if (!list || !p || !shell)
+		return (0);
+	removed = 0;
+	first = list->head;
+	while (first)
 	{
-		push_back(cmd->options, token->val);
-		token = token->next;
+		next = first->next;
+		if (p(first, shell) == true)
+		{
+			pop(list, first);
+			removed++;
+		}
+		first = next;
 	}
-	while (token)
-	{
-		push_back(cmd->args, token->val);
-		token = token->next;
-	}
-	return (0);
+	return (removed);
 }
+

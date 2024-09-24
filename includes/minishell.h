@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 16:57:26 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 16:24:06 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,13 @@ bool				is_digit(const char c);
 bool				is_name_part(const char c);
 bool				not_name_part(char c);
 bool				is_quoted_token(t_set *set, t_node *token);
-bool	is_closing_parenthesis(char *text);
-bool	is_opening_parenthesis(char *text);
-bool	is_opening_parenthesis_token(t_node * token, t_shell * shell);
-bool	is_closing_parenthesis_token(t_node * token, t_shell * shell);
+
+bool				is_parenthesis_token(t_node * token, t_shell * shell);
+bool				is_closing_parenthesis(char *text);
+bool				is_opening_parenthesis(char *text);
+bool				is_opening_parenthesis_token(t_node * token, t_shell * shell);
+bool				is_closing_parenthesis_token(t_node * token, t_shell * shell);
+bool				is_parenthesis(char *text);
 
 // lifecycle
 t_tree				*make_export(t_shell *shell)
@@ -118,7 +121,7 @@ t_list				*get_path(t_shell *shell)
 t_descriptor		*make_descriptors(void) __attribute__((warn_unused_result));
 t_descriptor		*make_stddesc(void) __attribute__((warn_unused_result));
 void				__t_shell__(t_shell *shell);
-
+void				__cmd_arr__(t_cmd **arr);
 
 t_fd 				make_logfile(t_shell *shell) __attribute__((warn_unused_result));
 
@@ -133,16 +136,21 @@ void				export(t_cmd *cmd);
 void				echo(t_cmd *cmd);
 void				history(t_cmd *cmd);
 void				msh_exit(t_cmd *cmd);
+void				errcmd(t_cmd *cmd);
 
-void				__cd__(t_cmd *cmd);
-void				__pwd__(t_cmd *cmd);
-void				__env__(t_cmd *cmd);
-void				__unset__(t_cmd *cmd);
-void				__export__(t_cmd *cmd);
-void				__echo__(t_cmd *cmd);
-void				__history__(t_cmd *cmd);
-void				__eval_prog__(t_cmd *cmd);
-void				__exit__(t_cmd *cmd);
+void				eval_prog_preprocess(t_cmd *cmd);
+
+// void				__cd__(t_cmd *cmd);
+// void				__pwd__(t_cmd *cmd);
+// void				__env__(t_cmd *cmd);
+// void				__unset__(t_cmd *cmd);
+// void				__export__(t_cmd *cmd);
+// void				__echo__(t_cmd *cmd);
+// void				__history__(t_cmd *cmd);
+// void				__eval_prog__(t_cmd *cmd);
+// void				__exit__(t_cmd *cmd);
+// void				__errcmd__(t_cmd *cmd);
+
 
 // other
 char				*_getcwd(t_shell *shell) __attribute__((warn_unused_result));
@@ -211,10 +219,15 @@ t_node				*find_next_pipe(t_node *first, t_list *tokens, t_shell *shell);
 bool				parenthesis_parse(t_list *tokens, t_shell *shell);
 
 bool				syntax_analysis(t_list *tokens, t_shell *shell);
+bool				is_invokable(t_cmd *cmd);
 
-
+t_list				*make_partition(t_shell *shell, t_node *first, t_node *last) __attribute__((warn_unused_result));
+t_cmd				**make_cmd_arr(t_list *tokens, t_shell *shell) __attribute__((warn_unused_result));
+void				logcmd(const char * line, t_fd logfile);
 
 // list extensions
+size_t				shcount_if(t_node *first, t_node *last, bool (*p)(t_node *, t_shell *), t_shell *shell);
+size_t				shremove_if(t_list *list, bool (*p)(t_node *, t_shell *), t_shell *shell);
 t_node				*shfind_if(t_node *first, t_node *last, bool (*p)(t_node *, t_shell*), t_shell *shell);
 t_node				*shrfind_if(t_node *first, t_node *last, bool (*p)(t_node *, t_shell*), t_shell *shell);
 

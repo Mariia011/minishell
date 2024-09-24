@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_tokens.c                                      :+:      :+:    :+:   */
+/*   errcmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/06 14:54:25 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/24 01:21:09 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/09/23 19:25:27 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/09/24 00:59:46 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	sort_tokens(t_cmd *cmd, t_list *tokens)
-{
-	t_node	*token;
+// void errcmd(t_cmd *cmd)
+// {
+// 	eval_wrapper(cmd, _nonivokable);
+// }
 
-	if (!cmd)
-		return (-1);
-	token = front(tokens)->next;
-	while (token && token->val && token->val[0] == '-')
-	{
-		push_back(cmd->options, token->val);
-		token = token->next;
-	}
-	while (token)
-	{
-		push_back(cmd->args, token->val);
-		token = token->next;
-	}
-	return (0);
+void errcmd(t_cmd *cmd)
+{
+	__perror(cmd->err);
+	set_exit_status_no_of(cmd->exit_status);
 }

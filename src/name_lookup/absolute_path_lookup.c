@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 19:44:46 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 15:25:33 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 01:06:29 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,32 @@ int	absolute_path_lookup(t_cmd *cmd)
 
 	if (found && S_ISDIR(buffer.st_mode))
 	{
-		__va_perror(cmd->name, ": is a directory", NULL);
-		set_exit_status(126);
+		cmd->err = __make_string(cmd->name, ": is a directory", NULL);
+		cmd->exit_status = 126;
 	}
 	else if (found && cmd->name[__strlen(cmd->name) - 1] == '/')
 	{
-		__va_perror(cmd->name, ": Not a directory", NULL);
-		set_exit_status(126);
+		cmd->err = __make_string(cmd->name, ": Not a directory", NULL);
+		cmd->exit_status = 126;
 	}
 
 	else
 	{
 		if (0 == access(cmd->name, F_OK | X_OK))
-			return (set_eval_to_prog_i_love_norminette(cmd));
+		{
+			cmd->eval = eval_prog_preprocess;
+			return 0;
+		}
 		if (0 == access(cmd->name, F_OK))
-			__va_perror(cmd->name, ": Permission denied", NULL);
+		{
+			cmd->exit_status = 126;
+			cmd->err = __make_string(cmd->name, ": Permission denied", NULL);
+		}
 		else
-			__va_perror(cmd->name, ": No such file or directory", NULL);
+		{
+			cmd->exit_status = 127;
+			cmd->err = __make_string(cmd->name, ": No such file or directory", NULL);
+		}
 	}
 
 	return (-1);

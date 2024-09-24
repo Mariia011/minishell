@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:08:55 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/15 19:56:04 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 01:21:09 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	dollar_sign_resolver(t_list *tokens, t_shell *shell)
 		if (is_quote(token->val))
 		{
 			if (empty(queue))
-				push_back(queue, token->val, NULL);
+				push_back(queue, token->val);
 			else if (string_equal(queue->head->val, token->val))
 				pop_front(queue);
 		}

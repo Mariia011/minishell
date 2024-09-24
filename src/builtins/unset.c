@@ -6,19 +6,16 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 21:09:38 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 15:49:29 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/23 23:48:07 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-
-void	unset(t_cmd *cmd)
-{
-	eval_wrapper(cmd, _unset);
-}
+// void	unset(t_cmd *cmd)
+// {
+// 	eval_wrapper(cmd, _unset);
+// }
 
 int	__unset_var__(t_shell *shell, t_list_value key)
 {
@@ -51,7 +48,7 @@ static void	_unset_args(t_node *arg, t_cmd *cmd, int *status)
 	}
 }
 
-void	__unset__(t_cmd *cmd)
+void	unset(t_cmd *cmd)
 {
 	int		status;
 	t_node	*arg;
@@ -70,5 +67,3 @@ void	__unset__(t_cmd *cmd)
 		_unset_args(arg, cmd, &status);
 	set_exit_status(status);
 }
-
-#pragma GCC diagnostic pop

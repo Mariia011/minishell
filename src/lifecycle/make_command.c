@@ -6,20 +6,17 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 18:49:59 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:51:32 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cmd	*make_command(char *raw_cmd, t_shell *shell)
+t_cmd	*make_command(t_list *tokens, t_shell *shell)
 {
 	t_cmd		*cmd;
 	t_node		*possible_name;
 
-	t_list		*tokens;
-
-	tokens = preprocess(tokenize(raw_cmd), shell);
 	if (empty(tokens) || !shell)
 		return (NULL);
 
@@ -40,8 +37,12 @@ t_cmd	*make_command(char *raw_cmd, t_shell *shell)
 	cmd->options = make_list();
 	cmd->args = make_list();
 	cmd->eval = NULL;
+	cmd->err = NULL;
+	cmd->invokable = true;
 	cmd->redirection = 0;
+	cmd->exit_status = 0;
 	possible_name = tokens->head;
+
 	while (possible_name && possible_name->next && is_redir(possible_name))
 	{
 		possible_name = possible_name->next->next;
@@ -50,7 +51,10 @@ t_cmd	*make_command(char *raw_cmd, t_shell *shell)
 	bool no_name = (possible_name == NULL);
 
 	if (!no_name)
+	{
 		cmd->name = __strdup(possible_name->val);
+		cmd->orig_name = __strdup(possible_name->val);
+	}
 
 	wildcard_resolve(tokens, shell);
 
@@ -58,9 +62,7 @@ t_cmd	*make_command(char *raw_cmd, t_shell *shell)
 	if (no_name || empty(tokens)
 		|| sort_tokens(cmd, tokens) == -1 || cmd_lookup(cmd) == -1)
 	{
-		__t_command__(cmd);
-		cmd = NULL;
+		cmd->invokable = false;
 	}
-	list_clear(&tokens);
 	return (cmd);
 }

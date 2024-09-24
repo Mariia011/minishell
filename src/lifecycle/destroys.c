@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 18:50:33 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 16:28:11 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,22 @@ void	__t_shell__(t_shell *shell)
 	shell = NULL;
 }
 
-void	__t_command__(t_cmd *cmd)
+void __cmd_arr__(t_cmd **arr)
+{
+	size_t	i;
+
+	if (NULL == arr)
+		return;
+	i = 0;
+	while (arr[i])
+	{
+		__t_cmd__(arr[i]);
+		i++;
+	}
+	free(arr);
+}
+
+void	__t_cmd__(t_cmd *cmd)
 {
 	if (NULL == cmd)
 		return ;
@@ -40,7 +55,9 @@ void	__t_command__(t_cmd *cmd)
 	// list_clear(&cmd->tokens);
 	// reset_descriptors(cmd);
 	// free(cmd->descriptors);
-	free(cmd->name);
+	__delete_string(&cmd->name);
+	__delete_string(&cmd->err);
+	__delete_string(&cmd->orig_name);
 	free(cmd);
 }
 
@@ -57,7 +74,7 @@ void	__t_cmd_container__(t_cmd_container **cmdsptr)
 	i = 0;
 	while (i < cmds->size)
 	{
-		__t_command__(cmds->arr[i]);
+		__t_cmd__(cmds->arr[i]);
 		i++;
 	}
 	set_clear(&cmds->shell->quoted_tokens);

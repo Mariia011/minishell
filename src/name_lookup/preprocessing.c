@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:21:34 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 16:47:12 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 16:14:42 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_list	*preprocess(t_list *tokens, t_shell *shell)
 		list_clear(&tokens);
 		return (tokens);
 	}
+	shremove_if(tokens, is_parenthesis_token, shell);
 	return (tokens);
 }
 

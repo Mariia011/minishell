@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:45:58 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/15 13:17:23 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 01:21:09 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ char	*get_pid(t_shell *shell)
 	val = get_next_line(fd);
 	while (val && !__strstr(val, "__EOF__"))
 	{
-		push_back(list, val, NULL);
+		push_back(list, val);
 		free(val);
 		val = get_next_line(fd);
 	}
-	
+
 	free(val);
 	get_next_line(-1);
 
@@ -46,7 +46,7 @@ char	*get_pid(t_shell *shell)
 
 	if (!node || !node->val)
 		val = __strdup("1337");
-	
+
 	else
 		val = __strdup(node->val);
 

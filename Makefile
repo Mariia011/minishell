@@ -1,7 +1,7 @@
 NAME = minishell
 
 SRCSPATH = ./src/lifecycle/ ./src/other/ ./src/builtin_utils ./src/builtins/ ./src/name_lookup/ ./src/exec/  \
-			./src/syntax_analysis/ ./src/list_extensions/ \
+			./src/syntax_analysis/ ./src/list_extensions/ ./src/cmd/ ./src/ast/ \
 			./cocobolo/cocobolo_src/ ./cocobolo/optional/ ./cocobolo/list/ \
 			./cocobolo/get_next_line/ ./cocobolo/tree/ ./cocobolo/matrix/ ./cocobolo/set/
 

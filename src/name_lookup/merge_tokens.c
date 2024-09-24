@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   merge_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:17:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/21 21:26:32 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/09/24 16:24:23 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,5 @@ static bool	is_self_mergeable(t_node *token)
 
 static bool	is_mergeable(t_node *token, t_set *quoted_tokens)
 {
-	return (is_quoted_token(quoted_tokens, token) || (!is_self_mergeable(token) && (!string_equal(token->val, " "))));
+	return (is_quoted_token(quoted_tokens, token) || (!is_self_mergeable(token) && (!is_parenthesis(token->val) && !string_equal(token->val, " "))));
 }

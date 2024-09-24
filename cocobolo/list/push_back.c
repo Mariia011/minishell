@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:58:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 21:36:44 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 01:20:14 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
-void	__single__push_back__(t_list *const list, const t_list_value x)
+void	push_back(t_list *const list, const t_list_value x)
 {
 	t_node	*node;
 

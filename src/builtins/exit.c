@@ -6,19 +6,16 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:17:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/23 18:45:34 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 16:05:15 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-
 static void	__exit_nb__(t_cmd *cmd, const int status, char *err);
 static void	foo(char **err, t_cmd *cmd);
 
-void	__exit__(t_cmd *cmd)
+void	msh_exit(t_cmd *cmd)
 {
 	char		*err;
 	t_optional	val;
@@ -61,13 +58,11 @@ static void	__exit_nb__(t_cmd *cmd, const int status, char *err)
 	__delete_string(&err);
 	t_shell *shell = cmd->shell;
 	__t_shell__(shell);
-	__t_command__(cmd);
+	__t_cmd__(cmd);
 	exit(get_exit_status());
 }
 
-void	msh_exit(t_cmd *cmd)
-{
-	eval_wrapper(cmd, _msh_exit);
-}
-
-#pragma GCC diagnostic pop
+// void	msh_exit(t_cmd *cmd)
+// {
+// 	eval_wrapper(cmd, _msh_exit);
+// }

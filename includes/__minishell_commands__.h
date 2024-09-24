@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:04:32 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 18:49:59 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 16:05:15 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,20 @@
 # include "minishell.h"
 # include <cocobolo.h>
 
+#define NOT_FOUND 127
+
 struct				s_cmd
 {
 	t_shell *shell;
 	char *name;
+	char *orig_name;
 	t_list *options;
 	t_list *args;		//here was an attribute deprecated
+	bool 	invokable;
+
+	int		exit_status;
+
+	char	*err;
 
 	t_eval eval;
 	t_list *tokens;
@@ -42,11 +50,11 @@ struct				s_cmd_container
 	t_list 		 	*tokens;
 };
 
-t_cmd			*make_command(char *raw_cmd, t_shell *shell)
+t_cmd			*make_command(t_list *tokens, t_shell *shell)
 					__attribute__((warn_unused_result));
 t_cmd_container		*make_cmd_container(char *raw_cmd,
 						t_shell *shell) __attribute__((warn_unused_result));
-void				__t_command__(t_cmd *cmd);
+void				__t_cmd__(t_cmd *cmd);
 void				__t_cmd_container__(t_cmd_container **cmdsptr);
 
 #endif // __MINISHELL_COMMANDS___H

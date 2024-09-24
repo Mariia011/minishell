@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   remove.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:31:20 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/09 20:26:07 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/09/24 16:10:03 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
-
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 void	pop(t_list *list, t_node *node)
 {
@@ -59,5 +56,3 @@ size_t	list_remove_if(t_list *list, t_list_value val, t_list_Bpredicate_val p)
 	}
 	return (removed);
 }
-
-#pragma GCC diagnostic pop
