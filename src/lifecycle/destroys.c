@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/24 16:05:34 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 16:28:11 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void __cmd_arr__(t_cmd **arr)
 {
 	size_t	i;
 
+	if (NULL == arr)
+		return;
 	i = 0;
 	while (arr[i])
 	{
