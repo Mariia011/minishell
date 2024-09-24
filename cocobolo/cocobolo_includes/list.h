@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:51:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/10 15:27:17 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 01:20:14 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ struct					s_node
 	t_node				*prev;
 };
 
-void					push_back(t_list *list, ...)
+void					va_push_back(t_list *list, ...)
 						__attribute__((sentinel));
-void					push_front(t_list *list, ...)
+void					va_push_front(t_list *list, ...)
 						__attribute__((sentinel));
-void					__single__push_back__(t_list *const list,
+void					push_back(t_list *const list,
 							const t_list_value x);
-void					__single__push_front__(t_list *const list,
+void					push_front(t_list *const list,
 							const t_list_value x);
 
 void					pop_front(t_list *const list);

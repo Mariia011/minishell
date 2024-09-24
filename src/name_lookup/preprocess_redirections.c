@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 20:53:23 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/18 19:20:18 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 01:13:17 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	preprocess_redirections_the_good_part(t_cmd_container *container, t_list *to
 	{
 		if (token->next)
 		{
-			// set_exit_status(1);
 			__perror("ambiguous redirect");
 		}
 		else

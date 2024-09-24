@@ -6,19 +6,16 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:17:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/14 23:39:23 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 16:05:15 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+static void	__exit_nb__(t_cmd *cmd, const int status, char *err);
+static void	foo(char **err, t_cmd *cmd);
 
-static void	__exit_nb__(t_command *cmd, const int status, char *err);
-static void	foo(char **err, t_command *cmd);
-
-void	__exit__(t_command *cmd)
+void	msh_exit(t_cmd *cmd)
 {
 	char		*err;
 	t_optional	val;
@@ -47,30 +44,25 @@ void	__exit__(t_command *cmd)
 	__delete_string(&err);
 }
 
-static void	foo(char **err, t_command *cmd)
+static void	foo(char **err, t_cmd *cmd)
 {
 	*err = __make_string("exit: ", front(cmd->args)->val,
 			": numeric argument required", NULL);
 }
 
-static void	__exit_nb__(t_command *cmd, const int status, char *err)
+static void	__exit_nb__(t_cmd *cmd, const int status, char *err)
 {
 	if (err)
 		__perror(err);
-	if (cmd->container->size == 1)
-	{
-		set_exit_status(status);
-		__delete_string(&err);
-		t_shell *shell = cmd->shell;
-		__t_cmd_container__(&cmd->container);
-		__t_shell__(shell);
-		exit(get_exit_status());
-	}
+	set_exit_status(status);
+	__delete_string(&err);
+	t_shell *shell = cmd->shell;
+	__t_shell__(shell);
+	__t_cmd__(cmd);
+	exit(get_exit_status());
 }
 
-void	msh_exit(t_command *cmd)
-{
-	eval_wrapper(cmd, _msh_exit);
-}
-
-#pragma GCC diagnostic pop
+// void	msh_exit(t_cmd *cmd)
+// {
+// 	eval_wrapper(cmd, _msh_exit);
+// }

@@ -6,18 +6,18 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:30:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/10 16:23:53 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/23 23:48:07 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	cd(t_command *cmd)
-{
-	eval_wrapper(cmd, _cd);
-}
+// void	cd(t_cmd *cmd)
+// {
+// 	eval_wrapper(cmd, _cd);
+// }
 
-void	__cd__(t_command *cmd)
+void	cd(t_cmd *cmd)
 {
 	char	*msg;
 	char	*oldpwd;

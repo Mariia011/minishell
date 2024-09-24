@@ -6,19 +6,16 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 21:09:38 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 20:59:43 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/23 23:48:07 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-
-void	unset(t_command *cmd)
-{
-	eval_wrapper(cmd, _unset);
-}
+// void	unset(t_cmd *cmd)
+// {
+// 	eval_wrapper(cmd, _unset);
+// }
 
 int	__unset_var__(t_shell *shell, t_list_value key)
 {
@@ -29,10 +26,7 @@ int	__unset_var__(t_shell *shell, t_list_value key)
 		__va_perror("unset: `", key, "\': not a valid identifier", NULL);
 		return (-1);
 	}
-	if (shell->container && shell->container->size == 1)
-	{
-		unset_var(shell, key);
-	}
+	unset_var(shell, key);
 	return (0);
 }
 
@@ -44,7 +38,7 @@ void	unset_var(t_shell *shell, t_list_value key)
 	tree_remove(shell->env, key);
 }
 
-static void	_unset_args(t_node *arg, t_command *cmd, int *status)
+static void	_unset_args(t_node *arg, t_cmd *cmd, int *status)
 {
 	while (arg)
 	{
@@ -54,7 +48,7 @@ static void	_unset_args(t_node *arg, t_command *cmd, int *status)
 	}
 }
 
-void	__unset__(t_command *cmd)
+void	unset(t_cmd *cmd)
 {
 	int		status;
 	t_node	*arg;
@@ -73,5 +67,3 @@ void	__unset__(t_command *cmd)
 		_unset_args(arg, cmd, &status);
 	set_exit_status(status);
 }
-
-#pragma GCC diagnostic pop

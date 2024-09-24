@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:19:13 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/10 16:38:11 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/23 23:48:07 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
-void	pwd(t_command *cmd)
-{
-	eval_wrapper(cmd, _pwd);
-}
+// void	pwd(t_cmd *cmd)
+// {
+// 	eval_wrapper(cmd, _pwd);
+// }
 
-void	__pwd__(t_command *cmd)
+void	pwd(t_cmd *cmd)
 {
 	int		status;
 	char	*path;

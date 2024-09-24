@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:01:15 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/15 12:24:28 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:49:13 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ int	__export_from_string__(char *expr, t_shell *shell)
 		return (-1);
 	if (______i_a_g_t_c_i_m_p_f_n_________(expr, tokens, shell) == -1)
 		return (-1);
-	if (shell->container && shell->container->size > 1)
-		return (0);
 	if (size(tokens) >= 2)
 		return (size_2(shell, tokens));
 	else

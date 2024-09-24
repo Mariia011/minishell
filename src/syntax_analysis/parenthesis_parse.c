@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   invalid_option.c                                   :+:      :+:    :+:   */
+/*   parenthesis_parse.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/12 19:50:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 15:25:33 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/09/23 16:23:05 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/09/23 16:23:11 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-
-int	invalid_option(t_cmd *cmd)
+bool	parenthesis_parse(t_list *tokens, t_shell *shell)
 {
-	if (cmd == NULL)
-		return (-1);
-	if (!empty(cmd->options))
+	int count = 0;
+	t_node *token = tokens->head;
+ 	while(token)
 	{
-		__va_perror(cmd->name, ": ", front(cmd->options)->val,
-			": invalid option", NULL);
-		return (-1);
+		if(is_opening_parenthesis_token(token, shell))
+			count++;
+		else if(is_closing_parenthesis_token(token, shell))
+			count--;
+		if(count <= -1)
+			return (false);
+		token = token->next;
 	}
-	return (0);
+	return (count == 0);
 }
-
-#pragma GCC diagnostic pop

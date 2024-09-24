@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:36:19 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/21 19:13:04 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/09/23 23:48:07 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
-void	history(t_command *cmd)
-{
-	eval_wrapper(cmd, _history);
-}
+// void	history(t_cmd *cmd)
+// {
+// 	eval_wrapper(cmd, _history);
+// }
 
-void	__history__(t_command *cmd)
+void	history(t_cmd *cmd)
 {
 	if (!cmd || !cmd->shell)
 		return ;

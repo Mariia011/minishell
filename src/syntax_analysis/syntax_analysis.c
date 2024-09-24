@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   invalid_option.c                                   :+:      :+:    :+:   */
+/*   syntax_analysis.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/12 19:50:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 15:25:33 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/09/23 16:16:22 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/09/23 16:57:41 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+	// parenthesis_parse(tokens, shell) == -1 || pipe_parse(tokens, shell) == -1 || redirection_parse(tokens, shell) == -1
 
-int	invalid_option(t_cmd *cmd)
+bool syntax_analysis(t_list *tokens, t_shell *shell)
 {
-	if (cmd == NULL)
-		return (-1);
-	if (!empty(cmd->options))
-	{
-		__va_perror(cmd->name, ": ", front(cmd->options)->val,
-			": invalid option", NULL);
-		return (-1);
-	}
-	return (0);
-}
+	return (
 
-#pragma GCC diagnostic pop
+		parenthesis_parse(tokens, shell) && keyword_parse(tokens, shell)  && redirection_parse(tokens, shell)
+
+	);
+}

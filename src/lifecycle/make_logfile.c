@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   make_logfile.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:43:38 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/21 20:34:06 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:12:51 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 #ifdef __linux__
-#define DATE "usr/bin/date"
+#define DATE "/usr/bin/date"
 #elif defined __APPLE__
 #define DATE "/bin/date"
 #endif

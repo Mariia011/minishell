@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:27:35 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/18 21:15:54 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:54:27 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_shell	*make_shell(char **env)
 	shell->history = make_list();
 	shell->quoted_tokens = make_set();
 	shell->stddesc = make_stddesc();
-	shell->container = NULL;
 	make_shlvl(shell);
 	export_update(shell, "SHELL", "minishell");
 	export_update(shell, "OLDPWD", "");

@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 19:23:00 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/09/24 17:07:53 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ struct				s_shell
 	t_list			*history;
 
 	t_descriptor	*stddesc;
-	t_cmd_container	*container;
 	t_set			*quoted_tokens;
 
 	t_fd			logfile;
@@ -73,21 +72,21 @@ struct				s_descriptor
 char				*read_line(char *s);
 
 // execution
-void				eval(t_cmd_container *cmds);
-void				set_descriptors(t_command *cmd);
-void				reset_descriptors(t_command *cmd);
-void				eval_prog(t_command *cmd);
-// void 			__eval_prog__deprecated__(t_fd *pipe, t_command * cmd);
+void				eval(t_cmd *cmd);
+void				set_descriptors(t_cmd *cmd);
+void				reset_descriptors(t_cmd *cmd);
+void				eval_prog(t_cmd *cmd);
+// void 			__eval_prog__deprecated__(t_fd *pipe, t_cmd * cmd);
 
 // execution helpers
 int					export_update(t_shell *shell, t_list_value key,
 						t_list_value val);
 char				*resolve(char *t_val,
 						t_shell *shell) __attribute__((warn_unused_result));
-int					cmd_lookup(t_command *cmd);
+int					cmd_lookup(t_cmd *cmd);
 t_fd				open_file(char *filename, int options);
 int					redirect(t_node *token, t_cmd_container *container);
-void				eval_wrapper(t_command *cmd, t_eval_opcode opcode);
+void				eval_wrapper(t_cmd *cmd, t_eval_opcode opcode);
 
 // find predicates
 bool				__cmd_exists__(const char *path, const char *name);
@@ -102,10 +101,13 @@ bool				is_digit(const char c);
 bool				is_name_part(const char c);
 bool				not_name_part(char c);
 bool				is_quoted_token(t_set *set, t_node *token);
-bool	is_closing_parenthesis(char *text);
-bool	is_opening_parenthesis(char *text);
-bool	is_opening_parenthesis_token(t_node * token, t_shell * shell);
-bool	is_closing_parenthesis_token(t_node * token, t_shell * shell);
+
+bool				is_parenthesis_token(t_node * token, t_shell * shell);
+bool				is_closing_parenthesis(char *text);
+bool				is_opening_parenthesis(char *text);
+bool				is_opening_parenthesis_token(t_node * token, t_shell * shell);
+bool				is_closing_parenthesis_token(t_node * token, t_shell * shell);
+bool				is_parenthesis(char *text);
 
 // lifecycle
 t_tree				*make_export(t_shell *shell)
@@ -119,52 +121,58 @@ t_list				*get_path(t_shell *shell)
 t_descriptor		*make_descriptors(void) __attribute__((warn_unused_result));
 t_descriptor		*make_stddesc(void) __attribute__((warn_unused_result));
 void				__t_shell__(t_shell *shell);
+void				__cmd_arr__(t_cmd **arr);
 
 t_fd 				make_logfile(t_shell *shell) __attribute__((warn_unused_result));
 
 // matrix
 
 // builtins
-void				cd(t_command *cmd);
-void				pwd(t_command *cmd);
-void				env(t_command *cmd);
-void				unset(t_command *cmd);
-void				export(t_command *cmd);
-void				echo(t_command *cmd);
-void				history(t_command *cmd);
-void				msh_exit(t_command *cmd);
+void				cd(t_cmd *cmd);
+void				pwd(t_cmd *cmd);
+void				env(t_cmd *cmd);
+void				unset(t_cmd *cmd);
+void				export(t_cmd *cmd);
+void				echo(t_cmd *cmd);
+void				history(t_cmd *cmd);
+void				msh_exit(t_cmd *cmd);
+void				errcmd(t_cmd *cmd);
 
-void				__cd__(t_command *cmd);
-void				__pwd__(t_command *cmd);
-void				__env__(t_command *cmd);
-void				__unset__(t_command *cmd);
-void				__export__(t_command *cmd);
-void				__echo__(t_command *cmd);
-void				__history__(t_command *cmd);
-void				__eval_prog__(t_command *cmd);
-void				__exit__(t_command *cmd);
+void				eval_prog_preprocess(t_cmd *cmd);
+
+// void				__cd__(t_cmd *cmd);
+// void				__pwd__(t_cmd *cmd);
+// void				__env__(t_cmd *cmd);
+// void				__unset__(t_cmd *cmd);
+// void				__export__(t_cmd *cmd);
+// void				__echo__(t_cmd *cmd);
+// void				__history__(t_cmd *cmd);
+// void				__eval_prog__(t_cmd *cmd);
+// void				__exit__(t_cmd *cmd);
+// void				__errcmd__(t_cmd *cmd);
+
 
 // other
 char				*_getcwd(t_shell *shell) __attribute__((warn_unused_result));
-int					set_eval_to_prog_i_love_norminette(t_command *cmd);
+int					set_eval_to_prog_i_love_norminette(t_cmd *cmd);
 int					__unset_var__(t_shell *shell, t_list_value val);
 void				unset_var(t_shell *shell, t_list_value key);
 void				set_exit_status(int status);
 int					get_exit_status(void);
 void				set_exit_status_no_of(int status);
-int					invalid_option(t_command *cmd);
+int					invalid_option(t_cmd *cmd);
 
 void				remove_spaces(t_shell *shell, t_list *tokens);
 
-int					pipe_parse(t_list *tokens, t_shell *shell);
-int					redirection_parse(t_list *tokens, t_shell *shell);
-void				save_token(t_shell *shell, t_node *address);
+bool					keyword_parse(t_list *tokens, t_shell *shell);
+bool					redirection_parse(t_list *tokens, t_shell *shell);
+void					save_token(t_shell *shell, t_node *address);
 
 // builtin utils
 void				update_pwd(t_shell *shell, char *oldpwd);
-void				__cd_one_arg__(t_command *cmd);
-void				_chdir(t_command *cmd, const char *path, int *status);
-void				__cd_no_arg__(t_command *cmd);
+void				__cd_one_arg__(t_cmd *cmd);
+void				_chdir(t_cmd *cmd, const char *path, int *status);
+void				__cd_no_arg__(t_cmd *cmd);
 bool				last_nl(t_node *const node);
 void				echo_arglist(t_list *arglist);
 bool				not_n_predicate(char c);
@@ -175,7 +183,7 @@ char				*get_pid(t_shell *shell)
 
 // name_lookup utils
 t_list				*get_cwd_files();
-int					absolute_path_lookup(t_command *cmd);
+int					absolute_path_lookup(t_cmd *cmd);
 int					quote_parse(t_list *tokens);
 bool				not_space(t_node *node);
 bool				is_redir(t_node *node);
@@ -205,10 +213,23 @@ int					preprocess_redirections_the_good_part(t_cmd_container *container, t_list
 t_fd				get_next_fd(t_cmd_container *container);
 size_t				get_next_fd_idx(t_cmd_container *container);
 
-int					pop_redirections(t_command *cmd, t_list *tokens, t_cmd_container *container);
+int					pop_redirections(t_cmd *cmd, t_list *tokens, t_cmd_container *container);
 size_t				count_pipes(t_list *tokens, t_shell *shell);
 t_node				*find_next_pipe(t_node *first, t_list *tokens, t_shell *shell);
-int					parenthesis_parse(t_list *tokens, t_shell *shell);
+bool				parenthesis_parse(t_list *tokens, t_shell *shell);
+
+bool				syntax_analysis(t_list *tokens, t_shell *shell);
+bool				is_invokable(t_cmd *cmd);
+
+t_list				*make_partition(t_shell *shell, t_node *first, t_node *last) __attribute__((warn_unused_result));
+t_cmd				**make_cmd_arr(t_list *tokens, t_shell *shell) __attribute__((warn_unused_result));
+void				logcmd(const char * line, t_fd logfile);
+
+// list extensions
+size_t				shcount_if(t_node *first, t_node *last, bool (*p)(t_node *, t_shell *), t_shell *shell);
+size_t				shremove_if(t_list *list, bool (*p)(t_node *, t_shell *), t_shell *shell);
+t_node				*shfind_if(t_node *first, t_node *last, bool (*p)(t_node *, t_shell*), t_shell *shell);
+t_node				*shrfind_if(t_node *first, t_node *last, bool (*p)(t_node *, t_shell*), t_shell *shell);
 
 #endif // MINISHELL_H
 

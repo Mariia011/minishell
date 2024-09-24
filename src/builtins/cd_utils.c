@@ -6,38 +6,25 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 18:57:53 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/16 22:07:22 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:42:32 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	cd_minus(int *status, t_command *cmd);
+static void	cd_minus(int *status, t_cmd *cmd);
 
-void	_chdir(t_command *cmd, const char *path, int *status)
+void	_chdir(t_cmd *cmd, const char *path, int *status)
 {
-	char *cwd	__attribute__((cleanup(__delete_string)));
-
-	cwd = _getcwd(cmd->shell);
 	if (chdir(path) == -1)
 	{
 		*status = 1;
 		__va_perror("cd: ", path, ": No such file or directory", NULL);
 		return ;
 	}
-	// if (cmd->container->size == 1 && __str_ends_with(cwd, "/../"))
-	// {
-	// 	__perror("cd: error retrieving current directory: getcwd:"
-	// 		"cannot access parent directories: No such file or directory");
-	// 	// chdir("../");
-	// }
-	if (cmd->container->size > 1)
-	{
-		chdir(cwd);
-	}
 }
 
-void	__cd_no_arg__(t_command *cmd)
+void	__cd_no_arg__(t_cmd *cmd)
 {
 	int		status;
 	char	*home;
@@ -56,7 +43,7 @@ void	__cd_no_arg__(t_command *cmd)
 	set_exit_status(status);
 }
 
-void	__cd_one_arg__(t_command *cmd)
+void	__cd_one_arg__(t_cmd *cmd)
 {
 	int	status;
 
@@ -75,7 +62,7 @@ void	__cd_one_arg__(t_command *cmd)
 	set_exit_status(status);
 }
 
-void	cd_minus(int *status, t_command *cmd)
+void	cd_minus(int *status, t_cmd *cmd)
 {
 	char	*path;
 

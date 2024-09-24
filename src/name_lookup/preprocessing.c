@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   preprocessing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:21:34 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/21 21:26:54 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/09/24 16:14:42 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@ t_list	*preprocess(t_list *tokens, t_shell *shell)
 		return (NULL);
 	dollar_sign_resolver(tokens, shell);
 	merge_tokens(shell, tokens);
-	if (parenthesis_parse(tokens, shell) == -1 || pipe_parse(tokens, shell) == -1 || redirection_parse(tokens, shell) == -1)
+	remove_spaces(shell, tokens);
+	if (!syntax_analysis(tokens, shell))
 	{
 		set_exit_status_no_of(258);
 		list_clear(&tokens);
 		return (tokens);
 	}
-	remove_spaces(shell, tokens);
+	shremove_if(tokens, is_parenthesis_token, shell);
 	return (tokens);
 }
 

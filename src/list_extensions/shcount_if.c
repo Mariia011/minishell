@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   invalid_option.c                                   :+:      :+:    :+:   */
+/*   shcount_if.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/12 19:50:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 15:25:33 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/09/24 15:33:32 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/09/24 15:55:44 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-
-int	invalid_option(t_cmd *cmd)
+size_t	shcount_if(t_node *first, t_node *last, bool (*p)(t_node *, t_shell *), t_shell *shell)
 {
-	if (cmd == NULL)
-		return (-1);
-	if (!empty(cmd->options))
-	{
-		__va_perror(cmd->name, ": ", front(cmd->options)->val,
-			": invalid option", NULL);
-		return (-1);
-	}
-	return (0);
-}
+	size_t	res;
 
-#pragma GCC diagnostic pop
+	if (NULL == first || NULL == last || NULL == p)
+		return (0);
+	res = 0;
+	while (first && first->prev != last)
+	{
+		if (p(first, shell) == true)
+			res++;
+		first = first->next;
+	}
+	return (res);
+}
