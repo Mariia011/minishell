@@ -6,13 +6,12 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:35:09 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/24 01:21:09 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:46:01 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "minishell.h"
 
-// static t_list	*make_partition(t_shell *shell, t_node *first, t_node *last);
 // static void		make_cmds(t_cmd_container *container, t_shell *shell,
 // 					t_list *tokens);
 
@@ -79,25 +78,4 @@
 // 		first = pipe->next;
 // 		i++;
 // 	}
-// }
-
-// static t_list	*make_partition(t_shell *shell, t_node *first, t_node *last)
-// {
-// 	t_list	*list;
-// 	t_node	*curr;
-
-// 	if (!shell || !first || !last)
-// 		return (NULL);
-// 	list = make_list();
-// 	curr = first;
-// 	while (curr && curr->prev != last)
-// 	{
-// 		push_back(list, curr->val);
-// 		if (is_quoted_token(shell->quoted_tokens, curr))
-// 		{
-// 			save_token(shell, back(list));
-// 		}
-// 		curr = curr->next;
-// 	}
-// 	return (list);
 // }

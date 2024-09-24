@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:04:32 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/24 00:44:20 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 16:05:15 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ struct				s_cmd_container
 	t_list 		 	*tokens;
 };
 
-t_cmd			*make_command(char *raw_cmd, t_shell *shell)
+t_cmd			*make_command(t_list *tokens, t_shell *shell)
 					__attribute__((warn_unused_result));
 t_cmd_container		*make_cmd_container(char *raw_cmd,
 						t_shell *shell) __attribute__((warn_unused_result));
-void				__t_command__(t_cmd *cmd);
+void				__t_cmd__(t_cmd *cmd);
 void				__t_cmd_container__(t_cmd_container **cmdsptr);
 
 #endif // __MINISHELL_COMMANDS___H

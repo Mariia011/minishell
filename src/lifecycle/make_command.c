@@ -6,20 +6,17 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/24 00:47:23 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:51:32 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cmd	*make_command(char *raw_cmd, t_shell *shell)
+t_cmd	*make_command(t_list *tokens, t_shell *shell)
 {
 	t_cmd		*cmd;
 	t_node		*possible_name;
 
-	t_list		*tokens;
-
-	tokens = preprocess(tokenize(raw_cmd), shell);
 	if (empty(tokens) || !shell)
 		return (NULL);
 
@@ -67,6 +64,5 @@ t_cmd	*make_command(char *raw_cmd, t_shell *shell)
 	{
 		cmd->invokable = false;
 	}
-	list_clear(&tokens);
 	return (cmd);
 }

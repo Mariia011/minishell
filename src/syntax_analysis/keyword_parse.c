@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 16:22:42 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 16:59:40 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:41:38 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool	keyword_parse(t_list *tokens, t_shell *shell)
 	if (!tokens)
 		return (true);
 	token = NULL;
-	token = shfind_if(tokens->head, tokens->tail, is_a_special_symbol, shell);
+	token = shfind_if(tokens->head, tokens->tail, is_special_symbol, shell);
 	if (token == tokens->head)
 	{
 		__va_perror("parse error near token `", token->val, "\'", NULL);
@@ -28,12 +28,12 @@ bool	keyword_parse(t_list *tokens, t_shell *shell)
 	}
 	while (token)
 	{
-		pair = shfind_if(token->next, tokens->tail, is_a_special_symbol, shell);
+		pair = shfind_if(token->next, tokens->tail, is_special_symbol, shell);
 		if (!pair)
 			pair = back(tokens);
 		else
 			pair = pair->prev;
-		if (NULL == shfind_if(token->next, pair, not_a_special_symbol, shell))
+		if (NULL == shfind_if(token->next, pair, not_special_symbol, shell))
 		{
 			__va_perror("parse error near token `", token->val, "\'", NULL);
 			return (false);
