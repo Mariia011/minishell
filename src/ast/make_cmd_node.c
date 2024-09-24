@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_predicates.c                                   :+:      :+:    :+:   */
+/*   make_cmd_node.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/23 19:21:21 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/25 02:12:44 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/09/25 01:27:08 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/09/25 01:33:35 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool is_invokable(t_cmd *cmd)
+t_ast_node *make_cmd_node(t_cmd *cmd)
 {
-	return (cmd->invokable);
-}
+	t_ast_node *res = __malloc(sizeof(t_ast_node));
+	res->type = CMD;
+	res->cmd_ptr = cmd;
+	res->fd = -1;
+	res->filename = NULL;
+	res->left = NULL;
+	res->right = NULL;
+	res->p = NULL;
 
-bool is_program(t_cmd *cmd)
-{
-	return (cmd->eval == eval_prog_preprocess);
+	return (res);
 }

@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_predicates.c                                   :+:      :+:    :+:   */
+/*   make_ast_skeleton.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/23 19:21:21 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/25 02:12:44 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/09/25 00:25:04 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/09/25 01:39:22 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool is_invokable(t_cmd *cmd)
+t_ast *make_ast_skeleton(t_list *tokens, t_shell *shell)
 {
-	return (cmd->invokable);
-}
+	t_ast	*res = make_ast_empty(shell);
 
-bool is_program(t_cmd *cmd)
-{
-	return (cmd->eval == eval_prog_preprocess);
+	t_node *op = shrfind_if(tokens->head, tokens->tail, is_special_symbol, shell);
+
+	while (op)
+	{
+		insert_ast_node(res, make_op_node(op));
+		op = shrfind_if(tokens->head, op->prev, is_special_symbol, shell);
+	}
+
+	return res;
 }

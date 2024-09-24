@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/24 16:24:06 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/25 02:15:05 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "__minishell_commands__.h"
 # include "__minishell_enums__.h"
+# include "__minishell_ast__.h"
 # include "__minishell_lexer__.h"
 # include "__minishell_typedefs__.h"
 # include <cocobolo.h>
@@ -186,7 +187,9 @@ t_list				*get_cwd_files();
 int					absolute_path_lookup(t_cmd *cmd);
 int					quote_parse(t_list *tokens);
 bool				not_space(t_node *node);
-bool				is_redir(t_node *node);
+
+bool				is_redirection_node(t_node *node, t_shell *shell);
+
 void				erase_quotes(t_list *tokens);
 bool				is_quote_node(t_node *const node);
 void				mark_quoted_tokens(t_shell *shell, t_list *tokens);
@@ -220,6 +223,7 @@ bool				parenthesis_parse(t_list *tokens, t_shell *shell);
 
 bool				syntax_analysis(t_list *tokens, t_shell *shell);
 bool				is_invokable(t_cmd *cmd);
+bool				is_program(t_cmd *cmd);
 
 t_list				*make_partition(t_shell *shell, t_node *first, t_node *last) __attribute__((warn_unused_result));
 t_cmd				**make_cmd_arr(t_list *tokens, t_shell *shell) __attribute__((warn_unused_result));

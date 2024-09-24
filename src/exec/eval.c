@@ -6,25 +6,25 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/24 00:34:06 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/25 01:57:19 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	eval(t_cmd *cmd)
-{
-	if (NULL == cmd)
-		return ;
+// void	eval(t_cmd *cmd)
+// {
+// 	if (NULL == cmd)
+// 		return ;
 
-	cmd->eval(cmd);
-	if (cmd->redirection & redirect_heredoc)
-		unlink(HEREDOC);
-	if (cmd->pid == -1)
-		return ;
-	while (-1 != wait(NULL))
-		;
-}
+// 	cmd->eval(cmd);
+// 	if (cmd->redirection & redirect_heredoc)
+// 		unlink(HEREDOC);
+// 	if (cmd->pid == -1)
+// 		return ;
+// 	while (-1 != wait(NULL))
+// 		;
+// }
 
 // void	eval(t_cmd_container *cmds)
 // {

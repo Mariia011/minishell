@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 19:44:46 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/24 01:06:29 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/25 02:11:36 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	absolute_path_lookup(t_cmd *cmd)
 	{
 		if (0 == access(cmd->name, F_OK | X_OK))
 		{
-			cmd->eval = eval_prog_preprocess;
 			return 0;
 		}
 		if (0 == access(cmd->name, F_OK))

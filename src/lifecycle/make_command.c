@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/24 15:51:32 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/25 02:41:11 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,26 +41,15 @@ t_cmd	*make_command(t_list *tokens, t_shell *shell)
 	cmd->invokable = true;
 	cmd->redirection = 0;
 	cmd->exit_status = 0;
-	possible_name = tokens->head;
 
-	while (possible_name && possible_name->next && is_redir(possible_name))
-	{
-		possible_name = possible_name->next->next;
-	}
-
-	bool no_name = (possible_name == NULL);
-
-	if (!no_name)
-	{
-		cmd->name = __strdup(possible_name->val);
-		cmd->orig_name = __strdup(possible_name->val);
-	}
+	//sort input before this
+	cmd->name = __strdup(tokens->head->val);
+	cmd->orig_name = __strdup(tokens->head->val);
 
 	wildcard_resolve(tokens, shell);
 
 	// add redirection handling
-	if (no_name || empty(tokens)
-		|| sort_tokens(cmd, tokens) == -1 || cmd_lookup(cmd) == -1)
+	if (empty(tokens) || sort_tokens(cmd, tokens) == -1 || cmd_lookup(cmd) == -1)
 	{
 		cmd->invokable = false;
 	}
