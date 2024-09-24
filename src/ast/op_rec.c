@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_build.c                                        :+:      :+:    :+:   */
+/*   op_rec.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/23 19:19:58 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/24 16:49:13 by marikhac         ###   ########.fr       */
+/*   Created: 2024/09/24 16:57:29 by marikhac          #+#    #+#             */
+/*   Updated: 2024/09/24 17:02:28 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-void	build_ast(t_list *tokens,  )
+bool is_operator()
 {
-	
+
+}
+
+bool is_or_operator(t_token *node, t_shell *shell)
+{
+	return( && );
 }
