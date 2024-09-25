@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/24 16:30:23 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:31:42 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ int	main(int ac, char **av, char **env)
 	{
 		line = read_line(shell->prompt);
 		t_list	*tokens = preprocess(tokenize(line), shell);
-		t_cmd	**arr = make_cmd_arr(tokens, shell);
+		// t_cmd	**arr = make_cmd_arr(tokens, shell);
+		build_ast(tokens, shell);
 		if (line)
 		{
-			for (int i = 0; arr[i]; i++)
-				eval(arr[i]);
+			// for (int i = 0; arr[i]; i++)
+			// 	eval(arr[i]);
 
 			if (__strlen(line) > 0)
 			{
@@ -41,7 +42,7 @@ int	main(int ac, char **av, char **env)
 				logcmd(line, shell->logfile);
 			}
 		}
-		__cmd_arr__(arr);
+		// __cmd_arr__(arr);
 		list_clear(&tokens);
 		// __t_cmd__(cmd);
 		if (!line)

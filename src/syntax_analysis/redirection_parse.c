@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_parse.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 16:23:25 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 16:28:48 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:39:40 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ bool	redirection_parse(t_list *tokens, t_shell *shell)
 	if (!tokens)
 		return (true);
 	rdr = NULL;
-	rdr = find_if(front(tokens), back(tokens), is_redir);
-	while (rdr && is_quoted_token(shell->quoted_tokens, rdr))
-		rdr = find_if(rdr->next, back(tokens), is_redir);
+	rdr = shfind_if(tokens->head, tokens->tail, is_redirection_node, shell);
 	while (rdr)
 	{
 		rdr = rdr->next;
@@ -32,12 +30,12 @@ bool	redirection_parse(t_list *tokens, t_shell *shell)
 			__perror("parse error near token `newline\'");
 			return (false);
 		}
-		else if (is_redirection(rdr->val) && !is_quoted_token(shell->quoted_tokens, rdr))
+		else if (is_redirection_node(rdr, shell))
 		{
 			__va_perror("parse error near token ", rdr->val, NULL);
 			return (false);
 		}
-		rdr = find_if(rdr->next, back(tokens), is_redir);
+		rdr = shfind_if(rdr->next, tokens->tail, is_redirection_node, shell);
 	}
 	return (true);
 }
