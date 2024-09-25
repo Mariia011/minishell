@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:48:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/24 01:21:09 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 22:56:38 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ char *ends_with(char *dirname, char *req)
 		return (dirname + __strlen(dirname) - 1);
 	return(NULL);
 }
-
 
 static bool check_node(char *dirname, t_list *reqs)
 {

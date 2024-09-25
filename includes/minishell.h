@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/24 17:07:53 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/09/24 23:35:58 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "__minishell_enums__.h"
 # include "__minishell_lexer__.h"
 # include "__minishell_typedefs__.h"
+# include "__minishell_ast__.h"
 # include <cocobolo.h>
 # include <fcntl.h>
 # include <readline/history.h>
