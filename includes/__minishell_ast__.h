@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 15:20:23 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/25 02:32:24 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/25 18:56:46 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ enum e_ast_node_type
 	AND,
 	PIPE,
 	REDIRECTION,
+	FILENODE,
 	CMD
 };
 
@@ -34,6 +35,7 @@ struct s_ast
 	t_ast_node 	*root;
 	t_shell 	*shell;
 	t_ast_node 	*last_process_cmd;
+	t_ast_node	*last_cmd;
 };
 
 struct s_ast_node
@@ -59,6 +61,7 @@ t_ast_node		*make_cmd_node(t_cmd *cmd);
 void			insert_cmd_node(t_ast *ast, t_ast_node *z);
 t_ast			*make_ast(char *line, t_shell *shell);
 t_ast_node		*find_last_process_cmd(t_ast *ast);
+t_ast_node		*find_last_cmd(t_ast *ast);
 
 void 			ast_eval(t_ast *ast);
 

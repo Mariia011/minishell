@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:39:26 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/24 00:20:06 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/25 22:55:25 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@ static void	execute(t_cmd *cmd, t_eval_opcode opcode);
 
 // void	eval_wrapper(t_cmd *cmd, t_eval_opcode opcode)
 // {
-	// t_fd	pipes[PIPE_MAX];
+// 	t_fd	pipes[PIPE_MAX];
 
-	// if (pipe(pipes) == -1)
-	// 	return killall(cmd->container);
-	// if (cmd->container->current_cmd_index < cmd->container->size - 1)
-	// 	dup2(pipes[out], STDOUT_FILENO);
-	// set_descriptors(cmd);
-	// execute(cmd, opcode);
-	// dup2(pipes[in], STDIN_FILENO);
-	// dup2(cmd->shell->stddesc->stdout, STDOUT_FILENO);
-	// close(pipes[in]);
-	// close(pipes[out]);
+// 	if (pipe(pipes) == -1)
+// 		return killall(cmd->container);
+// 	if (cmd->container->current_cmd_index < cmd->container->size - 1)
+// 		dup2(pipes[out], STDOUT_FILENO);
+// 	set_descriptors(cmd);
+// 	execute(cmd, opcode);
+// 	dup2(pipes[in], STDIN_FILENO);
+// 	dup2(cmd->shell->stddesc->stdout, STDOUT_FILENO);
+// 	close(pipes[in]);
+// 	close(pipes[out]);
 // }
 
 // static void	execute(t_cmd *cmd, t_eval_opcode opcode)
