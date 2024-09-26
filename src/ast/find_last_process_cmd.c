@@ -12,14 +12,8 @@
 
 #include "minishell.h"
 
-static t_ast_node	*dfs(t_ast_node *root);
 
-t_ast_node	*find_last_process_cmd(t_ast *ast)
-{
-	return dfs(ast->root);
-}
-
-static t_ast_node	*dfs(t_ast_node *root)
+t_ast_node	*find_last_process_cmd(t_ast_node *root)
 {
 	if (!root) return NULL;
 
@@ -27,16 +21,16 @@ static t_ast_node	*dfs(t_ast_node *root)
 	t_ast_node	*l = NULL;
 	t_ast_node	*r = NULL;
 
-	if ((root->type == CMD && is_program(root->cmd_ptr)) || (root->p && root->p->type == PIPE))
+	if ((root->type == CMD && is_program(root->cmd_ptr)))
 		curr = root;
 
-	r = dfs(root->right);
+	r = find_last_process_cmd(root->right);
 
 	if (r) return r;
 
 	if (curr) return curr;
 
-	l = dfs(root->left);
+	l = find_last_process_cmd(root->left);
 
 	return l;
 }

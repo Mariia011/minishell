@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 15:20:23 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/26 02:50:11 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/26 20:30:10 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_ast			*make_ast_skeleton(t_list *tokens, t_shell *shell);
 t_ast_node		*make_cmd_node(t_cmd *cmd);
 void			insert_cmd_node(t_ast *ast, t_ast_node *z);
 t_ast			*make_ast(char *line, t_shell *shell);
-t_ast_node		*find_last_process_cmd(t_ast *ast);
+t_ast_node		*find_last_process_cmd(t_ast_node *root);
 t_ast_node		*find_last_cmd(t_ast *ast);
 t_ast_node		*ast_find_by_token(t_ast * ast, t_node *token);
 void			ast_balance(t_ast *ast, t_list *tokens);
