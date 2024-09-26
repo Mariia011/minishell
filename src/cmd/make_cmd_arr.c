@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:29:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/24 16:03:09 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/26 03:07:12 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_cmd	**make_cmd_arr(t_list *tokens, t_shell *shell)
 
 	size_t size = shcount_if(tokens->head, tokens->tail, is_special_symbol, shell) + 2;
 	size_t i = 0;
-	t_cmd **res = __malloc(sizeof(t_cmd *) * size);
+	t_cmd **res = __calloc(sizeof(t_cmd *) * size);
 
 	res[size - 1] = NULL;
 
@@ -34,6 +34,8 @@ t_cmd	**make_cmd_arr(t_list *tokens, t_shell *shell)
 			second = second->prev;
 
 		t_list *partition = make_partition(shell, first, second);
+
+		shremove_if(partition, is_parenthesis_token, shell);
 
 		res[i++] = make_command(partition, shell);
 

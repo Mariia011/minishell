@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/25 02:15:05 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/26 02:42:43 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,7 @@ int					absolute_path_lookup(t_cmd *cmd);
 int					quote_parse(t_list *tokens);
 bool				not_space(t_node *node);
 
-bool				is_redirection_node(t_node *node, t_shell *shell);
+bool				is_redirection_token(t_node *node, t_shell *shell);
 
 void				erase_quotes(t_list *tokens);
 bool				is_quote_node(t_node *const node);

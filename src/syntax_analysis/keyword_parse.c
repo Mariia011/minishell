@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 16:22:42 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/24 15:41:38 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/26 02:42:29 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ bool	keyword_parse(t_list *tokens, t_shell *shell)
 			__va_perror("parse error near token `", token->val, "\'", NULL);
 			return (false);
 		}
-		token = shfind_if(pair->next, tokens->tail, is_pipe_node, shell);
+		token = shfind_if(pair->next, tokens->tail, is_pipe_token, shell);
 	}
 	return (true);
 }

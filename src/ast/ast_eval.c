@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 01:43:14 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/26 01:46:41 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/26 04:06:05 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,12 @@ static int dfs(t_ast_node *root, t_ast *ast, int stdout);
 
 void ast_eval(t_ast *ast)
 {
+	if (!ast)
+		return;
+
 	dfs(ast->root, ast, ast->shell->stddesc->stdout);
+
+	while (-1 != wait(NULL));
 
 	dup2(ast->shell->stddesc->stdin, STDIN_FILENO);
 	dup2(ast->shell->stddesc->stdout, STDOUT_FILENO);
@@ -37,7 +42,6 @@ static int dfs(t_ast_node *root, t_ast *ast, int stdout)
 	}
 	else if (root->type == PIPE)
 	{
-
 		t_fd	pipes[PIPE_MAX];
 
 		pipe(pipes);
@@ -53,13 +57,20 @@ static int dfs(t_ast_node *root, t_ast *ast, int stdout)
 
 		dup2(stdout, STDOUT_FILENO);
 
-		return dfs(root->right, ast, stdout);
+		int x = dfs(root->right, ast, stdout);
+
+		if (!root->p || root->p->type == AND || root->p->type == OR)
+			while (-1 != wait(NULL));
+
+		return x;
 	}
 	else if (root->type == CMD)
 	{
 		root->cmd_ptr->eval(root->cmd_ptr);
 
-		if (root == ast->last_process_cmd || root == ast->last_cmd || !root->p)
+		// if (root == ast->last_process_cmd || root == ast->last_cmd || !root->p || root->p->type == AND || root->p->type == OR)
+
+		if (!root->p || root->p->type == AND || root->p->type == OR)
 			while (-1 != wait(NULL));
 
 		return !get_exit_status();

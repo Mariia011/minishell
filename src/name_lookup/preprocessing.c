@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:21:34 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/24 16:14:42 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/26 02:53:52 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_list	*preprocess(t_list *tokens, t_shell *shell)
 		list_clear(&tokens);
 		return (tokens);
 	}
-	shremove_if(tokens, is_parenthesis_token, shell);
+	// shremove_if(tokens, is_parenthesis_token, shell);
 	return (tokens);
 }
 
@@ -40,7 +40,7 @@ bool	is_quoted_token(t_set *set, t_node *token)
 	return (set_count(set, guess) != 0);
 }
 
-void	remove_spaces(t_shell *shell, t_list *tokens)
+void	remove_spaces(t_shell *shell, t_list *tokens) // deprecated
 {
 	t_node	*curr;
 	t_node	*next;
