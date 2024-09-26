@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:04:32 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/25 02:11:36 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:27:02 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,16 @@ struct				s_cmd
 	char *orig_name;
 	t_list *options;
 	t_list *args;		//here was an attribute deprecated
-	bool 	invokable;
 
 	int		exit_status;
 
 	char	*err;
+	bool 	invokable;
+	bool 	forkable;
 
 	t_eval eval;
+	t_eval eval_core;
+	
 	t_list *tokens;
 
 	int redirection;

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 01:43:14 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/26 04:06:05 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/26 19:40:55 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,17 @@ static int dfs(t_ast_node *root, t_ast *ast, int stdout)
 	}
 	else if (root->type == CMD)
 	{
+		// if (root->p && root->p->type == PIPE)
+		// 	root->cmd_ptr->forkable = true;
+
 		root->cmd_ptr->eval(root->cmd_ptr);
 
-		// if (root == ast->last_process_cmd || root == ast->last_cmd || !root->p || root->p->type == AND || root->p->type == OR)
-
-		if (!root->p || root->p->type == AND || root->p->type == OR)
-			while (-1 != wait(NULL));
+		if ((!root->p || root->p->type == AND || root->p->type == OR) && is_program(root->cmd_ptr))
+		{
+			pid_t x = 0;
+			waitpid(root->cmd_ptr->pid, &x, 0);
+			set_exit_status(WEXITSTATUS(x));
+		}
 
 		return !get_exit_status();
 	}

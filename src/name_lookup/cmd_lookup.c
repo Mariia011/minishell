@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/25 02:11:36 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:28:24 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ int	cmd_lookup(t_cmd *cmd)
 	if (!cmd)
 		return (-1);
 	if (builtin_lookup(cmd) == 0)
+	{
+		cmd->eval = builtin_preeval;
 		return (0);
+	}
 	path = get_path(cmd->shell);
 	if (!string_equal(cmd->name, ""))
 	{
@@ -40,7 +43,7 @@ int	cmd_lookup(t_cmd *cmd)
 				cmd->eval = errcmd;
 				return -1;
 			}
-			cmd->eval = eval_prog_preprocess;
+			cmd->eval = eval_prog;
 		}
 	}
 	cmd->err = __make_string(cmd->orig_name, ": command not found", NULL);
@@ -51,7 +54,7 @@ int	cmd_lookup(t_cmd *cmd)
 
 int	set_eval_to_prog_i_love_norminette(t_cmd *cmd)
 {
-	cmd->eval = eval_prog_preprocess;
+	cmd->eval = eval_prog;
 	return (0);
 }
 
@@ -62,7 +65,7 @@ static int	replace_cmd_name(t_cmd *cmd, t_node *node)
 	resolved_name = __make_string(node->val, "/", cmd->name, NULL);
 	free(cmd->name);
 	cmd->name = resolved_name;
-	cmd->eval = eval_prog_preprocess;
+	cmd->eval = eval_prog;
 	return (0);
 }
 
@@ -81,22 +84,22 @@ bool	__cmd_exists__(const char *path, const char *name)
 static int	builtin_lookup(t_cmd *cmd)
 {
 	if (string_equal(cmd->name, "pwd"))
-		cmd->eval = pwd;
+		cmd->eval_core = pwd;
 	else if (string_equal(cmd->name, "history"))
-		cmd->eval = history;
+		cmd->eval_core = history;
 	else if (string_equal(cmd->name, "export"))
-		cmd->eval = export;
+		cmd->eval_core = export;
 	else if (string_equal(cmd->name, "echo"))
-		cmd->eval = echo;
+		cmd->eval_core = echo;
 	else if (string_equal(cmd->name, "unset"))
-		cmd->eval = unset;
+		cmd->eval_core = unset;
 	else if (string_equal(cmd->name, "env"))
-		cmd->eval = env;
+		cmd->eval_core = env;
 	else if (string_equal(cmd->name, "cd"))
-		cmd->eval = cd;
+		cmd->eval_core = cd;
 	else if (string_equal(cmd->name, "exit"))
-		cmd->eval = msh_exit;
-	if (cmd->eval == NULL)
+		cmd->eval_core = msh_exit;
+	if (cmd->eval_core == NULL)
 		return (-1);
 	return (0);
 }

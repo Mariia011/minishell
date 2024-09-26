@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:37:44 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/24 01:21:28 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/26 19:17:33 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	eval_prog_preprocess(t_cmd *cmd)
+void	eval_prog(t_cmd *cmd)
 {
 	int		s;
 
@@ -24,7 +24,7 @@ void	eval_prog_preprocess(t_cmd *cmd)
 	// }
 	if (0 == cmd->pid)
 	{
-		eval_prog(cmd);
+		eval_prog_core(cmd);
 	}
 	// if (cmd->container->current_cmd_index == cmd->container->size - 1)
 	// {
@@ -46,7 +46,7 @@ void	eval_prog_preprocess(t_cmd *cmd)
 // 	eval_wrapper(cmd, _program);
 // }
 
-void	eval_prog(t_cmd *cmd)
+void	eval_prog_core(t_cmd *cmd)
 {
 	t_list		*options_copy;
 	t_list		*args_copy;
@@ -54,7 +54,7 @@ void	eval_prog(t_cmd *cmd)
 	t_matrix	_env;
 
 	if (!cmd)
-		__exit(NULL);
+		exit(EXIT_FAILURE);
 	options_copy = make_list_copy_range(cmd->options, NULL);
 	push_front(options_copy, cmd->name);
 
@@ -65,5 +65,5 @@ void	eval_prog(t_cmd *cmd)
 
 	execve(cmd->name, _args, _env);
 	__t_shell__(cmd->shell);
-	__exit(NULL);
+	exit(EXIT_FAILURE);
 }
