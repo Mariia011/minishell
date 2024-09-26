@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/26 18:28:24 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/26 20:59:36 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	cmd_lookup(t_cmd *cmd)
 				return -1;
 			}
 			cmd->eval = eval_prog;
+			return 0;
 		}
 	}
 	cmd->err = __make_string(cmd->orig_name, ": command not found", NULL);
