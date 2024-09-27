@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/26 02:42:43 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:29:44 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char				*read_line(char *s);
 void				eval(t_cmd *cmd);
 void				set_descriptors(t_cmd *cmd);
 void				reset_descriptors(t_cmd *cmd);
-void				eval_prog(t_cmd *cmd);
+void				eval_prog_core(t_cmd *cmd);
 // void 			__eval_prog__deprecated__(t_fd *pipe, t_cmd * cmd);
 
 // execution helpers
@@ -139,7 +139,7 @@ void				history(t_cmd *cmd);
 void				msh_exit(t_cmd *cmd);
 void				errcmd(t_cmd *cmd);
 
-void				eval_prog_preprocess(t_cmd *cmd);
+void				eval_prog(t_cmd *cmd);
 
 // void				__cd__(t_cmd *cmd);
 // void				__pwd__(t_cmd *cmd);
@@ -165,11 +165,13 @@ int					invalid_option(t_cmd *cmd);
 
 void				remove_spaces(t_shell *shell, t_list *tokens);
 
-bool					keyword_parse(t_list *tokens, t_shell *shell);
-bool					redirection_parse(t_list *tokens, t_shell *shell);
-void					save_token(t_shell *shell, t_node *address);
+bool				keyword_parse(t_list *tokens, t_shell *shell);
+bool				redirection_parse(t_list *tokens, t_shell *shell);
+void				save_token(t_shell *shell, t_node *address);
 
 // builtin utils
+void				builtin_preeval(t_cmd * cmd);
+
 void				update_pwd(t_shell *shell, char *oldpwd);
 void				__cd_one_arg__(t_cmd *cmd);
 void				_chdir(t_cmd *cmd, const char *path, int *status);

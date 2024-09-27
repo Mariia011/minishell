@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 01:21:35 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/26 02:50:11 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/26 20:30:22 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_ast *make_ast(char *line, t_shell *shell)
 
 	ast_balance(ast, tokens);
 
-	ast->last_process_cmd = find_last_process_cmd(ast);
+	ast->last_process_cmd = find_last_process_cmd(ast->root);
 	ast->last_cmd = find_last_cmd(ast);
 
 	free(arr);

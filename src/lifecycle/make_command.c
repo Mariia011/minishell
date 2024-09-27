@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/25 02:41:11 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/26 19:14:04 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_cmd	*make_command(t_list *tokens, t_shell *shell)
 	cmd->eval = NULL;
 	cmd->err = NULL;
 	cmd->invokable = true;
+	cmd->forkable = false;
 	cmd->redirection = 0;
 	cmd->exit_status = 0;
 

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:39:26 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/26 00:57:57 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:01:13 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	execute(t_cmd *cmd, t_eval_opcode opcode);
 // 	else if (_msh_exit == opcode)
 // 		__exit__(cmd);
 // 	else if (_program == opcode)
-// 		eval_prog_preprocess(cmd);
+// 		eval_prog(cmd);
 // }
 
 static void killall(t_cmd_container *container)
