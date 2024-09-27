@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_preeval.c                                  :+:      :+:    :+:   */
+/*   cmd_runtime_init.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/26 18:07:26 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/27 22:45:08 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/09/27 22:39:00 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/09/27 22:45:38 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void builtin_preeval(t_cmd * cmd)
+void cmd_runtime_init(t_cmd *cmd)
 {
-	if (cmd->forkable)
+	wildcard_resolve(cmd->tokens, cmd->shell);
+
+	// add redirection handling
+	if (empty(cmd->tokens) || sort_tokens(cmd, cmd->tokens) == -1 || cmd_lookup(cmd) == -1)
 	{
-		cmd->pid = fork();
-		if (0 == cmd->pid)
-		{
-			cmd->eval_core(cmd);
-			exit(get_exit_status());
-		}
+		cmd->invokable = false;
 	}
-	else
-		cmd->eval_core(cmd);
 }

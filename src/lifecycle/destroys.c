@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/27 22:13:44 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/27 22:48:41 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	__t_cmd__(t_cmd *cmd)
 		unlink(HEREDOC);
 	list_clear(&cmd->args);
 	list_clear(&cmd->options);
-	// list_clear(&cmd->tokens);
+	list_clear(&cmd->tokens);
 	// reset_descriptors(cmd);
 	// free(cmd->descriptors);
 	__delete_string(&cmd->name);

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:04:32 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/26 18:27:02 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/27 22:40:04 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ struct				s_cmd
 
 	t_eval eval;
 	t_eval eval_core;
-	
+
 	t_list *tokens;
 
 	int redirection;
@@ -53,11 +53,13 @@ struct				s_cmd_container
 	t_list 		 	*tokens;
 };
 
-t_cmd			*make_command(t_list *tokens, t_shell *shell)
+t_cmd				*make_command(t_list *tokens, t_shell *shell)
 					__attribute__((warn_unused_result));
 t_cmd_container		*make_cmd_container(char *raw_cmd,
 						t_shell *shell) __attribute__((warn_unused_result));
 void				__t_cmd__(t_cmd *cmd);
 void				__t_cmd_container__(t_cmd_container **cmdsptr);
+
+void				cmd_runtime_init(t_cmd *cmd);
 
 #endif // __MINISHELL_COMMANDS___H

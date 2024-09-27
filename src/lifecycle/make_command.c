@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/26 19:14:04 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/27 22:44:31 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_cmd	*make_command(t_list *tokens, t_shell *shell)
 
 	if (empty(tokens) || !shell)
 		return (NULL);
-
 
 	if (count_range(tokens, "<<") > HEREDOC_MAX)
 	{
@@ -47,12 +46,13 @@ t_cmd	*make_command(t_list *tokens, t_shell *shell)
 	cmd->name = __strdup(tokens->head->val);
 	cmd->orig_name = __strdup(tokens->head->val);
 
-	wildcard_resolve(tokens, shell);
+	// wildcard_resolve(tokens, shell);
 
-	// add redirection handling
-	if (empty(tokens) || sort_tokens(cmd, tokens) == -1 || cmd_lookup(cmd) == -1)
-	{
-		cmd->invokable = false;
-	}
+	// // add redirection handling
+	// if (empty(tokens) || sort_tokens(cmd, tokens) == -1 || cmd_lookup(cmd) == -1)
+	// {
+	// 	cmd->invokable = false;
+	// }
+
 	return (cmd);
 }
