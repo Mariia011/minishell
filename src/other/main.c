@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/25 01:58:33 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/27 22:24:39 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ int	main(int ac, char **av, char **env)
 		line = read_line(shell->prompt);
 		// t_list	*tokens = preprocess(tokenize(line), shell);
 		// t_cmd	**arr = make_cmd_arr(tokens, shell);
-		t_ast * ast = make_ast(line, shell);
+		shell->ast = make_ast(line, shell);
 		if (line)
 		{
-			ast_eval(ast);
+			ast_eval(shell->ast);
 
 			// for (int i = 0; arr[i]; i++)
 				// eval(arr[i]);
@@ -44,6 +44,7 @@ int	main(int ac, char **av, char **env)
 				logcmd(line, shell->logfile);
 			}
 		}
+		ast_clear(&shell->ast);
 		// __cmd_arr__(arr);
 		// list_clear(&tokens);
 		// __t_cmd__(cmd);

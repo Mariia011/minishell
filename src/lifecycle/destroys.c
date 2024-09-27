@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/24 16:28:11 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/27 22:13:44 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	__t_shell__(t_shell *shell)
 	tree_clear(&shell->env);
 	tree_clear(&shell->export);
 	set_clear(&shell->quoted_tokens);
+	ast_clear(&shell->ast);
 	__va_close(&shell->stddesc->stdin, &shell->stddesc->stdout, &shell->stddesc->stderr, NULL);
 	free(shell->stddesc);
 	__putstr_fd(LOG_SEPARATOR, shell->logfile);

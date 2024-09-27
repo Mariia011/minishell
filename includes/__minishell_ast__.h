@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 15:20:23 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/26 20:30:10 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/27 22:30:56 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,8 @@ void 			ast_eval(t_ast *ast);
 void			ast_lrotate(t_ast *ast, t_ast_node *x, t_ast_node *z);
 void			ast_rrotate(t_ast *ast, t_ast_node *x, t_ast_node *z);
 
+
+void			ast_node_clear(t_ast_node *node);
+void			ast_clear(t_ast **astptr);
 
 #endif //__MINISHEL_AST___H

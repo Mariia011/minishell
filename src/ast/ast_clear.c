@@ -1,28 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_cmd_node.c                                    :+:      :+:    :+:   */
+/*   ast_clear.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/25 01:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/27 22:30:56 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/09/27 22:02:52 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/09/27 22:19:35 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_ast_node *make_cmd_node(t_cmd *cmd)
-{
-	t_ast_node *res = __malloc(sizeof(t_ast_node));
-	res->type = CMD;
-	res->cmd_ptr = cmd;
-	res->orig_token = NULL;
-	res->fd = -1;
-	res->filename = NULL;
-	res->left = NULL;
-	res->right = NULL;
-	res->p = NULL;
+void dfs(t_ast_node *root);
 
-	return (res);
+void ast_clear(t_ast **astptr)
+{
+	if (NULL == astptr || NULL == *astptr) return;
+
+	t_ast *ast = *astptr;
+
+	dfs(ast->root);
+
+	ast->root = NULL;
+	ast->shell->ast = NULL;
+	ast->shell = NULL;
+	ast->last_cmd = NULL;
+	ast->last_process_cmd = NULL;
+
+	free(ast);
+
+	*astptr = NULL;
+}
+
+void dfs(t_ast_node *root)
+{
+	if (!root) return;
+
+	dfs(root->left);
+	dfs(root->right);
+	ast_node_clear(root);
 }

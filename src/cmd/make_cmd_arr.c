@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:29:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/26 03:07:12 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/27 22:21:53 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ t_cmd	**make_cmd_arr(t_list *tokens, t_shell *shell)
 		shremove_if(partition, is_parenthesis_token, shell);
 
 		res[i++] = make_command(partition, shell);
+
+		list_clear(&partition);
 
 		if (second == tokens->tail)
 			first = second->next;
