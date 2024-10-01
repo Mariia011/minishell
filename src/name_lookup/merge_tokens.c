@@ -6,23 +6,23 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:17:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/24 16:24:23 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:31:31 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static void	merge_inside_quotes(t_list *tokens);
-static bool	is_self_mergeable(t_node *token);
-static bool	is_mergeable(t_node *token, t_set *quoted_tokens);
+static bool	is_self_mergeable(t_listnode *token);
+static bool	is_mergeable(t_listnode *token, t_set *quoted_tokens);
 
-static void	merge_inside_quotes_the_good_part(t_list *tokens, t_node **t,
-				t_node **next);
+static void	merge_inside_quotes_the_good_part(t_list *tokens, t_listnode **t,
+				t_listnode **next);
 
 void	merge_tokens(t_shell *shell, t_list *tokens)
 {
-	t_node	*token;
-	t_node	*next;
+	t_listnode	*token;
+	t_listnode	*next;
 
 	if (!tokens || empty(tokens))
 		return ;
@@ -51,8 +51,8 @@ void	merge_tokens(t_shell *shell, t_list *tokens)
 
 static void	merge_inside_quotes(t_list *tokens)
 {
-	t_node	*token;
-	t_node	*next;
+	t_listnode	*token;
+	t_listnode	*next;
 
 	if (!tokens || empty(tokens))
 		return ;
@@ -68,10 +68,10 @@ static void	merge_inside_quotes(t_list *tokens)
 	}
 }
 
-static void	merge_inside_quotes_the_good_part(t_list *tokens, t_node **t,
-		t_node **next)
+static void	merge_inside_quotes_the_good_part(t_list *tokens, t_listnode **t,
+		t_listnode **next)
 {
-	t_node	*tmp;
+	t_listnode	*tmp;
 	char	*quote_type;
 
 	quote_type = __strdup((*t)->val);
@@ -95,13 +95,13 @@ static void	merge_inside_quotes_the_good_part(t_list *tokens, t_node **t,
 	__delete_string(&quote_type);
 }
 
-static bool	is_self_mergeable(t_node *token)
+static bool	is_self_mergeable(t_listnode *token)
 {
 	return (token && token->val && __strlen(token->val) == 1
 		&& __strchr(SELF_MERGEABLE_TOKENS, token->val[0]));
 }
 
-static bool	is_mergeable(t_node *token, t_set *quoted_tokens)
+static bool	is_mergeable(t_listnode *token, t_set *quoted_tokens)
 {
 	return (is_quoted_token(quoted_tokens, token) || (!is_self_mergeable(token) && (!is_parenthesis(token->val) && !string_equal(token->val, " "))));
 }

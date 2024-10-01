@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:48:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/24 01:21:09 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:31:31 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char *ends_with(char *dirname, char *req)
 static bool check_node(char *dirname, t_list *reqs)
 {
 	char *(*fptr)(char *, char *);
-	t_node *cur = reqs->head;
+	t_listnode *cur = reqs->head;
 	char *dir_p = dirname;
 
 	fptr = contains_it;
@@ -107,7 +107,7 @@ static t_list *check_all_dirs(t_list *dir, t_list *reqs)
 	if (!__str_starts_with(reqs->head->val, "."))
 		list_remove_if(dir_cpy, ".", __str_starts_with);
 
-	t_node *dir_node = dir_cpy->head;
+	t_listnode *dir_node = dir_cpy->head;
 	while(dir_node)
 	{
 		if (check_node(dir_node->val, reqs))
@@ -119,9 +119,9 @@ static t_list *check_all_dirs(t_list *dir, t_list *reqs)
 	return res;
 }
 
-void substitute_args(t_node *wildcard_node, t_list *args, t_list *survived)
+void substitute_args(t_listnode *wildcard_node, t_list *args, t_list *survived)
 {
-	t_node *w_node = survived->tail;
+	t_listnode *w_node = survived->tail;
 	while(w_node)
 	{
 		list_insert(args, wildcard_node, w_node->val);
@@ -133,14 +133,14 @@ void wildcard_resolve(t_list *tokens, t_shell *shell)
 {
 	t_list *dir = get_cwd_files();
 	int i = 0;
-	t_node *wild = tokens->head;
+	t_listnode *wild = tokens->head;
 	t_list *reqs = NULL;
 
 	wild = find_if(tokens->head, tokens->tail, is_wildcard);
 
 	while(wild)
 	{
-		t_node *save = wild->next;
+		t_listnode *save = wild->next;
 		if (!is_quoted_token(shell->quoted_tokens, wild) && (wild != tokens->head && !string_equal(wild->prev->val, "<<")))
 		{
 			reqs = make_list_from_string(wild->val, "*", all);

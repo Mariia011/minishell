@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 15:20:23 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/27 22:30:56 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/01 16:42:38 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ struct s_ast_node
 	t_fd					fd;
 	char					*filename;
 
-	t_node				*orig_token;
+	t_listnode				*orig_token;
 
 	t_ast_node 			*right;
 	t_ast_node 			*left;
@@ -55,8 +55,8 @@ struct s_ast_node
 
 
 t_ast			*make_ast_empty(t_shell *shell) __attribute__((warn_unused_result));
-t_ast_node_type	node_gettype(t_node *token);
-t_ast_node		*make_op_node(t_node *token);
+t_ast_node_type	node_gettype(t_listnode *token);
+t_ast_node		*make_op_node(t_listnode *token);
 void			insert_ast_node(t_ast *ast, t_ast_node *z);
 t_ast			*make_ast_skeleton(t_list *tokens, t_shell *shell);
 t_ast_node		*make_cmd_node(t_cmd *cmd);
@@ -64,10 +64,12 @@ void			insert_cmd_node(t_ast *ast, t_ast_node *z);
 t_ast			*make_ast(char *line, t_shell *shell);
 t_ast_node		*find_last_process_cmd(t_ast_node *root);
 t_ast_node		*find_last_cmd(t_ast *ast);
-t_ast_node		*ast_find_by_token(t_ast * ast, t_node *token);
+t_ast_node		*ast_find_by_token(t_ast * ast, t_listnode *token);
 void			ast_balance(t_ast *ast, t_list *tokens);
 
 void 			ast_eval(t_ast *ast);
+
+void			ttopsort(t_list *tokens, t_shell *shell);
 
 void			ast_lrotate(t_ast *ast, t_ast_node *x, t_ast_node *z);
 void			ast_rrotate(t_ast *ast, t_ast_node *x, t_ast_node *z);

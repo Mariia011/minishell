@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:21:34 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/26 02:53:52 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/01 17:52:48 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,16 @@ t_list	*preprocess(t_list *tokens, t_shell *shell)
 	{
 		set_exit_status_no_of(258);
 		list_clear(&tokens);
-		return (tokens);
 	}
-	// shremove_if(tokens, is_parenthesis_token, shell);
+	ttopsort(tokens, shell);
+
+	print_list_no_nl(tokens);
+	list_clear(&tokens);
+
 	return (tokens);
 }
 
-bool	is_quoted_token(t_set *set, t_node *token)
+bool	is_quoted_token(t_set *set, t_listnode *token)
 {
 	char *guess	__attribute__((cleanup(__delete_string)));
 
@@ -42,8 +45,8 @@ bool	is_quoted_token(t_set *set, t_node *token)
 
 void	remove_spaces(t_shell *shell, t_list *tokens) // deprecated
 {
-	t_node	*curr;
-	t_node	*next;
+	t_listnode	*curr;
+	t_listnode	*next;
 
 	if (!shell || empty(tokens))
 		return ;

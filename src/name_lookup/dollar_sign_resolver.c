@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:08:55 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/24 01:21:09 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:31:31 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	dollar_sign_resolver(t_list *tokens, t_shell *shell)
 {
 	t_list	*queue;
-	t_node	*token;
-	t_node	*next;
+	t_listnode	*token;
+	t_listnode	*next;
 
 	if (!tokens || !shell)
 		return ;

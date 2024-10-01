@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:01:15 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/23 15:49:13 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:31:31 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	size_2(t_shell *shell, t_list *tokens);
 
 static int	foo(int x, t_list *tokens);
 
-static bool	not_equal_sign(t_node *const node)
+static bool	not_equal_sign(t_listnode *const node)
 {
 	return (node && !string_equal(node->val, "="));
 }

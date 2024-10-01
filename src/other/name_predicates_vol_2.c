@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 18:26:29 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/24 16:23:48 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/01 16:42:38 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,21 @@ bool	not_name_part(char c)
 	return (!is_name_part(c));
 }
 
-bool	is_parenthesis_token(t_node * token, t_shell * shell)
+bool	is_parenthesis_token(t_listnode * token, t_shell * shell)
 {
 	return (is_opening_parenthesis_token(token, shell) || is_closing_parenthesis_token(token, shell));
 }
 
-bool	is_opening_parenthesis_token(t_node * token, t_shell * shell)
+bool	not_parenthesis_token(t_listnode * token, t_shell * shell)
+{
+	return (!is_parenthesis_token(token, shell));
+}
+
+bool	is_opening_parenthesis_token(t_listnode * token, t_shell * shell)
 {
 	return (!is_quoted_token(shell->quoted_tokens, token) && is_opening_parenthesis(token->val));
 }
-bool	is_closing_parenthesis_token(t_node * token, t_shell * shell)
+bool	is_closing_parenthesis_token(t_listnode * token, t_shell * shell)
 {
 	return (!is_quoted_token(shell->quoted_tokens, token) && is_closing_parenthesis(token->val));
 }

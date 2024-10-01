@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/27 22:13:15 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/01 16:42:38 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char				*resolve(char *t_val,
 						t_shell *shell) __attribute__((warn_unused_result));
 int					cmd_lookup(t_cmd *cmd);
 t_fd				open_file(char *filename, int options);
-int					redirect(t_node *token, t_cmd_container *container);
+int					redirect(t_listnode *token, t_cmd_container *container);
 void				eval_wrapper(t_cmd *cmd, t_eval_opcode opcode);
 
 // find predicates
@@ -103,13 +103,14 @@ bool				is_alpha(const char c);
 bool				is_digit(const char c);
 bool				is_name_part(const char c);
 bool				not_name_part(char c);
-bool				is_quoted_token(t_set *set, t_node *token);
+bool				is_quoted_token(t_set *set, t_listnode *token);
 
-bool				is_parenthesis_token(t_node * token, t_shell * shell);
+bool				is_parenthesis_token(t_listnode * token, t_shell * shell);
+bool				not_parenthesis_token(t_listnode * token, t_shell * shell);
 bool				is_closing_parenthesis(char *text);
 bool				is_opening_parenthesis(char *text);
-bool				is_opening_parenthesis_token(t_node * token, t_shell * shell);
-bool				is_closing_parenthesis_token(t_node * token, t_shell * shell);
+bool				is_opening_parenthesis_token(t_listnode * token, t_shell * shell);
+bool				is_closing_parenthesis_token(t_listnode * token, t_shell * shell);
 bool				is_parenthesis(char *text);
 
 // lifecycle
@@ -169,7 +170,7 @@ void				remove_spaces(t_shell *shell, t_list *tokens);
 
 bool				keyword_parse(t_list *tokens, t_shell *shell);
 bool				redirection_parse(t_list *tokens, t_shell *shell);
-void				save_token(t_shell *shell, t_node *address);
+void				save_token(t_shell *shell, t_listnode *address);
 
 // builtin utils
 void				builtin_preeval(t_cmd * cmd);
@@ -178,7 +179,7 @@ void				update_pwd(t_shell *shell, char *oldpwd);
 void				__cd_one_arg__(t_cmd *cmd);
 void				_chdir(t_cmd *cmd, const char *path, int *status);
 void				__cd_no_arg__(t_cmd *cmd);
-bool				last_nl(t_node *const node);
+bool				last_nl(t_listnode *const node);
 void				echo_arglist(t_list *arglist);
 bool				not_n_predicate(char c);
 bool				is_n(char *opt);
@@ -190,12 +191,12 @@ char				*get_pid(t_shell *shell)
 t_list				*get_cwd_files();
 int					absolute_path_lookup(t_cmd *cmd);
 int					quote_parse(t_list *tokens);
-bool				not_space(t_node *node);
+bool				not_space(t_listnode *node);
 
-bool				is_redirection_token(t_node *node, t_shell *shell);
+bool				is_redirection_token(t_listnode *node, t_shell *shell);
 
 void				erase_quotes(t_list *tokens);
-bool				is_quote_node(t_node *const node);
+bool				is_quote_node(t_listnode *const node);
 void				mark_quoted_tokens(t_shell *shell, t_list *tokens);
 
 // signals
@@ -212,32 +213,32 @@ char				*starts_with(char *dirname, char *req);
 char				*ends_with(char *dirname, char *req);
 t_list				*get_cwd_files(void);
 void				wildcard_resolve(t_list *tokens, t_shell *shell);
-void				substitute_args(t_node *wildcard_node, t_list *args, t_list *survived);
+void				substitute_args(t_listnode *wildcard_node, t_list *args, t_list *survived);
 
 int					preprocess_redirections(t_list *tokens, t_cmd_container *container);
-int					preprocess_redirections_the_good_part(t_cmd_container *container, t_list *tokens, t_node *token);
+int					preprocess_redirections_the_good_part(t_cmd_container *container, t_list *tokens, t_listnode *token);
 
 t_fd				get_next_fd(t_cmd_container *container);
 size_t				get_next_fd_idx(t_cmd_container *container);
 
 int					pop_redirections(t_cmd *cmd, t_list *tokens, t_cmd_container *container);
 size_t				count_pipes(t_list *tokens, t_shell *shell);
-t_node				*find_next_pipe(t_node *first, t_list *tokens, t_shell *shell);
+t_listnode				*find_next_pipe(t_listnode *first, t_list *tokens, t_shell *shell);
 bool				parenthesis_parse(t_list *tokens, t_shell *shell);
 
 bool				syntax_analysis(t_list *tokens, t_shell *shell);
 bool				is_invokable(t_cmd *cmd);
 bool				is_program(t_cmd *cmd);
 
-t_list				*make_partition(t_shell *shell, t_node *first, t_node *last) __attribute__((warn_unused_result));
+t_list				*make_partition(t_shell *shell, t_listnode *first, t_listnode *last) __attribute__((warn_unused_result));
 t_cmd				**make_cmd_arr(t_list *tokens, t_shell *shell) __attribute__((warn_unused_result));
 void				logcmd(const char * line, t_fd logfile);
 
 // list extensions
-size_t				shcount_if(t_node *first, t_node *last, bool (*p)(t_node *, t_shell *), t_shell *shell);
-size_t				shremove_if(t_list *list, bool (*p)(t_node *, t_shell *), t_shell *shell);
-t_node				*shfind_if(t_node *first, t_node *last, bool (*p)(t_node *, t_shell*), t_shell *shell);
-t_node				*shrfind_if(t_node *first, t_node *last, bool (*p)(t_node *, t_shell*), t_shell *shell);
+size_t				shcount_if(t_listnode *first, t_listnode *last, bool (*p)(t_listnode *, t_shell *), t_shell *shell);
+size_t				shremove_if(t_list *list, bool (*p)(t_listnode *, t_shell *), t_shell *shell);
+t_listnode				*shfind_if(t_listnode *first, t_listnode *last, bool (*p)(t_listnode *, t_shell*), t_shell *shell);
+t_listnode				*shrfind_if(t_listnode *first, t_listnode *last, bool (*p)(t_listnode *, t_shell*), t_shell *shell);
 
 #endif // MINISHELL_H
 

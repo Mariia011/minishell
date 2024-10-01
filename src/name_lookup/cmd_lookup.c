@@ -6,14 +6,14 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/26 20:59:36 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:31:31 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static int	builtin_lookup(t_cmd *cmd);
-static int	replace_cmd_name(t_cmd *cmd, t_node *node);
+static int	replace_cmd_name(t_cmd *cmd, t_listnode *node);
 
 int	cmd_lookup(t_cmd *cmd)
 {
@@ -59,7 +59,7 @@ int	set_eval_to_prog_i_love_norminette(t_cmd *cmd)
 	return (0);
 }
 
-static int	replace_cmd_name(t_cmd *cmd, t_node *node)
+static int	replace_cmd_name(t_cmd *cmd, t_listnode *node)
 {
 	char	*resolved_name;
 

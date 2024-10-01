@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:07:40 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/15 01:02:26 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:31:31 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
-static int	process_infile(t_node *token, t_cmd_container *container);
-static int	process_outfile(t_node *token, t_cmd_container *container);
-static int	process_append(t_node *token, t_cmd_container *container);
-static int	process_heredoc(t_node *token, t_cmd_container *container);
+static int	process_infile(t_listnode *token, t_cmd_container *container);
+static int	process_outfile(t_listnode *token, t_cmd_container *container);
+static int	process_append(t_listnode *token, t_cmd_container *container);
+static int	process_heredoc(t_listnode *token, t_cmd_container *container);
 
-int	redirect(t_node *token, t_cmd_container *container)
+int	redirect(t_listnode *token, t_cmd_container *container)
 {
 	int	x;
 
@@ -40,7 +40,7 @@ int	redirect(t_node *token, t_cmd_container *container)
 	return (x);
 }
 
-static int	process_infile(t_node *token, t_cmd_container *container)
+static int	process_infile(t_listnode *token, t_cmd_container *container)
 {
 	t_fd	fd;
 
@@ -49,7 +49,7 @@ static int	process_infile(t_node *token, t_cmd_container *container)
 	return (fd);
 }
 
-static int	process_outfile(t_node *token, t_cmd_container *container)
+static int	process_outfile(t_listnode *token, t_cmd_container *container)
 {
 	t_fd	fd;
 
@@ -58,7 +58,7 @@ static int	process_outfile(t_node *token, t_cmd_container *container)
 	return (fd);
 }
 
-static int	process_heredoc(t_node *token, t_cmd_container *container)
+static int	process_heredoc(t_listnode *token, t_cmd_container *container)
 {
 	t_fd	fd;
 
@@ -68,7 +68,7 @@ static int	process_heredoc(t_node *token, t_cmd_container *container)
 	return (fd);
 }
 
-static int	process_append(t_node *token, t_cmd_container *container)
+static int	process_append(t_listnode *token, t_cmd_container *container)
 {
 	t_fd	fd;
 

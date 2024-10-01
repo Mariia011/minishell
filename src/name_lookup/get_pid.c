@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:45:58 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/24 01:21:09 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:31:31 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*get_pid(t_shell *shell)
 	free(val);
 	get_next_line(-1);
 
-	t_node *node = list->tail;
+	t_listnode *node = list->tail;
 
 	while (node && !__strstr(node->val, "minishell"))
 		node = node->prev;

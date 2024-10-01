@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 22:09:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/01 22:11:07 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:31:31 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static size_t __count_pipes__(t_node *token, t_shell *shell)
+static size_t __count_pipes__(t_listnode *token, t_shell *shell)
 {
 	if (!token) return 0;
 

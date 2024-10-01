@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:35:09 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/24 15:46:01 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:31:31 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@
 // 		t_list *tokens)
 // {
 // 	size_t	i;
-// 	t_node	*first;
-// 	t_node	*pipe;
+// 	t_listnode	*first;
+// 	t_listnode	*pipe;
 // 	t_list	*partition;
 
 // 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:29:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/27 22:48:17 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:42:54 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ t_cmd	**make_cmd_arr(t_list *tokens, t_shell *shell)
 
 	res[size - 1] = NULL;
 
-	t_node *first = tokens->head;
+	t_listnode *first = tokens->head;
 
 	while (first)
 	{
-		t_node *second = shfind_if(first, tokens->tail, is_special_symbol, shell);
+		t_listnode *second = shfind_if(first, tokens->tail, is_special_symbol, shell);
 
 		if (!second)
 			second = tokens->tail;
@@ -47,10 +47,10 @@ t_cmd	**make_cmd_arr(t_list *tokens, t_shell *shell)
 	return res;
 }
 
-t_list	*make_partition(t_shell *shell, t_node *first, t_node *last)
+t_list	*make_partition(t_shell *shell, t_listnode *first, t_listnode *last)
 {
 	t_list	*list;
-	t_node	*curr;
+	t_listnode	*curr;
 
 	if (!shell || !first || !last)
 		return (NULL);

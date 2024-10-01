@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 21:49:46 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 21:36:42 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/01 17:54:17 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
-static void	__print_listnode__(t_node *const head)
+static void	__print_listnode__(t_listnode *const head)
 {
 	if (NULL == head)
 	{
@@ -25,7 +25,14 @@ static void	__print_listnode__(t_node *const head)
 	printf("%s\n", head->val);
 }
 
-static void	__print_listnode_enumerate__(t_node *const head, size_t n)
+static void	__print_listnode_no_nl__(t_listnode *const head)
+{
+	printf("%s ", head->val);
+	if (NULL == head->next)
+		printf("\n");
+}
+
+static void	__print_listnode_enumerate__(t_listnode *const head, size_t n)
 {
 	if (NULL == head)
 		return ;
@@ -38,6 +45,13 @@ void	print_list(t_list *list)
 	if (NULL == list)
 		return ;
 	preorder_traverse(list->head, __print_listnode__);
+}
+
+void	print_list_no_nl(t_list *list)
+{
+	if (NULL == list)
+		return ;
+	preorder_traverse(list->head, __print_listnode_no_nl__);
 }
 
 void	print_list_custom(t_list *list, t_list_Upredicate p)

@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 00:36:59 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/26 02:36:43 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:31:31 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_ast_node *make_op_node(t_node *token)
+t_ast_node *make_op_node(t_listnode *token)
 {
 	t_ast_node *res = __malloc(sizeof(t_ast_node));
 	res->type = node_gettype(token);

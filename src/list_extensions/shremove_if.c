@@ -6,17 +6,17 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:09:43 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/24 16:14:05 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:31:31 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-size_t	shremove_if(t_list *list, bool (*p)(t_node *, t_shell *), t_shell *shell)
+size_t	shremove_if(t_list *list, bool (*p)(t_listnode *, t_shell *), t_shell *shell)
 {
 	size_t	removed;
-	t_node	*next;
-	t_node	*first;
+	t_listnode	*next;
+	t_listnode	*first;
 
 	if (!list || !p || !shell)
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 18:37:08 by codespace         #+#    #+#             */
-/*   Updated: 2024/09/23 15:50:03 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:31:31 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 // int	pop_redirections(t_cmd *cmd, t_list *tokens, t_cmd_container *container)
 // {
-// 	t_node	*token;
-// 	t_node	*next;
+// 	t_listnode	*token;
+// 	t_listnode	*next;
 // 	t_fd	fd;
 
 // 	token = tokens->head;

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   merge_tokens_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:26:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/26 15:44:34 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:31:31 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	save_token(t_shell *shell, t_node *address)
+void	save_token(t_shell *shell, t_listnode *address)
 {
 	char	*val;
 
@@ -21,16 +21,16 @@ void	save_token(t_shell *shell, t_node *address)
 	free(val);
 }
 
-bool	is_quote_node(t_node *const node)
+bool	is_quote_node(t_listnode *const node)
 {
 	return (is_quote(node->val));
 }
 
 void	mark_quoted_tokens(t_shell *shell, t_list *tokens)
 {
-	t_node	*left_quote;
-	t_node	*right_quote;
-	t_node	*token;
+	t_listnode	*left_quote;
+	t_listnode	*right_quote;
+	t_listnode	*token;
 
 	if (empty(tokens))
 		return ;
@@ -55,8 +55,8 @@ void	mark_quoted_tokens(t_shell *shell, t_list *tokens)
 
 void	erase_quotes(t_list *tokens)
 {
-	t_node	*token;
-	t_node	*pair;
+	t_listnode	*token;
+	t_listnode	*pair;
 
 	if (empty(tokens))
 		return ;
