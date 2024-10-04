@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:47:09 by marikhac          #+#    #+#             */
-/*   Updated: 2024/10/01 17:01:10 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 19:35:12 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ bool is_special_symbol(t_listnode * node, t_shell *shell);
 bool not_special_symbol(t_listnode * node, t_shell *shell);
 bool is_binary_operator(t_listnode * node, t_shell *shell);
 bool not_binary_operator(t_listnode * node, t_shell *shell);
+bool not_binary_operator_nor_parenthesis(t_listnode * node, t_shell *shell);
 bool is_and(char *val);
 bool is_or(char *val);
 bool is_pipe(char *val);
