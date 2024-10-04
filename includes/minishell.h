@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/04 15:42:01 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 17:48:42 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char				*resolve(char *t_val,
 						t_shell *shell) __attribute__((warn_unused_result));
 int					cmd_lookup(t_cmd *cmd);
 t_fd				open_file(char *filename, int options);
-int					redirect(t_listnode *token, t_cmd_container *container);
+t_authorized_fds	redirect(t_ast_node *r, t_authorized_fds oldfds);
 void				eval_wrapper(t_cmd *cmd, t_eval_opcode opcode);
 
 // find predicates
@@ -219,7 +219,7 @@ int					preprocess_redirections(t_list *tokens, t_cmd_container *container);
 int					preprocess_redirections_the_good_part(t_cmd_container *container, t_list *tokens, t_listnode *token);
 
 
-int					pop_redirections(t_cmd *cmd, t_list *tokens, t_cmd_container *container);
+int					pop_redirections(t_list *partition, t_shell *shell);
 size_t				count_pipes(t_list *tokens, t_shell *shell);
 t_listnode				*find_next_pipe(t_listnode *first, t_list *tokens, t_shell *shell);
 bool				parenthesis_parse(t_list *tokens, t_shell *shell);

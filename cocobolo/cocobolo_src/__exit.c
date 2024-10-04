@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 18:02:29 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:17:09 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 16:02:19 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@ void	__exit(const char *const err)
 {
 	if (NULL != err)
 	{
-		printf(RED);
-		printf("\n./minishell: %s\n\n", err);
-		printf(RESET);
+		write(STDERR_FILENO, RED, __strlen(RED));
+		write(STDERR_FILENO, "./minishell: ", __strlen("./minishell: "));
+		write(STDERR_FILENO, err, __strlen(err));
+		write(STDERR_FILENO, "\n", __strlen("\n"));
+		write(STDERR_FILENO, RESET, __strlen(RESET));
+
 	}
 	exit(EXIT_FAILURE);
 }

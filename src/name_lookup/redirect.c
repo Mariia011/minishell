@@ -1,79 +1,90 @@
-// /* ************************************************************************** */
-// /*                                                                            */
-// /*                                                        :::      ::::::::   */
-// /*   redirect.c                                         :+:      :+:    :+:   */
-// /*                                                    +:+ +:+         +:+     */
-// /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
-// /*                                                +#+#+#+#+#+   +#+           */
-// /*   Created: 2024/07/10 22:07:40 by aamirkha          #+#    #+#             */
-// /*   Updated: 2024/10/01 15:31:31 by aamirkha         ###   ########.fr       */
-// /*                                                                            */
-// /* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirect.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/10 22:07:40 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/10/04 18:04:48 by aamirkha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// #include "minishell.h"
+#include "minishell.h"
 
-// #pragma GCC diagnostic push
-// #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+static int	process_infile(t_ast_node *r);
+static int	process_outfile(t_ast_node *r);
+static int	process_append(t_ast_node *r);
+// static int	process_heredoc(t_ast_node *r);
 
-// static int	process_infile(t_listnode *token, t_cmd_container *container);
-// static int	process_outfile(t_listnode *token, t_cmd_container *container);
-// static int	process_append(t_listnode *token, t_cmd_container *container);
-// static int	process_heredoc(t_listnode *token, t_cmd_container *container);
+t_authorized_fds	redirect(t_ast_node *r, t_authorized_fds oldfds)
+{
+	t_authorized_fds newfds;
+	int x;
+	if (r->redirection_type & redirect_in)
+	{
+		newfds.stdin.fd = (process_infile(r));
+		newfds.stdin.author = r;
+		x = newfds.stdin.fd;
+		if ((!oldfds.stdin.author || oldfds.stdin.author->type != REDIRECTION) && x != -1)
+			dup2(x, STDIN_FILENO);
+	}
+	else if (r->redirection_type & (redirect_out | redirect_append))
+	{
+		if (r->redirection_type & redirect_out)
+			newfds.stdout.fd = (process_outfile(r));
+		else
+			newfds.stdout.fd = (process_append(r));
+		newfds.stdout.author = r;
+		x = newfds.stdout.fd;
+		if ((!oldfds.stdout.author || oldfds.stdout.author->type != REDIRECTION) && x != -1)
+			dup2(newfds.stdout.fd, STDOUT_FILENO);
+	}
 
-// int	redirect(t_listnode *token, t_cmd_container *container)
-// {
-// 	int	x;
+	r->right->fd = x;
+	if (x == -1)
+		__va_perror(r->right->filename, ": ", "no such file or directory", NULL);
 
-// 	if (!token || !container)
-// 	{
-// 		return (-1);
-// 	}
-// 	if (string_equal(token->val, "<"))
-// 		x = (process_infile(token, container));
-// 	else if (string_equal(token->val, "<<"))
-// 		x = (process_heredoc(token, container));
-// 	else if (string_equal(token->val, ">"))
-// 		x = (process_outfile(token, container));
-// 	else
-// 		x = (process_append(token, container));
-// 	container->fds[get_next_fd_idx(container)] = x;
-// 	return (x);
-// }
 
-// static int	process_infile(t_listnode *token, t_cmd_container *container)
+	return newfds;
+
+	// else if (r->redirection_type & redirect_heredoc)
+	// 	r->right->fd = (process_heredoc(r));
+}
+
+static int	process_infile(t_ast_node *r)
+{
+	t_fd	fd;
+
+	fd = -1;
+	fd = open_file(r->right->filename, O_RDONLY);
+	return (fd);
+}
+
+static int	process_outfile(t_ast_node *r)
+{
+	t_fd	fd;
+
+	fd = -1;
+	fd = open_file(r->right->filename, O_WRONLY | O_CREAT | O_TRUNC);
+	return (fd);
+}
+
+// static int	process_heredoc(t_ast_node *r)
 // {
 // 	t_fd	fd;
 
 // 	fd = -1;
-// 	fd = open_file(token->next->val, O_RDONLY);
+// 	fd = make_heredoc(r->next->val, container->shell,
+// 			is_quoted_r(container->shell->quoted_rs, r->next));
 // 	return (fd);
 // }
 
-// static int	process_outfile(t_listnode *token, t_cmd_container *container)
-// {
-// 	t_fd	fd;
+static int	process_append(t_ast_node *r)
+{
+	t_fd	fd;
 
-// 	fd = -1;
-// 	fd = open_file(token->next->val, O_WRONLY | O_CREAT | O_TRUNC);
-// 	return (fd);
-// }
-
-// static int	process_heredoc(t_listnode *token, t_cmd_container *container)
-// {
-// 	t_fd	fd;
-
-// 	fd = -1;
-// 	fd = make_heredoc(token->next->val, container->shell,
-// 			is_quoted_token(container->shell->quoted_tokens, token->next));
-// 	return (fd);
-// }
-
-// static int	process_append(t_listnode *token, t_cmd_container *container)
-// {
-// 	t_fd	fd;
-
-// 	fd = -1;
-// 	fd = open_file(token->next->val, O_WRONLY | O_CREAT | O_APPEND);
-// 	return (fd);
-// }
-// #pragma GCC diagnostic pop
+	fd = -1;
+	fd = open_file(r->right->filename, O_WRONLY | O_CREAT | O_APPEND);
+	return (fd);
+}

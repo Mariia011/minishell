@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:29:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/04 15:46:05 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 15:56:54 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_cmd	**make_cmd_arr(t_list *tokens, t_shell *shell)
 		t_list *partition = make_partition(shell, first, second);
 
 		shremove_if(partition, is_parenthesis_token, shell);
+		pop_redirections(partition, shell);
 
 		res[i++] = make_command(partition, shell);
 

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 00:32:16 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/25 02:19:10 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 17:17:21 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,5 @@ t_ast *make_ast_empty(t_shell *shell)
 	res->root = NULL;
 	res->shell = shell;
 	res->last_process_cmd = NULL;
-
 	return res;
 }
