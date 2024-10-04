@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:07:40 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/04 18:04:48 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 18:24:06 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	process_append(t_ast_node *r);
 
 t_authorized_fds	redirect(t_ast_node *r, t_authorized_fds oldfds)
 {
-	t_authorized_fds newfds;
+	t_authorized_fds newfds = oldfds;
 	int x;
 	if (r->redirection_type & redirect_in)
 	{
@@ -28,6 +28,9 @@ t_authorized_fds	redirect(t_ast_node *r, t_authorized_fds oldfds)
 		x = newfds.stdin.fd;
 		if ((!oldfds.stdin.author || oldfds.stdin.author->type != REDIRECTION) && x != -1)
 			dup2(x, STDIN_FILENO);
+		else if (x == -1)
+			__va_perror(r->right->filename, ": ", "no such file or directory", NULL);
+
 	}
 	else if (r->redirection_type & (redirect_out | redirect_append))
 	{
@@ -39,12 +42,11 @@ t_authorized_fds	redirect(t_ast_node *r, t_authorized_fds oldfds)
 		x = newfds.stdout.fd;
 		if ((!oldfds.stdout.author || oldfds.stdout.author->type != REDIRECTION) && x != -1)
 			dup2(newfds.stdout.fd, STDOUT_FILENO);
+		else if (x == -1)
+			__va_perror(r->right->filename, ": ", "could not open file", NULL);
 	}
 
 	r->right->fd = x;
-	if (x == -1)
-		__va_perror(r->right->filename, ": ", "no such file or directory", NULL);
-
 
 	return newfds;
 

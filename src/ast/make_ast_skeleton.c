@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 00:25:04 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/04 16:59:37 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 18:33:39 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ t_ast *make_ast_skeleton(t_list *tokens, t_shell *shell)
 
 	while (op)
 	{
-		if (node_gettype(op) == REDIRECTION)
-			insert_cmd_node(ast, make_op_node(op));
-		else
-			insert_ast_node(ast, make_op_node(op));
+		insert_ast_node(ast, make_op_node(op));
 		op = shrfind_if(tokens->head, op->prev, is_special_symbol, shell);
 	}
 

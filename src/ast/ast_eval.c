@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 01:43:14 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/04 17:52:35 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 18:27:17 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ static int dfs(t_ast_node *root, t_ast *ast, t_authorized_fds fds)
 
 		dfs(root->left, ast, new_fds);
 
-		dup2(pipes[in], STDIN_FILENO);
+		if (!root->p || root->p->type != REDIRECTION)
+			dup2(pipes[in], STDIN_FILENO);
 
 		close(pipes[in]);
 		close(pipes[out]);
