@@ -6,20 +6,20 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/01 15:31:31 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 20:24:07 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static int	builtin_lookup(t_cmd *cmd);
+static int	cmd_lookup_core(t_cmd *cmd);
 static int	replace_cmd_name(t_cmd *cmd, t_listnode *node);
 
 int	cmd_lookup(t_cmd *cmd)
 {
-	t_list *path	__attribute__((cleanup(list_clear)));
+	int	x;
 
-	path = NULL;
 	if (!cmd)
 		return (-1);
 	if (builtin_lookup(cmd) == 0)
@@ -27,30 +27,39 @@ int	cmd_lookup(t_cmd *cmd)
 		cmd->eval = builtin_preeval;
 		return (0);
 	}
-	path = get_path(cmd->shell);
 	if (!string_equal(cmd->name, ""))
 	{
-		if (__strchr(cmd->name, '/') == false)
-		{
-			if (find_range(path, cmd->name, __cmd_exists__))
-				return (replace_cmd_name(cmd, find_range(path,
-							cmd->name, __cmd_exists__)));
-		}
-		else
-		{
-			if (absolute_path_lookup(cmd) == -1)
-			{
-				cmd->eval = errcmd;
-				return -1;
-			}
-			cmd->eval = eval_prog;
-			return 0;
-		}
+		x = cmd_lookup_core(cmd);
+		if (x != 2)
+			return (x);
 	}
 	cmd->err = __make_string(cmd->orig_name, ": command not found", NULL);
 	cmd->exit_status = NOT_FOUND;
 	cmd->eval = errcmd;
 	return (-1);
+}
+
+static int	cmd_lookup_core(t_cmd *cmd)
+{
+	t_list *path __attribute__((cleanup(list_clear)));
+	path = get_path(cmd->shell);
+	if (__strchr(cmd->name, '/') == false)
+	{
+		if (find_range(path, cmd->name, __cmd_exists__))
+			return (replace_cmd_name(cmd, find_range(path, cmd->name,
+						__cmd_exists__)));
+	}
+	else
+	{
+		if (absolute_path_lookup(cmd) == -1)
+		{
+			cmd->eval = errcmd;
+			return (-1);
+		}
+		cmd->eval = eval_prog;
+		return (0);
+	}
+	return (2);
 }
 
 int	set_eval_to_prog_i_love_norminette(t_cmd *cmd)
@@ -72,12 +81,10 @@ static int	replace_cmd_name(t_cmd *cmd, t_listnode *node)
 
 bool	__cmd_exists__(const char *path, const char *name)
 {
-	char *guess	__attribute__((cleanup(__delete_string)));
+	struct stat	buffer;
 
+	char *guess __attribute__((cleanup(__delete_string)));
 	guess = __make_string(path, "/", name, NULL);
-
-	struct stat buffer;
-
 	stat(guess, &buffer);
 	return (0 == access(guess, F_OK | X_OK) && !S_ISDIR(buffer.st_mode));
 }

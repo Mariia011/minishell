@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:08:55 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/01 15:31:31 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 20:30:52 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	dollar_sign_resolver(t_list *tokens, t_shell *shell)
 {
-	t_list	*queue;
+	t_list		*queue;
 	t_listnode	*token;
 	t_listnode	*next;
 
@@ -34,12 +34,7 @@ void	dollar_sign_resolver(t_list *tokens, t_shell *shell)
 		}
 		if ((empty(queue) || string_equal(queue->head->val, "\""))
 			&& __strchr(token->val, '$'))
-		{
 			token->val = resolve(token->val, shell);
-			// if (string_equal(token->val, "$") && token->next && !string_equal(token->next->val, " ")) // echo $""USER
-			// 	pop(tokens, token);
-
-		}
 		token = next;
 	}
 	list_clear(&queue);

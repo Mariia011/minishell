@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:07:59 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/04 16:50:54 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 20:38:56 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,5 @@ t_fd	open_file(char *filename, int option)
 		fd = open(filename, O_RDONLY);
 	else
 		fd = open(filename, option, PERMISSIONS);
-
 	return (fd);
 }

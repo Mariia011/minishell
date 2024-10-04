@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/04 15:41:58 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 20:27:59 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	__t_shell__(t_shell *shell)
 	tree_clear(&shell->export);
 	set_clear(&shell->quoted_tokens);
 	ast_clear(&shell->ast);
-	__va_close(&shell->stddesc->stdin, &shell->stddesc->stdout, &shell->stddesc->stderr, NULL);
+	__va_close(&shell->stddesc->stdin, &shell->stddesc->stdout,
+		&shell->stddesc->stderr, NULL);
 	free(shell->stddesc);
 	__putstr_fd(LOG_SEPARATOR, shell->logfile);
 	close(shell->logfile);
@@ -30,12 +31,12 @@ void	__t_shell__(t_shell *shell)
 	shell = NULL;
 }
 
-void __cmd_arr__(t_cmd **arr)
+void	__cmd_arr__(t_cmd **arr)
 {
 	size_t	i;
 
 	if (NULL == arr)
-		return;
+		return ;
 	i = 0;
 	while (arr[i])
 	{
@@ -60,30 +61,4 @@ void	__t_cmd__(t_cmd *cmd)
 	__delete_string(&cmd->err);
 	__delete_string(&cmd->orig_name);
 	free(cmd);
-}
-
-void	__t_cmd_container__(t_cmd_container **cmdsptr)
-{
-	t_cmd_container	*cmds;
-	size_t			i;
-
-	if (NULL == cmdsptr)
-		return ;
-	cmds = *cmdsptr;
-	if (NULL == cmds)
-		return ;
-	i = 0;
-	while (i < cmds->size)
-	{
-		__t_cmd__(cmds->arr[i]);
-		i++;
-	}
-	set_clear(&cmds->shell->quoted_tokens);
-	cmds->shell->quoted_tokens = make_set();
-	list_clear(&cmds->tokens);
-	cmds->shell = NULL;
-	free(cmds->arr);
-	free(cmds->fds);
-	free(cmds);
-	// *cmdsptr = NULL;
 }

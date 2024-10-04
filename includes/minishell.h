@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/04 17:48:42 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 20:27:54 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,12 +215,7 @@ t_list				*get_cwd_files(void);
 void				wildcard_resolve(t_list *tokens, t_shell *shell);
 void				substitute_args(t_listnode *wildcard_node, t_list *args, t_list *survived);
 
-int					preprocess_redirections(t_list *tokens, t_cmd_container *container);
-int					preprocess_redirections_the_good_part(t_cmd_container *container, t_list *tokens, t_listnode *token);
-
-
 int					pop_redirections(t_list *partition, t_shell *shell);
-size_t				count_pipes(t_list *tokens, t_shell *shell);
 t_listnode				*find_next_pipe(t_listnode *first, t_list *tokens, t_shell *shell);
 bool				parenthesis_parse(t_list *tokens, t_shell *shell);
 

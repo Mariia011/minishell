@@ -6,14 +6,14 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:39:26 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/26 18:01:13 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 20:29:22 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void killall(t_cmd_container *container);
-static void	execute(t_cmd *cmd, t_eval_opcode opcode);
+// static void killall(t_cmd_container *container);
+// static void	execute(t_cmd *cmd, t_eval_opcode opcode);
 
 // void	eval_wrapper(t_cmd *cmd, t_eval_opcode opcode)
 // {
@@ -55,22 +55,22 @@ static void	execute(t_cmd *cmd, t_eval_opcode opcode);
 // 		eval_prog(cmd);
 // }
 
-static void killall(t_cmd_container *container)
-{
-	size_t	i;
+// static void killall(t_cmd_container *container)
+// {
+// 	size_t	i;
 
-	container->arr[container->current_cmd_index]->pid = -1;
+// 	container->arr[container->current_cmd_index]->pid = -1;
 
-	i = 0;
-	while (i < container->current_cmd_index)
-	{
-		if (container->arr[i] && container->arr[i]->pid > -1)
-		{
-			kill(container->arr[i]->pid, SIGKILL);
-			waitpid(container->arr[i]->pid, NULL, 0);
-			container->arr[i]->pid = -1;
-		}
-		i++;
-	}
-	__perror("fork: Resource temporarily unavailable");
-}
+// 	i = 0;
+// 	while (i < container->current_cmd_index)
+// 	{
+// 		if (container->arr[i] && container->arr[i]->pid > -1)
+// 		{
+// 			kill(container->arr[i]->pid, SIGKILL);
+// 			waitpid(container->arr[i]->pid, NULL, 0);
+// 			container->arr[i]->pid = -1;
+// 		}
+// 		i++;
+// 	}
+// 	__perror("fork: Resource temporarily unavailable");
+// }

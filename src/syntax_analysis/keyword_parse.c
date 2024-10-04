@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 16:22:42 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/04 19:40:53 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 19:46:56 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@ bool	keyword_parse(t_list *tokens, t_shell *shell)
 	t_listnode	*token;
 	t_listnode	*pair;
 
-	if (!tokens)
-		return (true);
-	token = NULL;
 	token = shfind_if(tokens->head, tokens->tail, is_binary_operator, shell);
 	if (token == tokens->head)
 	{
@@ -33,7 +30,8 @@ bool	keyword_parse(t_list *tokens, t_shell *shell)
 			pair = back(tokens);
 		else
 			pair = pair->prev;
-		if (NULL == shfind_if(token->next, pair, not_binary_operator_nor_parenthesis, shell))
+		if (NULL == shfind_if(token->next, pair,
+				not_binary_operator_nor_parenthesis, shell))
 		{
 			__va_perror("parse error near token `", token->val, "\'", NULL);
 			return (false);
@@ -42,4 +40,3 @@ bool	keyword_parse(t_list *tokens, t_shell *shell)
 	}
 	return (true);
 }
-
