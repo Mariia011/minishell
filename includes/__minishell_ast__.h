@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 15:20:23 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/04 18:04:48 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 21:51:47 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ enum	e_redirection_type
 	redirect_heredoc = 8,
 	redirect_append = 16,
 
-	invalid_redirection = 77
+	invalid_redirection = 256
 };
 
 struct	s_fd_auth
@@ -70,15 +70,16 @@ struct s_ast_node
 	t_ast_node_type			type;
 
 	t_cmd					*cmd_ptr;
+	t_ast					*ast;
 	t_fd					fd;
 	char					*filename;
 	t_redirection_type		redirection_type;
 
 	t_listnode				*orig_token;
 
-	t_ast_node 			*right;
-	t_ast_node 			*left;
-	t_ast_node 			*p;
+	t_ast_node 				*right;
+	t_ast_node 				*left;
+	t_ast_node 				*p;
 };
 
 t_ast			*make_ast_empty(t_shell *shell) __attribute__((warn_unused_result));

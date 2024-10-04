@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:06:10 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/04 21:10:19 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 21:44:28 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_ast_node	*make_file_node(t_listnode *token)
 	res->type = FILENODE;
 	res->cmd_ptr = NULL;
 	res->fd = -1;
+	res->ast = NULL;
 	res->filename = __strdup(token->val);
 	res->left = NULL;
 	res->right = NULL;

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/04 20:27:59 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 22:04:36 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ void	__t_cmd__(t_cmd *cmd)
 {
 	if (NULL == cmd)
 		return ;
-	if (cmd->redirection & redirect_heredoc)
-		unlink(HEREDOC);
 	list_clear(&cmd->args);
 	list_clear(&cmd->options);
 	list_clear(&cmd->tokens);

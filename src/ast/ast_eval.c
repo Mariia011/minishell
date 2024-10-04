@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 01:43:14 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/04 19:27:24 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 22:09:42 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	ast_eval(t_ast *ast) // ls | (cat 12345 && echo hello)
 	dup2(ast->shell->stddesc->stdin, STDIN_FILENO);
 	dup2(ast->shell->stddesc->stdout, STDOUT_FILENO);
 	dup2(ast->shell->stddesc->stderr, STDERR_FILENO);
+	if (0 == access(HEREDOC, F_OK))
+		unlink(HEREDOC);
 }
 
 static int	dfs(t_ast_node *root, t_ast *ast, t_authorized_fds fds)
