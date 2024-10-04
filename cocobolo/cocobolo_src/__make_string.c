@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:53:36 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/01 15:31:31 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 21:18:56 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*__make_string_from_char(const char c)
 
 char	*__make_string_from_list(t_listnode *first, t_listnode *last)
 {
-	char	*res;
+	char		*res;
 	t_listnode	*curr;
 
 	if (!first || !last)

@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 18:07:26 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/27 22:45:08 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 21:05:36 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void builtin_preeval(t_cmd * cmd)
+void	builtin_preeval(t_cmd *cmd)
 {
 	if (cmd->forkable)
 	{

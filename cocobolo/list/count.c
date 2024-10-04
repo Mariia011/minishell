@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:19:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/01 15:31:31 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 21:14:59 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ size_t	count_range(t_list *list, t_list_value val)
 	return (count(list->head, list->tail, val));
 }
 
-size_t	count_if(t_listnode *first, t_listnode *last, t_list_Countpredicate p)
+size_t	count_if(t_listnode *first, t_listnode *last, t_list_countpredicate p)
 {
 	size_t	res;
 

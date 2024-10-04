@@ -6,16 +6,11 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:50:58 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/24 01:21:09 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 21:04:46 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// void	echo(t_cmd *cmd)
-// {
-// 	eval_wrapper(cmd, _echo);
-// }
 
 void	echo(t_cmd *cmd)
 {

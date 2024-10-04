@@ -6,17 +6,19 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 02:01:59 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/26 03:47:49 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 21:10:19 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void ast_rrotate(t_ast *ast, t_ast_node *x, t_ast_node *z)
+void	ast_rrotate(t_ast *ast, t_ast_node *x, t_ast_node *z)
 {
+	t_ast_node	*w;
+
 	if (!ast || !x || !z)
-		return;
-	t_ast_node *w = z->p;
+		return ;
+	w = z->p;
 	if (x == ast->root)
 	{
 		ast->root = z;
@@ -25,7 +27,6 @@ void ast_rrotate(t_ast *ast, t_ast_node *x, t_ast_node *z)
 	else
 	{
 		z->p = x->p;
-
 		if (x == x->p->right)
 			x->p->right = z;
 		else

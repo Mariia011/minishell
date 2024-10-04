@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 18:10:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/01 15:31:31 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 21:23:39 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_matrix	make_matrix_from_list(t_list *list)
 {
 	size_t		lstsize;
 	t_matrix	arr;
-	t_listnode		*node;
+	t_listnode	*node;
 	size_t		i;
 
 	if (!list)

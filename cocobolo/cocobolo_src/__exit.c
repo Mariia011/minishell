@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 18:02:29 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/04 16:02:19 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 21:18:57 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	__exit(const char *const err)
 		write(STDERR_FILENO, err, __strlen(err));
 		write(STDERR_FILENO, "\n", __strlen("\n"));
 		write(STDERR_FILENO, RESET, __strlen(RESET));
-
 	}
 	exit(EXIT_FAILURE);
 }

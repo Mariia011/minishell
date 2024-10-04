@@ -6,14 +6,11 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 19:01:36 by marikhac          #+#    #+#             */
-/*   Updated: 2024/10/01 15:31:31 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 21:04:55 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 void	echo_arglist(t_list *arglist)
 {
@@ -50,5 +47,3 @@ bool	is_n(char *opt)
 	opt++;
 	return (*__strchr_p(opt, not_n_predicate) == '\0');
 }
-
-#pragma GCC diagnostic pop

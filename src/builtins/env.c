@@ -6,18 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:15:43 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/25 02:46:20 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 21:04:41 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 void	__print_env__(t_tree_node *node);
-
-// void	env(t_cmd *cmd)
-// {
-// 	eval_wrapper(cmd, _env);
-// }
 
 void	env(t_cmd *cmd)
 {

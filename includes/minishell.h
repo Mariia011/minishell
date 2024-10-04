@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/04 20:27:54 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 21:03:48 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ char				*read_line(char *s);
 
 // execution
 void				eval(t_cmd *cmd);
-void				set_descriptors(t_cmd *cmd);
-void				reset_descriptors(t_cmd *cmd);
 void				eval_prog_core(t_cmd *cmd);
 // void 			__eval_prog__deprecated__(t_fd *pipe, t_cmd * cmd);
 
@@ -89,7 +87,6 @@ char				*resolve(char *t_val,
 int					cmd_lookup(t_cmd *cmd);
 t_fd				open_file(char *filename, int options);
 t_authorized_fds	redirect(t_ast_node *r, t_authorized_fds oldfds);
-void				eval_wrapper(t_cmd *cmd, t_eval_opcode opcode);
 
 // find predicates
 bool				__cmd_exists__(const char *path, const char *name);

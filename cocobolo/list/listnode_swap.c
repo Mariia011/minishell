@@ -6,18 +6,19 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 15:53:34 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/01 15:55:48 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 21:21:55 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 
-void listnode_swap(t_listnode *lhv, t_listnode *rhv)
+void	listnode_swap(t_listnode *lhv, t_listnode *rhv)
 {
-	if (!lhv || !rhv)
-		return;
+	char	*t;
 
-	char *t = lhv->val;
+	if (!lhv || !rhv)
+		return ;
+	t = lhv->val;
 	lhv->val = rhv->val;
 	rhv->val = t;
 }

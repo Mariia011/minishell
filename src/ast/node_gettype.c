@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 00:41:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/01 15:31:31 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 21:10:19 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_ast_node_type node_gettype(t_listnode *token)
+t_ast_node_type	node_gettype(t_listnode *token)
 {
 	if (is_or(token->val))
 		return (OR);
