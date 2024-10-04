@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/27 22:48:41 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 15:41:58 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ void	__t_cmd_container__(t_cmd_container **cmdsptr)
 	set_clear(&cmds->shell->quoted_tokens);
 	cmds->shell->quoted_tokens = make_set();
 	list_clear(&cmds->tokens);
-	get_next_fd(NULL);
-	get_next_fd_idx(NULL);
 	cmds->shell = NULL;
 	free(cmds->arr);
 	free(cmds->fds);

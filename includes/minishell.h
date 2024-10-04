@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/01 16:42:38 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 15:42:01 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,8 +218,6 @@ void				substitute_args(t_listnode *wildcard_node, t_list *args, t_list *survive
 int					preprocess_redirections(t_list *tokens, t_cmd_container *container);
 int					preprocess_redirections_the_good_part(t_cmd_container *container, t_list *tokens, t_listnode *token);
 
-t_fd				get_next_fd(t_cmd_container *container);
-size_t				get_next_fd_idx(t_cmd_container *container);
 
 int					pop_redirections(t_cmd *cmd, t_list *tokens, t_cmd_container *container);
 size_t				count_pipes(t_list *tokens, t_shell *shell);

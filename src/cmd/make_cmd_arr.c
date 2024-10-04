@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:29:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/01 15:42:54 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 15:46:05 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_cmd	**make_cmd_arr(t_list *tokens, t_shell *shell)
 
 	while (first)
 	{
-		t_listnode *second = shfind_if(first, tokens->tail, is_special_symbol, shell);
+		t_listnode *second = shfind_if(first, tokens->tail, is_binary_operator, shell);
 
 		if (!second)
 			second = tokens->tail;
