@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 01:43:14 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/04 22:09:42 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/05 16:33:20 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ static int	dfs(t_ast_node *root, t_ast *ast, t_authorized_fds fds)
 	}
 	else // if (root->type == REDIRECTION)
 	{
-		return (dfs(root->left, ast, redirect(root, fds)));
+		t_authorized_fds newfds = redirect(root, fds);
+		if (newfds.stdin.fd != -1 && newfds.stdin.fd != -1)
+			return (dfs(root->left, ast, newfds));
+		return 1;
 	}
 }
 

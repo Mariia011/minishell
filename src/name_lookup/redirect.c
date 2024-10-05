@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:07:40 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/04 22:12:52 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/05 17:11:23 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ t_authorized_fds	redirect(t_ast_node *r, t_authorized_fds oldfds)
 			newfds.stdin.fd = (process_heredoc(r, r->ast->shell));
 		newfds.stdin.author = r;
 		x = newfds.stdin.fd;
-		if ((!oldfds.stdin.author || oldfds.stdin.author->type != REDIRECTION))
-			dup2(x, STDIN_FILENO);
-		else if (x == -1 && r->redirection_type & redirect_in)
+
+		// if ((!oldfds.stdin.author || oldfds.stdin.author->type != REDIRECTION))
+
+		dup2(x, STDIN_FILENO);
+		if (x == -1 && r->redirection_type & redirect_in)
 			__va_perror(r->right->filename, ": ", "no such file or directory", NULL);
 	}
 	else if (r->redirection_type & (redirect_out | redirect_append))
@@ -42,13 +44,15 @@ t_authorized_fds	redirect(t_ast_node *r, t_authorized_fds oldfds)
 			newfds.stdout.fd = (process_append(r));
 		newfds.stdout.author = r;
 		x = newfds.stdout.fd;
-		if ((!oldfds.stdout.author || oldfds.stdout.author->type != REDIRECTION))
-			dup2(newfds.stdout.fd, STDOUT_FILENO);
-		else if (x == -1)
+		// if ((!oldfds.stdout.author || oldfds.stdout.author->type != REDIRECTION))
+		dup2(newfds.stdout.fd, STDOUT_FILENO);
+		if (x == -1)
 			__va_perror(r->right->filename, ": ", "could not open file", NULL);
 	}
 
 	r->right->fd = x;
+
+	// printf("descriptor : %d\n", r->right->fd);
 
 	return newfds;
 
