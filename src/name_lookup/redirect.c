@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:07:40 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/05 17:11:23 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/05 19:49:35 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ t_authorized_fds	redirect(t_ast_node *r, t_authorized_fds oldfds)
 	int x;
 	if (r->redirection_type & (redirect_in | redirect_heredoc))
 	{
+		dup2(r->ast->shell->stddesc->stdin, STDIN_FILENO);
+
 		if (r->redirection_type & redirect_in)
 			newfds.stdin.fd = (process_infile(r));
 		else
@@ -33,7 +35,7 @@ t_authorized_fds	redirect(t_ast_node *r, t_authorized_fds oldfds)
 		// if ((!oldfds.stdin.author || oldfds.stdin.author->type != REDIRECTION))
 
 		dup2(x, STDIN_FILENO);
-		if (x == -1 && r->redirection_type & redirect_in)
+		if (x == -1 && (r->redirection_type & redirect_in))
 			__va_perror(r->right->filename, ": ", "no such file or directory", NULL);
 	}
 	else if (r->redirection_type & (redirect_out | redirect_append))

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:21:34 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/04 20:39:41 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/05 20:01:17 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@ t_list	*preprocess(t_list *tokens, t_shell *shell)
 	{
 		set_exit_status_no_of(258);
 		list_clear(&tokens);
+	}
+	if (count_range(tokens, "<<") > HEREDOC_MAX)
+	{
+		list_clear(&tokens);
+		__t_shell__(shell);
+		__perror("maximum here-document count exceeded");
+		exit(2);
 	}
 	return (tokens);
 }
