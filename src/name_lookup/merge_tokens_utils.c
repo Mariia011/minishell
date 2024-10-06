@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   merge_tokens_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:26:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/10/01 15:31:31 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/06 14:42:17 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	save_token(t_shell *shell, t_listnode *address)
+void	save_token(t_set *set, t_listnode *address)
 {
 	char	*val;
 
 	val = __ptoa((size_t)address);
-	set_insert(shell->quoted_tokens, val);
+	set_insert(set, val);
 	free(val);
 }
 
@@ -44,7 +44,7 @@ void	mark_quoted_tokens(t_shell *shell, t_list *tokens)
 		token = left_quote->next;
 		while (token && token != right_quote)
 		{
-			save_token(shell, token);
+			save_token(shell->quoted_tokens, token);
 			token = token->next;
 		}
 		pop(tokens, left_quote);

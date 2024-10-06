@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_cmd_arr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:29:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/04 15:56:54 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/06 14:50:03 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ t_list	*make_partition(t_shell *shell, t_listnode *first, t_listnode *last)
 	while (curr && curr->prev != last)
 	{
 		push_back(list, curr->val);
-		if (is_quoted_token(shell->quoted_tokens, curr))
+		if (find_addr(shell->quoted_tokens, curr))
 		{
-			save_token(shell, back(list));
+			save_token(shell->quoted_tokens, back(list));
 		}
 		curr = curr->next;
 	}

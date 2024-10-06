@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard_vol_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:48:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/10/04 20:50:24 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/06 14:44:58 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	wildcard_resolve(t_list *tokens, t_shell *shell)
 	while (wild)
 	{
 		save = wild->next;
-		if (!is_quoted_token(shell->quoted_tokens, wild)
+		if (!find_addr(shell->quoted_tokens, wild)
 			&& (wild != tokens->head && !string_equal(wild->prev->val, "<<")))
 		{
 			wildcard_resolve_core(tokens, &wild, dir, reqs);

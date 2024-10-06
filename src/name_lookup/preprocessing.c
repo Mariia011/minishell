@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   preprocessing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:21:34 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/05 20:01:17 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/06 14:44:58 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_list	*preprocess(t_list *tokens, t_shell *shell)
 	return (tokens);
 }
 
-bool	is_quoted_token(t_set *set, t_listnode *token)
+bool	find_addr(t_set *set, t_listnode *token)
 {
 	char *guess	__attribute__((cleanup(__delete_string)));
 
@@ -57,7 +57,7 @@ void	remove_spaces(t_shell *shell, t_list *tokens) // deprecated
 	{
 		next = curr->next;
 		if (string_equal(curr->val, " ")
-			&& !is_quoted_token(shell->quoted_tokens, curr))
+			&& !find_addr(shell->quoted_tokens, curr))
 		{
 			pop(tokens, curr);
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destroys.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/04 22:04:36 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/06 14:38:36 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	__t_shell__(t_shell *shell)
 	tree_clear(&shell->env);
 	tree_clear(&shell->export);
 	set_clear(&shell->quoted_tokens);
+	set_clear(&shell->dollar_tokens);
 	ast_clear(&shell->ast);
 	__va_close(&shell->stddesc->stdin, &shell->stddesc->stdout,
 		&shell->stddesc->stderr, NULL);

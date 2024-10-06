@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_sign_resolver.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:08:55 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/04 20:30:52 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/06 14:43:01 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ void	dollar_sign_resolver(t_list *tokens, t_shell *shell)
 		}
 		if ((empty(queue) || string_equal(queue->head->val, "\""))
 			&& __strchr(token->val, '$'))
+		{
+			save_token(shell->dollar_tokens, token);
 			token->val = resolve(token->val, shell);
+		}
 		token = next;
 	}
 	list_clear(&queue);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   name_predicates_vol_6.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 20:41:41 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/04 20:50:38 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/06 14:44:58 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool	not_special_symbol(t_listnode *node, t_shell *shell)
 
 bool	is_redirection_token(t_listnode *node, t_shell *shell)
 {
-	return (is_redirection(node->val) && !is_quoted_token(shell->quoted_tokens,
+	return (is_redirection(node->val) && !find_addr(shell->quoted_tokens,
 			node));
 }
 
@@ -35,5 +35,5 @@ bool	is_not_wildcard(t_listnode *node)
 
 bool	is_pipe_token(t_listnode *node, t_shell *shell)
 {
-	return (is_pipe(node->val) && !is_quoted_token(shell->quoted_tokens, node));
+	return (is_pipe(node->val) && !find_addr(shell->quoted_tokens, node));
 }

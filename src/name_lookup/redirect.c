@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:07:40 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/05 19:49:35 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/06 14:53:43 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,14 @@ t_authorized_fds	redirect(t_ast_node *r, t_authorized_fds oldfds)
 
 		dup2(x, STDIN_FILENO);
 		if (x == -1 && (r->redirection_type & redirect_in))
-			__va_perror(r->right->filename, ": ", "no such file or directory", NULL);
+		{
+			if (find_addr(r->ast->shell->dollar_tokens, r->right->orig_token))
+				__perror(" : ambiguous redirect");
+			else
+				__va_perror(r->right->filename, ": ", "no such file or directory", NULL);
+		}
 	}
-	else if (r->redirection_type & (redirect_out | redirect_append))
+	else if (r->redirection_type & (redirect_out | redirect_append)) // handle ambuguous redirec error for these
 	{
 		if (r->redirection_type & redirect_out)
 			newfds.stdout.fd = (process_outfile(r));
@@ -73,7 +78,7 @@ static int	process_outfile(t_ast_node *r)
 static int	process_heredoc(t_ast_node *r, t_shell *shell)
 {
 	return  make_heredoc(r->right->filename, shell,
-			is_quoted_token(shell->quoted_tokens, r->right->orig_token));
+			find_addr(shell->quoted_tokens, r->right->orig_token));
 }
 
 static int	process_append(t_ast_node *r)
