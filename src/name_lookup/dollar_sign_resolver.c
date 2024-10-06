@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:08:55 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/06 14:43:01 by kali             ###   ########.fr       */
+/*   Updated: 2024/10/07 00:23:48 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	dollar_sign_resolver(t_list *tokens, t_shell *shell)
 			&& __strchr(token->val, '$'))
 		{
 			save_token(shell->dollar_tokens, token);
+			save_orig_value(token, shell);
 			token->val = resolve(token->val, shell);
 		}
 		token = next;

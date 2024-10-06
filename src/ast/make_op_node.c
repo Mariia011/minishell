@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_op_node.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 00:36:59 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/04 21:44:22 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/07 00:53:05 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_ast_node	*make_op_node(t_listnode *token)
 	res->left = NULL;
 	res->right = NULL;
 	res->p = NULL;
+	res->redirection_type = 0;
 	res->orig_token = token;
 	deduce_redirection_type(res);
 	return (res);

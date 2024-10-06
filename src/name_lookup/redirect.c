@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:07:40 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/06 14:53:43 by kali             ###   ########.fr       */
+/*   Updated: 2024/10/07 00:41:45 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,17 @@ t_authorized_fds	redirect(t_ast_node *r, t_authorized_fds oldfds)
 		newfds.stdin.author = r;
 		x = newfds.stdin.fd;
 
-		// if ((!oldfds.stdin.author || oldfds.stdin.author->type != REDIRECTION))
 
 		dup2(x, STDIN_FILENO);
 		if (x == -1 && (r->redirection_type & redirect_in))
 		{
 			if (find_addr(r->ast->shell->dollar_tokens, r->right->orig_token))
-				__perror(" : ambiguous redirect");
+				__va_perror(get_orig_val(r->right->orig_token, r->ast->shell), ": ambiguous redirect", NULL);
 			else
 				__va_perror(r->right->filename, ": ", "no such file or directory", NULL);
 		}
 	}
-	else if (r->redirection_type & (redirect_out | redirect_append)) // handle ambuguous redirec error for these
+	else if (r->redirection_type & (redirect_out | redirect_append))
 	{
 		if (r->redirection_type & redirect_out)
 			newfds.stdout.fd = (process_outfile(r));
@@ -51,10 +50,14 @@ t_authorized_fds	redirect(t_ast_node *r, t_authorized_fds oldfds)
 			newfds.stdout.fd = (process_append(r));
 		newfds.stdout.author = r;
 		x = newfds.stdout.fd;
-		// if ((!oldfds.stdout.author || oldfds.stdout.author->type != REDIRECTION))
-		dup2(newfds.stdout.fd, STDOUT_FILENO);
+		dup2(x, STDOUT_FILENO);
 		if (x == -1)
-			__va_perror(r->right->filename, ": ", "could not open file", NULL);
+		{
+			if (find_addr(r->ast->shell->dollar_tokens, r->right->orig_token))
+				__va_perror(get_orig_val(r->right->orig_token, r->ast->shell), ": ambiguous redirect", NULL);
+			else
+				__va_perror(r->right->filename, ": ", "could not open file", NULL);
+		}
 	}
 
 	r->right->fd = x;

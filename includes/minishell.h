@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/06 14:44:32 by kali             ###   ########.fr       */
+/*   Updated: 2024/10/07 00:46:08 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ struct				s_shell
 	t_descriptor	*stddesc;
 	t_set			*quoted_tokens;
 	t_set			*dollar_tokens;
+	t_tree			*orig_values;
 
 	t_ast			*ast;
 
@@ -102,6 +103,8 @@ bool				is_digit(const char c);
 bool				is_name_part(const char c);
 bool				not_name_part(char c);
 bool				find_addr(t_set *set, t_listnode *token);
+char				*get_orig_val(t_listnode *token, t_shell *shell);
+void				save_orig_value(t_listnode *address, t_shell *shell);
 
 bool				is_parenthesis_token(t_listnode * token, t_shell * shell);
 bool				not_parenthesis_token(t_listnode * token, t_shell * shell);
@@ -169,6 +172,8 @@ void				remove_spaces(t_shell *shell, t_list *tokens);
 bool				keyword_parse(t_list *tokens, t_shell *shell);
 bool				redirection_parse(t_list *tokens, t_shell *shell);
 void				save_token(t_set *set, t_listnode *address);
+void				recover_variables(t_list *tokens, t_shell *shell);
+
 
 // builtin utils
 void				builtin_preeval(t_cmd * cmd);

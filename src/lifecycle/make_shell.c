@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:27:35 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/06 14:38:58 by kali             ###   ########.fr       */
+/*   Updated: 2024/10/07 00:16:43 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_shell	*make_shell(char **env)
 	shell->history = make_list();
 	shell->quoted_tokens = make_set();
 	shell->dollar_tokens = make_set();
+	shell->orig_values = make_tree(string_less);
 	shell->stddesc = make_stddesc();
 
 	make_shlvl(shell);

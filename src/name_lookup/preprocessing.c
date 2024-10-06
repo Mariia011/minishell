@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:21:34 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/06 14:44:58 by kali             ###   ########.fr       */
+/*   Updated: 2024/10/07 00:47:30 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_list	*preprocess(t_list *tokens, t_shell *shell)
 	dollar_sign_resolver(tokens, shell);
 	merge_tokens(shell, tokens);
 	remove_spaces(shell, tokens);
+	recover_variables(tokens, shell);
 	if (!syntax_analysis(tokens, shell))
 	{
 		set_exit_status_no_of(258);
@@ -33,16 +34,6 @@ t_list	*preprocess(t_list *tokens, t_shell *shell)
 		exit(2);
 	}
 	return (tokens);
-}
-
-bool	find_addr(t_set *set, t_listnode *token)
-{
-	char *guess	__attribute__((cleanup(__delete_string)));
-
-	if (!set || !token)
-		return (false);
-	guess = __ptoa((size_t)token);
-	return (set_count(set, guess) != 0);
 }
 
 void	remove_spaces(t_shell *shell, t_list *tokens) // deprecated

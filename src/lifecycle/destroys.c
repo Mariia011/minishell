@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/06 14:38:36 by kali             ###   ########.fr       */
+/*   Updated: 2024/10/07 00:51:19 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	__t_shell__(t_shell *shell)
 	list_clear(&shell->history);
 	tree_clear(&shell->env);
 	tree_clear(&shell->export);
+	tree_clear(&shell->orig_values);
 	set_clear(&shell->quoted_tokens);
 	set_clear(&shell->dollar_tokens);
 	ast_clear(&shell->ast);
