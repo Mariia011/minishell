@@ -6,25 +6,25 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 18:15:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/10 18:58:49 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/10 22:03:22 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void dfs(t_ast_node *root);
+static void	dfs(t_ast_node *root);
 
-int killall(t_ast *ast)
+int	killall(t_ast *ast)
 {
 	dfs(ast->root);
 	__perror("fork: Resource temporarily unavailable");
-	return 1;
+	return (1);
 }
 
-static void dfs(t_ast_node *root)
+static void	dfs(t_ast_node *root)
 {
 	if (!root)
-		return;
+		return ;
 	if (root->type == CMD && root->cmd_ptr->pid > -1)
 	{
 		kill(root->cmd_ptr->pid, SIGKILL);

@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   make_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:27:35 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/07 00:16:43 by kali             ###   ########.fr       */
+/*   Updated: 2024/10/10 22:12:32 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	make_prompt(t_shell *shell);
 
 t_shell	*make_shell(char **env)
 {
@@ -24,22 +26,27 @@ t_shell	*make_shell(char **env)
 	shell->dollar_tokens = make_set();
 	shell->orig_values = make_tree(string_less);
 	shell->stddesc = make_stddesc();
-
 	make_shlvl(shell);
 	export_update(shell, "SHELL", "minishell");
 	export_update(shell, "OLDPWD", "");
 	unset_var(shell, "_");
 	export_update(shell, "__HOME_CACHE__", get_val(shell->export, "HOME"));
-
 	shell->ast = NULL;
-
 	shell->logfile = make_logfile(shell);
-
-	char *username __attribute__((cleanup(__delete_string))) = __strdup(get_val(shell->export, "USER"));
-
-	username = (username) ? __strappend(username, "@", NULL) : __make_string_empty();
-
-	shell->prompt = __make_string("\033[0;35m\e[3m", username, "minishell\033[0;32m\e[3m>$ \033[0m", NULL);
-
+	make_prompt(shell);
 	return (shell);
+}
+
+static void	make_prompt(t_shell *shell)
+{
+	char	*username;
+
+	username = __strdup(get_val(shell->export, "USER"));
+	if (username)
+		username = __strappend(username, "@", NULL);
+	else
+		username = __make_string_empty();
+	shell->prompt = __make_string("\033[0;35m\e[3m", username,
+			"minishell\033[0;32m\e[3m>$ \033[0m", NULL);
+	__delete_string(&username);
 }

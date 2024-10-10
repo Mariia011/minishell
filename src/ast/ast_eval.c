@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 01:43:14 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/10 18:59:18 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/10 21:58:38 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	dfs(t_ast_node *root, t_ast *ast, t_authorized_fds fds);
 static int	ast_handle_pipe(t_ast_node *root, t_ast *ast, t_authorized_fds fds);
 static int	ast_handle_cmd(t_ast_node *root, t_ast *ast, t_authorized_fds fds);
 
-void	ast_eval(t_ast *ast) // ls | (cat 12345 && echo hello)
+void	ast_eval(t_ast *ast)
 {
 	t_authorized_fds	fds;
 
@@ -38,30 +38,24 @@ void	ast_eval(t_ast *ast) // ls | (cat 12345 && echo hello)
 
 static int	dfs(t_ast_node *root, t_ast *ast, t_authorized_fds fds)
 {
+	t_authorized_fds	newfds;
+
 	if (!root)
 		return (1);
 	if (root->type == AND)
-	{
 		return (dfs(root->left, ast, fds) && dfs(root->right, ast, fds));
-	}
 	else if (root->type == OR)
-	{
 		return (dfs(root->left, ast, fds) || dfs(root->right, ast, fds));
-	}
 	else if (root->type == PIPE)
-	{
 		return (ast_handle_pipe(root, ast, fds));
-	}
 	else if (root->type == CMD)
-	{
 		return (ast_handle_cmd(root, ast, fds));
-	}
-	else // if (root->type == REDIRECTION)
+	else
 	{
-		t_authorized_fds newfds = redirect(root, fds);
+		newfds = redirect(root, fds);
 		if (newfds.stdin.fd != -1 && newfds.stdout.fd != -1)
 			return (dfs(root->left, ast, newfds));
-		return 1;
+		return (1);
 	}
 }
 

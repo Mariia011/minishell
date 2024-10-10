@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:37:44 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/10 21:43:07 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/10 22:03:13 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	eval_prog(t_cmd *cmd)
 {
-	int		s;
+	int	s;
 
 	cmd->pid = fork();
 	if (cmd->pid < 0)
 	{
 		cmd->pid = -1;
 		killall(cmd->shell->ast);
-		return;
+		return ;
 	}
 	if (0 == cmd->pid)
 	{
@@ -40,12 +40,10 @@ void	eval_prog_core(t_cmd *cmd)
 		exit(EXIT_FAILURE);
 	options_copy = make_list_copy_range(cmd->options, NULL);
 	push_front(options_copy, cmd->name);
-
 	args_copy = make_list_copy_range(cmd->args, NULL);
 	list_move_back(args_copy, options_copy);
 	_args = make_matrix_from_list(options_copy);
 	_env = make_matrix_from_tree(cmd->shell->env);
-
 	execve(cmd->name, _args, _env);
 	__t_shell__(cmd->shell);
 	exit(EXIT_FAILURE);

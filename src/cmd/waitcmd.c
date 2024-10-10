@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 18:11:18 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/10 18:14:11 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/10 22:07:46 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void waitcmd(pid_t pid, int *x)
+void	waitcmd(pid_t pid, int *x)
 {
 	waitpid(pid, x, 0);
 	if (WIFSIGNALED(*x))

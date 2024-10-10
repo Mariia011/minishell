@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 00:25:04 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/10 21:46:17 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/10 22:00:16 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ t_ast	*make_ast_skeleton(t_list *tokens, t_shell *shell)
 	ast = make_ast_empty(shell);
 	op = shrfind_if(tokens->head, tokens->tail, is_binary_operator, shell);
 	if (!op)
-	{
 		return (boba(tokens, shell, ast));
-	}
 	else
 		pair = shrfind_if(tokens->head, op->prev, is_binary_operator, shell);
 	insert_redirections(op, tokens->tail, ast, shell);

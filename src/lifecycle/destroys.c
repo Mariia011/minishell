@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destroys.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/07 00:51:19 by kali             ###   ########.fr       */
+/*   Updated: 2024/10/10 22:08:25 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ void	__t_cmd__(t_cmd *cmd)
 	list_clear(&cmd->args);
 	list_clear(&cmd->options);
 	list_clear(&cmd->tokens);
-	// reset_descriptors(cmd);
-	// free(cmd->descriptors);
 	__delete_string(&cmd->name);
 	__delete_string(&cmd->err);
 	__delete_string(&cmd->orig_name);
