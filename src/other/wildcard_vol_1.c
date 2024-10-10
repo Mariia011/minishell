@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:48:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/10/10 21:34:46 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/10 22:44:15 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static bool	check_node(char *dirname, t_list *reqs)
 {
 	t_listnode		*cur;
 	char			*dir_p;
-	wildcard_fptr	fptr;
+	t_wildcard_fptr	fptr;
 
 	cur = reqs->head;
 	dir_p = dirname;

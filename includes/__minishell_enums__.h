@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:00:33 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/04 16:26:07 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/10 22:43:08 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ enum	e_eval_opcode
 	_msh_exit
 };
 
-enum e_cleanup_option
+enum	e_cleanup_option
 {
 	asg,
 	delete
