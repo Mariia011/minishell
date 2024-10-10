@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/10 21:41:24 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/10 22:24:03 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ int	cmd_lookup(t_cmd *cmd)
 
 static int	cmd_lookup_core(t_cmd *cmd)
 {
-	t_list *path __attribute__((cleanup(list_clear)));
+	t_list *path	__attribute__((cleanup(list_clear)));
+
 	path = get_path(cmd->shell);
 	if (find_range(path, cmd->name, __cmd_exists__))
 		return (replace_cmd_name(cmd, find_range(path, cmd->name,
@@ -70,16 +71,6 @@ static int	replace_cmd_name(t_cmd *cmd, t_listnode *node)
 	cmd->name = resolved_name;
 	cmd->eval = eval_prog;
 	return (0);
-}
-
-bool	__cmd_exists__(const char *path, const char *name)
-{
-	struct stat	buffer;
-
-	char *guess __attribute__((cleanup(__delete_string)));
-	guess = __make_string(path, "/", name, NULL);
-	stat(guess, &buffer);
-	return (0 == access(guess, F_OK | X_OK) && !S_ISDIR(buffer.st_mode));
 }
 
 static int	builtin_lookup(t_cmd *cmd)

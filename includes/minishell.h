@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/10 18:59:24 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/10 22:27:27 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,9 @@ struct				s_descriptor
 //	reading input
 char				*read_line(char *s);
 
+
+void				__redirect_out__(t_authorized_fds *newfds, t_ast_node *r);
+void				__redirect_in__(t_authorized_fds *newfds, t_ast_node *r);
 // execution
 void				eval(t_cmd *cmd);
 void				eval_prog_core(t_cmd *cmd);
@@ -115,6 +118,11 @@ bool				is_opening_parenthesis(char *text);
 bool				is_opening_parenthesis_token(t_listnode * token, t_shell * shell);
 bool				is_closing_parenthesis_token(t_listnode * token, t_shell * shell);
 bool				is_parenthesis(char *text);
+
+int			process_infile(t_ast_node *r);
+int			process_outfile(t_ast_node *r);
+int			process_append(t_ast_node *r);
+int			process_heredoc(t_ast_node *r, t_shell *shell);
 
 // lifecycle
 t_tree				*make_export(t_shell *shell)

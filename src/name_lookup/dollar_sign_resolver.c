@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_sign_resolver.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:08:55 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/07 00:23:48 by kali             ###   ########.fr       */
+/*   Updated: 2024/10/10 22:26:43 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	__pshurik__(t_list *tokens, t_listnode *token, t_shell *shell);
 
 void	dollar_sign_resolver(t_list *tokens, t_shell *shell)
 {
@@ -34,12 +36,15 @@ void	dollar_sign_resolver(t_list *tokens, t_shell *shell)
 		}
 		if ((empty(queue) || string_equal(queue->head->val, "\""))
 			&& __strchr(token->val, '$'))
-		{
-			save_token(shell->dollar_tokens, token);
-			save_orig_value(token, shell);
-			token->val = resolve(token->val, shell);
-		}
+			__pshurik__(tokens, token, shell);
 		token = next;
 	}
 	list_clear(&queue);
+}
+
+static void	__pshurik__(t_list *tokens, t_listnode *token, t_shell *shell)
+{
+	save_token(shell->dollar_tokens, token);
+	save_orig_value(token, shell);
+	token->val = resolve(token->val, shell);
 }
