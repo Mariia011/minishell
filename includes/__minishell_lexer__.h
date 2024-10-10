@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:47:09 by marikhac          #+#    #+#             */
-/*   Updated: 2024/10/04 19:35:12 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/10 21:04:56 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 // wildcards
 bool is_wildcard(t_listnode *node);
 bool is_not_wildcard(t_listnode *node);
+
+bool	is_wildcard_token(t_listnode *node, t_shell *shell);
 
 // syntax
 bool is_pipe_token(t_listnode *node, t_shell *shell);

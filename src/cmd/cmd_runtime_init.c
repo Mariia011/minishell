@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 22:39:00 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/04 21:03:23 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/10 21:07:27 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	cmd_runtime_init(t_cmd *cmd)
 {
 	wildcard_resolve(cmd->tokens, cmd->shell);
+	cmd->name = __strdup(cmd->tokens->head->val);
+	cmd->orig_name = __strdup(cmd->tokens->head->val);
 	if (empty(cmd->tokens) || sort_tokens(cmd, cmd->tokens) == -1
 		|| cmd_lookup(cmd) == -1)
 	{

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:37:44 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/10 20:15:57 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/10 20:40:54 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	eval_prog(t_cmd *cmd)
 	if (cmd->pid < 0)
 	{
 		cmd->pid = -1;
-		return killall(cmd->shell->ast);
+		killall(cmd->shell->ast);
+		return;
 	}
 	if (0 == cmd->pid)
 	{
