@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 00:25:04 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/05 19:51:22 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/10 18:56:52 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,11 @@ t_ast	*make_ast_skeleton(t_list *tokens, t_shell *shell)
 			pair = tokens->head;
 		insert_ast_node(ast, make_op_node(op));
 		insert_redirections(pair, op, ast, shell);
+		if (pair != tokens->head)
+			insert_ast_node(ast, make_op_node(pair));
 		op = shrfind_if(tokens->head, pair->prev, is_binary_operator, shell);
+		if (op)
+			pair = shrfind_if(tokens->head, op->prev, is_binary_operator, shell);
 	}
 	return (ast);
 }

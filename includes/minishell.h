@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/07 00:46:08 by kali             ###   ########.fr       */
+/*   Updated: 2024/10/10 18:59:24 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ t_authorized_fds	redirect(t_ast_node *r, t_authorized_fds oldfds);
 // find predicates
 bool				__cmd_exists__(const char *path, const char *name);
 
+int				killall(t_ast *ast);
+
 // name predicates
 bool				is_quote(char *s);
 bool				is_single_redirection(char *val);
@@ -129,6 +131,8 @@ void				__t_shell__(t_shell *shell);
 void				__cmd_arr__(t_cmd **arr);
 
 t_fd 				make_logfile(t_shell *shell) __attribute__((warn_unused_result));
+void				waitcmd(pid_t pid, int *x);
+
 
 // matrix
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_eval.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 01:43:14 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/07 00:29:48 by kali             ###   ########.fr       */
+/*   Updated: 2024/10/10 18:59:18 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ static int	ast_handle_pipe(t_ast_node *root, t_ast *ast, t_authorized_fds fds)
 	t_ast_node			*last;
 	pid_t				x;
 
-	pipe(pipes);
+	if (pipe(pipes) == -1)
+		return (killall(ast));
 	dup2(pipes[out], STDOUT_FILENO);
 	new_fds.stdin = fds.stdin;
 	new_fds.stdout.fd = pipes[out];
@@ -87,8 +88,7 @@ static int	ast_handle_pipe(t_ast_node *root, t_ast *ast, t_authorized_fds fds)
 	last = find_last_process_cmd(root->right);
 	if ((!root->p || root->p->type == AND || root->p->type == OR) && last)
 	{
-		waitpid(last->cmd_ptr->pid, &x, 0);
-		set_exit_status(WEXITSTATUS(x));
+		waitcmd(last->cmd_ptr->pid, &x);
 		return (!get_exit_status());
 	}
 	return (y);
@@ -106,8 +106,7 @@ static int	ast_handle_cmd(t_ast_node *root, t_ast *ast, t_authorized_fds fds)
 		&& is_program(root->cmd_ptr))
 	{
 		x = 0;
-		waitpid(root->cmd_ptr->pid, &x, 0);
-		set_exit_status(WEXITSTATUS(x));
+		waitcmd(root->cmd_ptr->pid, &x);
 	}
 	return (!get_exit_status());
 }
