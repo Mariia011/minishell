@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 18:57:53 by marikhac          #+#    #+#             */
-/*   Updated: 2024/10/04 21:06:26 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/10 21:55:18 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@ static void	cd_minus(int *status, t_cmd *cmd);
 
 void	_chdir(t_cmd *cmd, const char *path, int *status)
 {
+	char *pwd = _getcwd(cmd->shell);
 	if (chdir(path) == -1)
 	{
 		*status = 1;
-		__va_perror("cd: ", path, ": No such file or directory", NULL);
-		return ;
+		if(!__str_ends_with(pwd, "/../"))
+			__va_perror("cd: ", path, ": No such file or directory", NULL);
 	}
+	__delete_string(&pwd);
 }
 
 void	__cd_no_arg__(t_cmd *cmd)
