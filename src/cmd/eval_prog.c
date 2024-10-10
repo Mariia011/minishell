@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:37:44 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/10 20:40:54 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/10 21:43:07 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	eval_prog(t_cmd *cmd)
 	{
 		eval_prog_core(cmd);
 	}
-
 }
 
 void	eval_prog_core(t_cmd *cmd)
