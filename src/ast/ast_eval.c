@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 01:43:14 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/10 21:58:38 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/10 22:53:34 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int	ast_handle_pipe(t_ast_node *root, t_ast *ast, t_authorized_fds fds)
 	new_fds.stdout.fd = pipes[out];
 	new_fds.stdout.author = root;
 	dfs(root->left, ast, new_fds);
-	if (!root->p || root->p->type != REDIRECTION)
+	if (!root->p || root->p->type != REDIRECTION || root->p->redirection_type != redirect_in)
 		dup2(pipes[in], STDIN_FILENO);
 	__va_close(&pipes[in], &pipes[out], NULL);
 	dup2(fds.stdout.fd, STDOUT_FILENO);
