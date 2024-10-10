@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:37:44 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/27 22:45:08 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/10 20:15:57 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,34 +17,17 @@ void	eval_prog(t_cmd *cmd)
 	int		s;
 
 	cmd->pid = fork();
-	// if (cmd->pid < 0)
-	// {
-	// 	cmd->pid = -1;
-	// 	return killall(cmd->container);
-	// }
+	if (cmd->pid < 0)
+	{
+		cmd->pid = -1;
+		return killall(cmd->shell->ast);
+	}
 	if (0 == cmd->pid)
 	{
 		eval_prog_core(cmd);
 	}
-	// if (cmd->container->current_cmd_index == cmd->container->size - 1)
-	// {
-	// 	waitpid(cmd->pid, &s, 0);
-	// 	if (WIFSIGNALED(s))
-	// 	{
-	// 		s = WTERMSIG(s) + 128;
-	// 		if (s == 131)
-	// 			printf("Quit: 3\n");
-	// 		set_exit_status(s);
-	// 	}
-	// 	else
-	// 		set_exit_status(WEXITSTATUS(s));
-	// }
-}
 
-// void	eval_prog(t_cmd *cmd)
-// {
-// 	eval_wrapper(cmd, _program);
-// }
+}
 
 void	eval_prog_core(t_cmd *cmd)
 {
