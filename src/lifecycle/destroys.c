@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destroys.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 18:50:33 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/07 00:51:19 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@ void	__t_shell__(t_shell *shell)
 	list_clear(&shell->history);
 	tree_clear(&shell->env);
 	tree_clear(&shell->export);
+	tree_clear(&shell->orig_values);
 	set_clear(&shell->quoted_tokens);
-	__va_close(&shell->stddesc->stdin, &shell->stddesc->stdout, &shell->stddesc->stderr, NULL);
+	set_clear(&shell->dollar_tokens);
+	ast_clear(&shell->ast);
+	__va_close(&shell->stddesc->stdin, &shell->stddesc->stdout,
+		&shell->stddesc->stderr, NULL);
 	free(shell->stddesc);
 	__putstr_fd(LOG_SEPARATOR, shell->logfile);
 	close(shell->logfile);
@@ -29,45 +33,32 @@ void	__t_shell__(t_shell *shell)
 	shell = NULL;
 }
 
-void	__t_command__(t_cmd *cmd)
+void	__cmd_arr__(t_cmd **arr)
+{
+	size_t	i;
+
+	if (NULL == arr)
+		return ;
+	i = 0;
+	while (arr[i])
+	{
+		__t_cmd__(arr[i]);
+		i++;
+	}
+	free(arr);
+}
+
+void	__t_cmd__(t_cmd *cmd)
 {
 	if (NULL == cmd)
 		return ;
-	if (cmd->redirection & redirect_heredoc)
-		unlink(HEREDOC);
 	list_clear(&cmd->args);
 	list_clear(&cmd->options);
-	// list_clear(&cmd->tokens);
+	list_clear(&cmd->tokens);
 	// reset_descriptors(cmd);
 	// free(cmd->descriptors);
-	free(cmd->name);
+	__delete_string(&cmd->name);
+	__delete_string(&cmd->err);
+	__delete_string(&cmd->orig_name);
 	free(cmd);
-}
-
-void	__t_cmd_container__(t_cmd_container **cmdsptr)
-{
-	t_cmd_container	*cmds;
-	size_t			i;
-
-	if (NULL == cmdsptr)
-		return ;
-	cmds = *cmdsptr;
-	if (NULL == cmds)
-		return ;
-	i = 0;
-	while (i < cmds->size)
-	{
-		__t_command__(cmds->arr[i]);
-		i++;
-	}
-	set_clear(&cmds->shell->quoted_tokens);
-	cmds->shell->quoted_tokens = make_set();
-	list_clear(&cmds->tokens);
-	get_next_fd(NULL);
-	get_next_fd_idx(NULL);
-	cmds->shell = NULL;
-	free(cmds->arr);
-	free(cmds->fds);
-	free(cmds);
-	// *cmdsptr = NULL;
 }

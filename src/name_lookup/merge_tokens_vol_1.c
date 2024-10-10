@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   merge_tokens.c                                     :+:      :+:    :+:   */
+/*   merge_tokens_vol_1.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:17:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/21 21:26:32 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/10/04 20:38:05 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	merge_inside_quotes(t_list *tokens);
-static bool	is_self_mergeable(t_node *token);
-static bool	is_mergeable(t_node *token, t_set *quoted_tokens);
+bool		is_self_mergeable(t_listnode *token);
+bool		is_mergeable(t_listnode *token, t_set *quoted_tokens);
+bool		__small_condition__(t_listnode *token, t_shell *shell);
+bool		__scary_condition__(t_listnode *token, t_listnode *next,
+				t_shell *shell);
 
-static void	merge_inside_quotes_the_good_part(t_list *tokens, t_node **t,
-				t_node **next);
+static void	merge_inside_quotes(t_list *tokens);
+static void	merge_inside_quotes_the_good_part(t_list *tokens, t_listnode **t,
+				t_listnode **next);
 
 void	merge_tokens(t_shell *shell, t_list *tokens)
 {
-	t_node	*token;
-	t_node	*next;
+	t_listnode	*token;
+	t_listnode	*next;
 
 	if (!tokens || empty(tokens))
 		return ;
@@ -32,14 +35,12 @@ void	merge_tokens(t_shell *shell, t_list *tokens)
 	while (token && token->next)
 	{
 		next = token->next;
-		if (string_equal(token->val, "<<") || string_equal(token->val, ">>") || is_opening_parenthesis_token(token, shell) ||
-		is_closing_parenthesis_token(token, shell))
+		if (__small_condition__(token, shell))
 		{
 			token = next;
 			continue ;
 		}
-		if ((is_quoted_token(shell->quoted_tokens, token) && is_quoted_token(shell->quoted_tokens, token->next)) || (is_self_mergeable(token) && string_equal(next->val, token->val) && !is_quoted_token(shell->quoted_tokens, next))
-			|| (is_mergeable(token, shell->quoted_tokens) && (is_mergeable(next, shell->quoted_tokens) || is_quoted_token(shell->quoted_tokens, next))))
+		if (__scary_condition__(token, next, shell))
 		{
 			token->val = __strappend(token->val, next->val, NULL);
 			pop(tokens, next);
@@ -51,8 +52,8 @@ void	merge_tokens(t_shell *shell, t_list *tokens)
 
 static void	merge_inside_quotes(t_list *tokens)
 {
-	t_node	*token;
-	t_node	*next;
+	t_listnode	*token;
+	t_listnode	*next;
 
 	if (!tokens || empty(tokens))
 		return ;
@@ -68,11 +69,11 @@ static void	merge_inside_quotes(t_list *tokens)
 	}
 }
 
-static void	merge_inside_quotes_the_good_part(t_list *tokens, t_node **t,
-		t_node **next)
+static void	merge_inside_quotes_the_good_part(t_list *tokens, t_listnode **t,
+		t_listnode **next)
 {
-	t_node	*tmp;
-	char	*quote_type;
+	t_listnode	*tmp;
+	char		*quote_type;
 
 	quote_type = __strdup((*t)->val);
 	if ((*t)->next && string_equal((*t)->next->val, quote_type))
@@ -93,15 +94,4 @@ static void	merge_inside_quotes_the_good_part(t_list *tokens, t_node **t,
 		tmp = tmp->next;
 	(*next) = tmp;
 	__delete_string(&quote_type);
-}
-
-static bool	is_self_mergeable(t_node *token)
-{
-	return (token && token->val && __strlen(token->val) == 1
-		&& __strchr(SELF_MERGEABLE_TOKENS, token->val[0]));
-}
-
-static bool	is_mergeable(t_node *token, t_set *quoted_tokens)
-{
-	return (is_quoted_token(quoted_tokens, token) || (!is_self_mergeable(token) && (!string_equal(token->val, " "))));
 }

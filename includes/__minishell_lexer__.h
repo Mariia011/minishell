@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:47:09 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/23 16:54:23 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 19:35:12 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,22 @@
 # include "minishell.h"
 
 // wildcards
-bool is_wildcard(t_node *node);
-bool is_not_wildcard(t_node *node);
-bool is_pipe_node(t_node *node, t_shell *shell);
-bool is_and_node(t_node *node, t_shell *shell);
-bool is_or_node(t_node *node, t_shell *shell);
-bool is_a_special_symbol(t_node * node, t_shell *shell);
-bool not_a_special_symbol(t_node * node, t_shell *shell);
+bool is_wildcard(t_listnode *node);
+bool is_not_wildcard(t_listnode *node);
+
+// syntax
+bool is_pipe_token(t_listnode *node, t_shell *shell);
+bool is_and_token(t_listnode *node, t_shell *shell);
+bool is_or_node_token(t_listnode *node, t_shell *shell);
+bool is_special_symbol(t_listnode * node, t_shell *shell);
+bool not_special_symbol(t_listnode * node, t_shell *shell);
+bool is_binary_operator(t_listnode * node, t_shell *shell);
+bool not_binary_operator(t_listnode * node, t_shell *shell);
+bool not_binary_operator_nor_parenthesis(t_listnode * node, t_shell *shell);
+bool is_and(char *val);
+bool is_or(char *val);
+bool is_pipe(char *val);
+
 
 
 // parsing

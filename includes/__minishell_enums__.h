@@ -6,24 +6,16 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:00:33 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/15 01:50:49 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 16:26:07 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __MINISHELL_ENUMS___H
 # define __MINISHELL_ENUMS___H
 
-enum	e_rdr
-{
-	in = 0,
-	out = 1,
-	redirect_in = 2,
-	redirect_out = 4,
-	redirect_heredoc = 8
-};
-
 enum	e_eval_opcode
 {
+	_nonivokable,
 	_cd,
 	_echo,
 	_env,

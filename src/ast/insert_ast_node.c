@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_fd.c                                      :+:      :+:    :+:   */
+/*   insert_ast_node.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/31 21:03:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/31 21:25:00 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/09/25 00:50:04 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/10/04 21:45:02 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_fd	get_next_fd(t_cmd_container *container)
+void	insert_ast_node(t_ast *ast, t_ast_node *z)
 {
-	static int	i = 0;
+	t_ast_node	*x;
 
-	if (!container)
+	x = ast->root;
+	while (x && x->left)
+		x = x->left;
+	if (x == NULL)
+		ast->root = z;
+	else
 	{
-		i = 0;
-		return (-1);
+		x->left = z;
+		z->p = x;
 	}
-	return (container->fds[i++]);
-}
-size_t	get_next_fd_idx(t_cmd_container *container)
-{
-	static int	i = 0;
-
-	if (!container)
-	{
-		i = 0;
-		return (-1);
-	}
-	return (i++);
+	if (z->type == REDIRECTION)
+		z->right = make_file_node(z->orig_token->next);
+	z->ast = ast;
 }

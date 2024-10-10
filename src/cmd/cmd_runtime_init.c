@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   count_pipes.c                                      :+:      :+:    :+:   */
+/*   cmd_runtime_init.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/01 22:09:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/01 22:11:07 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/09/27 22:39:00 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/10/04 21:03:23 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static size_t __count_pipes__(t_node *token, t_shell *shell)
+void	cmd_runtime_init(t_cmd *cmd)
 {
-	if (!token) return 0;
-
-	return (!is_quoted_token(shell->quoted_tokens, token) && string_equal(token->val, "|")) + __count_pipes__(token->next, shell);
-}
-
-size_t count_pipes(t_list *tokens, t_shell *shell)
-{
-	if (!tokens || !shell) return 0;
-
-	return __count_pipes__(tokens->head, shell);
+	wildcard_resolve(cmd->tokens, cmd->shell);
+	if (empty(cmd->tokens) || sort_tokens(cmd, cmd->tokens) == -1
+		|| cmd_lookup(cmd) == -1)
+	{
+		cmd->eval = errcmd;
+		cmd->invokable = false;
+	}
 }

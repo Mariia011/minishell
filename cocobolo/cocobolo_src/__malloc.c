@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 20:03:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/15 00:45:01 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 21:19:23 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	*__calloc(size_t n)
 	ptr = malloc(n);
 	if (NULL == ptr)
 		__exit("Bad alloc");
-
 	__memset(ptr, 0, n);
 	return (ptr);
 }

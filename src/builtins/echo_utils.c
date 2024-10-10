@@ -3,21 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   echo_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 19:01:36 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/21 19:04:24 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/10/04 21:04:55 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-
 void	echo_arglist(t_list *arglist)
 {
-	t_node	*arg;
+	t_listnode	*arg;
 
 	if (!arglist)
 		return ;
@@ -31,7 +28,7 @@ void	echo_arglist(t_list *arglist)
 	}
 }
 
-bool	last_nl(t_node *const node)
+bool	last_nl(t_listnode *const node)
 {
 	if (!node || !node->val)
 		return (false);
@@ -50,5 +47,3 @@ bool	is_n(char *opt)
 	opt++;
 	return (*__strchr_p(opt, not_n_predicate) == '\0');
 }
-
-#pragma GCC diagnostic pop

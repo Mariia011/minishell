@@ -6,24 +6,22 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:17:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/23 18:45:34 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/10 19:09:21 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-
 static void	__exit_nb__(t_cmd *cmd, const int status, char *err);
 static void	foo(char **err, t_cmd *cmd);
 
-void	__exit__(t_cmd *cmd)
+void	msh_exit(t_cmd *cmd)
 {
 	char		*err;
 	t_optional	val;
 
-	printf("exit\n");
+	if (!cmd->forkable)
+		printf("exit\n");
 	err = NULL;
 	list_move_back(cmd->options, cmd->args);
 	if (size(cmd->args) >= 1)
@@ -59,15 +57,7 @@ static void	__exit_nb__(t_cmd *cmd, const int status, char *err)
 		__perror(err);
 	set_exit_status(status);
 	__delete_string(&err);
-	t_shell *shell = cmd->shell;
-	__t_shell__(shell);
-	__t_command__(cmd);
+	__t_shell__(cmd->shell);
+	while(true);
 	exit(get_exit_status());
 }
-
-void	msh_exit(t_cmd *cmd)
-{
-	eval_wrapper(cmd, _msh_exit);
-}
-
-#pragma GCC diagnostic pop

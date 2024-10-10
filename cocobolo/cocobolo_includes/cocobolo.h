@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/18 20:23:57 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 21:13:26 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # define ITALIC_OFF "\e[23m"
 
 typedef struct s_list	t_list;
-typedef struct s_node	t_node;
+typedef struct s_node	t_listnode;
 
 typedef void			(*t_printf_option)(const char *const);
 
@@ -76,8 +76,8 @@ char					*__make_string_from_char(const char c)
 char					*__strtrim(char *s1,
 							char *set) __attribute__((malloc))
 						__attribute__((warn_unused_result));
-char					*__make_string_from_list(t_node *first,
-							t_node *last)
+char					*__make_string_from_list(t_listnode *first,
+							t_listnode *last)
 						__attribute__((malloc))
 						__attribute__((warn_unused_result));
 char					*__strappend(char *s,
@@ -98,8 +98,10 @@ char					*__strdup_until(const char *src,
 							const char end) __attribute__((warn_unused_result));
 char					*__strstr(char *haystack, char *needle);
 ssize_t					__strcmp(const char *lhv, const char *rhv);
-bool					__str_ends_with(const char *haystack, const char *needle);
-bool					__str_starts_with(const char *haystack, const char *needle);
+bool					__str_ends_with(const char *haystack,
+							const char *needle);
+bool					__str_starts_with(const char *haystack,
+							const char *needle);
 bool					__strchr(char *s, const char c);
 char					*__strchr_p(char *s, bool (*p)(char));
 bool					__strcmp_weak__(const char *lhv, const char *rhv);

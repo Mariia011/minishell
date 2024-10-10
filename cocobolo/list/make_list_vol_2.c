@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 21:42:17 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 21:40:19 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/24 01:23:20 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_list	*make_list_from_matrix(char **arr)
 	i = 0;
 	while (arr[i])
 	{
-		push_back(list, arr[i], NULL);
+		push_back(list, arr[i]);
 		i++;
 	}
 	return (list);
@@ -41,7 +41,7 @@ static t_list	*make_list_from_string_all(char *s, char *set)
 		if (__strchr(set, *s) == true)
 		{
 			val = __make_string_from_char(*s);
-			push_back(list, val, NULL);
+			push_back(list, val);
 			++s;
 		}
 		else
@@ -50,7 +50,7 @@ static t_list	*make_list_from_string_all(char *s, char *set)
 			while (*tmp && __strchr(set, *tmp) == false)
 				tmp++;
 			val = __strdup_until(s, *tmp);
-			push_back(list, val, NULL);
+			push_back(list, val);
 			s = tmp;
 		}
 		__delete_string(&val);

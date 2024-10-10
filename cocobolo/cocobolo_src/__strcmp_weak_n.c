@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   __strcmp_weak_n.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 19:45:01 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/21 20:25:11 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/10/04 21:19:56 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ char	*__strcmp_weak_n(const char *lhv, const char *rhv)
 		rhv++;
 	}
 	if (*lhv)
-		return  (char*)(lhv);
-	return (char*)(rhv);
+		return ((char *)(lhv));
+	return ((char *)(rhv));
 }

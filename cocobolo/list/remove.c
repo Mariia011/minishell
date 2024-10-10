@@ -3,19 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   remove.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:31:20 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/09 20:26:07 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/10/04 21:23:15 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-
-void	pop(t_list *list, t_node *node)
+void	pop(t_list *list, t_listnode *node)
 {
 	if (!list || !node)
 		return ;
@@ -37,11 +34,11 @@ size_t	list_remove(t_list *list, t_list_value val)
 	return (list_remove_if(list, val, list_value_same));
 }
 
-size_t	list_remove_if(t_list *list, t_list_value val, t_list_Bpredicate_val p)
+size_t	list_remove_if(t_list *list, t_list_value val, t_list_bpredicate_val p)
 {
-	size_t	removed;
-	t_node	*node;
-	t_node	*next;
+	size_t		removed;
+	t_listnode	*node;
+	t_listnode	*next;
 
 	if (!list || empty(list) || !val)
 		return (0);
@@ -59,5 +56,3 @@ size_t	list_remove_if(t_list *list, t_list_value val, t_list_Bpredicate_val p)
 	}
 	return (removed);
 }
-
-#pragma GCC diagnostic pop

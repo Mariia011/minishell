@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_sign_resolver.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:08:55 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/15 19:56:04 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/07 00:23:48 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	dollar_sign_resolver(t_list *tokens, t_shell *shell)
 {
-	t_list	*queue;
-	t_node	*token;
-	t_node	*next;
+	t_list		*queue;
+	t_listnode	*token;
+	t_listnode	*next;
 
 	if (!tokens || !shell)
 		return ;
@@ -28,17 +28,16 @@ void	dollar_sign_resolver(t_list *tokens, t_shell *shell)
 		if (is_quote(token->val))
 		{
 			if (empty(queue))
-				push_back(queue, token->val, NULL);
+				push_back(queue, token->val);
 			else if (string_equal(queue->head->val, token->val))
 				pop_front(queue);
 		}
 		if ((empty(queue) || string_equal(queue->head->val, "\""))
 			&& __strchr(token->val, '$'))
 		{
+			save_token(shell->dollar_tokens, token);
+			save_orig_value(token, shell);
 			token->val = resolve(token->val, shell);
-			// if (string_equal(token->val, "$") && token->next && !string_equal(token->next->val, " ")) // echo $""USER
-			// 	pop(tokens, token);
-
 		}
 		token = next;
 	}

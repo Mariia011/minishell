@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:27:35 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 15:54:27 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/07 00:16:43 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,17 @@ t_shell	*make_shell(char **env)
 	shell->export = make_export(shell);
 	shell->history = make_list();
 	shell->quoted_tokens = make_set();
+	shell->dollar_tokens = make_set();
+	shell->orig_values = make_tree(string_less);
 	shell->stddesc = make_stddesc();
+
 	make_shlvl(shell);
 	export_update(shell, "SHELL", "minishell");
 	export_update(shell, "OLDPWD", "");
 	unset_var(shell, "_");
 	export_update(shell, "__HOME_CACHE__", get_val(shell->export, "HOME"));
+
+	shell->ast = NULL;
 
 	shell->logfile = make_logfile(shell);
 

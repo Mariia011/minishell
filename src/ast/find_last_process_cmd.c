@@ -1,23 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_descriptors.c                                  :+:      :+:    :+:   */
+/*   find_last_process_cmd.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/22 22:32:22 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 18:51:31 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/10/04 21:11:54 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/10/04 21:11:56 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// void	set_descriptors(t_cmd *cmd)
-// {
-// 	if (!cmd)
-// 		return ;
-// 	if (cmd->redirection & redirect_in)
-// 		dup2(cmd->descriptors->stdin, STDIN_FILENO);
-// 	if (cmd->redirection & redirect_out)
-// 		dup2(cmd->descriptors->stdout, STDOUT_FILENO);
-// }
+t_ast_node	*find_last_process_cmd(t_ast_node *root)
+{
+	t_ast_node	*curr;
+	t_ast_node	*l;
+	t_ast_node	*r;
+
+	if (!root)
+		return (NULL);
+	curr = NULL;
+	l = NULL;
+	r = NULL;
+	if ((root->type == CMD && is_program(root->cmd_ptr)))
+		curr = root;
+	r = find_last_process_cmd(root->right);
+	if (r)
+		return (r);
+	if (curr)
+		return (curr);
+	l = find_last_process_cmd(root->left);
+	return (l);
+}

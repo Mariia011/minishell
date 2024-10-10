@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:27:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/15 00:20:37 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 20:40:30 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ static void	foo(char **s, size_t *i, t_pair *data, t_shell *shell)
 	(*s)[k] = c;
 	if (!val)
 		val = "";
-		// val = data->second;
 	(*i) += __strlen(val) - 1;
 	data->first = __strappend(data->first, val, (*s) + k, NULL);
 	free((*s));

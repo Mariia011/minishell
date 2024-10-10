@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 13:57:58 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/15 14:02:20 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 21:18:57 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cocobolo.h>
 
-void __va_close(int *s, ...)
+void	__va_close(int *s, ...)
 {
 	va_list	args;
 	int		*fdptr;

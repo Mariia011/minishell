@@ -6,23 +6,15 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:15:43 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 15:25:33 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/04 21:04:41 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-
 void	__print_env__(t_tree_node *node);
 
 void	env(t_cmd *cmd)
-{
-	eval_wrapper(cmd, _env);
-}
-
-void	__env__(t_cmd *cmd)
 {
 	int		status;
 	char	*str;
@@ -54,5 +46,3 @@ void	__print_env__(t_tree_node *node)
 		printf("%s", node->val);
 	printf("\n");
 }
-
-#pragma GCC diagnostic pop

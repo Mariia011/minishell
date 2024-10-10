@@ -3,77 +3,88 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:07:40 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/15 01:02:26 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/07 00:41:45 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+static int	process_infile(t_ast_node *r);
+static int	process_outfile(t_ast_node *r);
+static int	process_append(t_ast_node *r);
+static int	process_heredoc(t_ast_node *r, t_shell *shell);
 
-static int	process_infile(t_node *token, t_cmd_container *container);
-static int	process_outfile(t_node *token, t_cmd_container *container);
-static int	process_append(t_node *token, t_cmd_container *container);
-static int	process_heredoc(t_node *token, t_cmd_container *container);
-
-int	redirect(t_node *token, t_cmd_container *container)
+t_authorized_fds	redirect(t_ast_node *r, t_authorized_fds oldfds)
 {
-	int	x;
-
-	if (!token || !container)
+	t_authorized_fds newfds = oldfds;
+	int x;
+	if (r->redirection_type & (redirect_in | redirect_heredoc))
 	{
-		return (-1);
+		dup2(r->ast->shell->stddesc->stdin, STDIN_FILENO);
+
+		if (r->redirection_type & redirect_in)
+			newfds.stdin.fd = (process_infile(r));
+		else
+			newfds.stdin.fd = (process_heredoc(r, r->ast->shell));
+		newfds.stdin.author = r;
+		x = newfds.stdin.fd;
+
+
+		dup2(x, STDIN_FILENO);
+		if (x == -1 && (r->redirection_type & redirect_in))
+		{
+			if (find_addr(r->ast->shell->dollar_tokens, r->right->orig_token))
+				__va_perror(get_orig_val(r->right->orig_token, r->ast->shell), ": ambiguous redirect", NULL);
+			else
+				__va_perror(r->right->filename, ": ", "no such file or directory", NULL);
+		}
 	}
-	if (string_equal(token->val, "<"))
-		x = (process_infile(token, container));
-	else if (string_equal(token->val, "<<"))
-		x = (process_heredoc(token, container));
-	else if (string_equal(token->val, ">"))
-		x = (process_outfile(token, container));
-	else
-		x = (process_append(token, container));
-	container->fds[get_next_fd_idx(container)] = x;
-	return (x);
+	else if (r->redirection_type & (redirect_out | redirect_append))
+	{
+		if (r->redirection_type & redirect_out)
+			newfds.stdout.fd = (process_outfile(r));
+		else
+			newfds.stdout.fd = (process_append(r));
+		newfds.stdout.author = r;
+		x = newfds.stdout.fd;
+		dup2(x, STDOUT_FILENO);
+		if (x == -1)
+		{
+			if (find_addr(r->ast->shell->dollar_tokens, r->right->orig_token))
+				__va_perror(get_orig_val(r->right->orig_token, r->ast->shell), ": ambiguous redirect", NULL);
+			else
+				__va_perror(r->right->filename, ": ", "could not open file", NULL);
+		}
+	}
+
+	r->right->fd = x;
+
+	// printf("descriptor : %d\n", r->right->fd);
+
+	return newfds;
+
 }
 
-static int	process_infile(t_node *token, t_cmd_container *container)
+static int	process_infile(t_ast_node *r)
 {
-	t_fd	fd;
-
-	fd = -1;
-	fd = open_file(token->next->val, O_RDONLY);
-	return (fd);
+	return (open_file(r->right->filename, O_RDONLY));
 }
 
-static int	process_outfile(t_node *token, t_cmd_container *container)
+static int	process_outfile(t_ast_node *r)
 {
-	t_fd	fd;
-
-	fd = -1;
-	fd = open_file(token->next->val, O_WRONLY | O_CREAT | O_TRUNC);
-	return (fd);
+	return (open_file(r->right->filename, O_WRONLY | O_CREAT | O_TRUNC));
 }
 
-static int	process_heredoc(t_node *token, t_cmd_container *container)
+static int	process_heredoc(t_ast_node *r, t_shell *shell)
 {
-	t_fd	fd;
-
-	fd = -1;
-	fd = make_heredoc(token->next->val, container->shell,
-			is_quoted_token(container->shell->quoted_tokens, token->next));
-	return (fd);
+	return  make_heredoc(r->right->filename, shell,
+			find_addr(shell->quoted_tokens, r->right->orig_token));
 }
 
-static int	process_append(t_node *token, t_cmd_container *container)
+static int	process_append(t_ast_node *r)
 {
-	t_fd	fd;
-
-	fd = -1;
-	fd = open_file(token->next->val, O_WRONLY | O_CREAT | O_APPEND);
-	return (fd);
+	return (open_file(r->right->filename, O_WRONLY | O_CREAT | O_APPEND));
 }
-#pragma GCC diagnostic pop
