@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:48:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/10/10 21:06:48 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/10 21:34:46 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ void	wildcard_resolve(t_list *tokens, t_shell *shell)
 	t_listnode	*save;
 
 	dir = get_cwd_files();
+	if (empty(dir))
+		return ;
 	i = 0;
 	reqs = NULL;
 	wild = shfind_if(tokens->head, tokens->tail, is_wildcard_token, shell);
@@ -126,8 +128,8 @@ static void	wildcard_resolve_core(t_list *tokens, t_listnode **wild,
 	if (!empty(survived))
 	{
 		substitute_args((*wild), tokens, survived);
+		pop(tokens, (*wild));
 	}
-	pop(tokens, (*wild));
 	list_clear(&survived);
 	list_clear(&reqs);
 }

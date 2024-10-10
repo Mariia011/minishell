@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 20:41:41 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/10 21:04:45 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/10 21:10:51 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,6 @@ bool	is_redirection_token(t_listnode *node, t_shell *shell)
 bool	is_wildcard(t_listnode *node)
 {
 	return (__strchr(node->val, '*'));
-}
-bool	is_wildcard_token(t_listnode *node, t_shell *shell)
-{
-	return (is_wildcard(node) && !find_addr(shell->quoted_tokens, node));
 }
 
 bool	is_not_wildcard(t_listnode *node)

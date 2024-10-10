@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/04 20:24:07 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/10 21:25:53 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,16 @@ static int	cmd_lookup_core(t_cmd *cmd)
 {
 	t_list *path __attribute__((cleanup(list_clear)));
 	path = get_path(cmd->shell);
-	if (__strchr(cmd->name, '/') == false)
+	if (find_range(path, cmd->name, __cmd_exists__))
+		return (replace_cmd_name(cmd, find_range(path, cmd->name,
+					__cmd_exists__)));
+	if (absolute_path_lookup(cmd) == -1)
 	{
-		if (find_range(path, cmd->name, __cmd_exists__))
-			return (replace_cmd_name(cmd, find_range(path, cmd->name,
-						__cmd_exists__)));
+		cmd->eval = errcmd;
+		return (-1);
 	}
-	else
-	{
-		if (absolute_path_lookup(cmd) == -1)
-		{
-			cmd->eval = errcmd;
-			return (-1);
-		}
-		cmd->eval = eval_prog;
-		return (0);
-	}
+	cmd->eval = eval_prog;
+	return (0);
 	return (2);
 }
 
