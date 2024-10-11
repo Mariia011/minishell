@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:43:01 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/01 01:18:50 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/11 15:37:55 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ char	*read_line(char *prompt)
 {
 	char	*line;
 
-	set_signals_interactive();
+	signals_enable();
 	line = readline(prompt);
-	set_signals_noninteractive();
+	signals_disable();
 	return (line);
 }

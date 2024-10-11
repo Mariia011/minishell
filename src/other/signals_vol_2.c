@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   signals_vol_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 17:53:25 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/15 14:20:18 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/11 15:37:55 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	set_signals_interactive(void)
+void	signals_enable(void)
 {
 	struct sigaction	act;
 
@@ -25,7 +25,7 @@ void	set_signals_interactive(void)
 	disable_echoctl();
 }
 
-void	set_signals_noninteractive(void)
+void	signals_disable(void)
 {
 	struct sigaction	act;
 
