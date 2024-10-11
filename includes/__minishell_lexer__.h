@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   __minishell_lexer__.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:47:09 by marikhac          #+#    #+#             */
-/*   Updated: 2024/10/11 10:44:52 by kali             ###   ########.fr       */
+/*   Updated: 2024/10/11 16:13:43 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,19 @@ bool	is_alpha(const char c);
 bool	is_digit(const char c);
 bool	is_name_part(const char c);
 bool	not_name_part(char c);
-bool				is_redirection_token(t_listnode *node, t_shell *shell);
-bool				is_quote_node(t_listnode *const node);
-bool				is_invokable(t_cmd *cmd);
-bool				is_program(t_cmd *cmd);
-bool				is_parenthesis_token(t_listnode *token, t_shell *shell);
-bool				not_parenthesis_token(t_listnode *token, t_shell *shell);
-bool				is_closing_parenthesis(char *text);
-bool				is_opening_parenthesis(char *text);
-bool				is_opening_parenthesis_token(t_listnode *token,
-						t_shell *shell);
-bool				is_closing_parenthesis_token(t_listnode *token,
-						t_shell *shell);
-bool				is_parenthesis(char *text);
+bool	is_redirection_token(t_listnode *node, t_shell *shell);
+bool	is_quote_node(t_listnode *const node);
+bool	is_invokable(t_cmd *cmd);
+bool	is_program(t_cmd *cmd);
+bool	is_parenthesis_token(t_listnode *token, t_shell *shell);
+bool	not_parenthesis_token(t_listnode *token, t_shell *shell);
+bool	is_closing_parenthesis(char *text);
+bool	is_opening_parenthesis(char *text);
+bool	is_opening_parenthesis_token(t_listnode *token,
+			t_shell *shell);
+bool	is_closing_parenthesis_token(t_listnode *token,
+			t_shell *shell);
+bool	is_parenthesis(char *text);
 
 // parsing
 t_list	*tokenize(char *raw_cmd) __attribute__((warn_unused_result));
@@ -69,6 +69,6 @@ void	merge_redirections(t_list *tokens);
 
 void	merge_inside_quotes(t_list *tokens);
 void	merge_inside_quotes_the_good_part(t_list *tokens, t_listnode **t,
-				t_listnode **next);
+			t_listnode **next);
 
 #endif // __MINISHELL_LEXER___H

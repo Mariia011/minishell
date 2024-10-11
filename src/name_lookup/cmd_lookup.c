@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_lookup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/11 16:07:39 by kali             ###   ########.fr       */
+/*   Updated: 2024/10/11 16:12:45 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,18 @@ int	cmd_lookup(t_cmd *cmd)
 
 static int	cmd_lookup_core(t_cmd *cmd)
 {
-	t_list *path	__attribute__((cleanup(list_clear)));
-	int	y;
+	t_list	*path;
+	int		y;
 
 	path = get_path(cmd->shell);
 	if (find_range(path, cmd->name, __cmd_exists__))
-		return (replace_cmd_name(cmd, find_range(path, cmd->name,
-					__cmd_exists__)));
+	{
+		y = replace_cmd_name(cmd, find_range(path, cmd->name,
+					__cmd_exists__));
+		list_clear(&path);
+		return (y);
+	}
+	list_clear(&path);
 	y = absolute_path_lookup(cmd);
 	if (__strchr(cmd->name, '/') && y == -1)
 	{
