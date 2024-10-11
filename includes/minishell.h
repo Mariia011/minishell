@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/11 10:37:25 by kali             ###   ########.fr       */
+/*   Updated: 2024/10/11 11:05:49 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ struct				s_descriptor
 //	reading input
 char				*read_line(char *s);
 
-void				__minishell__(char **env);
+void				__minishell__(int ac, char **av, char **env);
 
 void				__redirect_out__(t_authorized_fds *newfds, t_ast_node *r);
 void				__redirect_in__(t_authorized_fds *newfds, t_ast_node *r);

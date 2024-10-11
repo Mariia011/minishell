@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_pid.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:45:58 by marikhac          #+#    #+#             */
-/*   Updated: 2024/10/04 20:55:29 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/11 11:08:59 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #define PS_ ".__ps__.txt"
 
 static void	exec_ps(t_shell *shell);
-static char	*get_pid_core(t_fd fd, t_shell *shell);
+static char	*get_pid_core(t_fd fd);
 
 char	*get_pid(t_shell *shell)
 {
@@ -28,7 +28,7 @@ char	*get_pid(t_shell *shell)
 	__putstr_fd("__EOF__", fd);
 	close(fd);
 	fd = open_file(PS_, O_RDONLY);
-	val = get_pid_core(fd, shell);
+	val = get_pid_core(fd);
 	p = __atoi(val);
 	free(val);
 	val = __itoa(value(&p));
@@ -37,7 +37,7 @@ char	*get_pid(t_shell *shell)
 	return (val);
 }
 
-static char	*get_pid_core(t_fd fd, t_shell *shell)
+static char	*get_pid_core(t_fd fd)
 {
 	t_list		*list;
 	t_listnode	*node;

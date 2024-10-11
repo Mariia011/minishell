@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eval_prog.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:37:44 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/10 22:03:13 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/11 11:09:58 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	eval_prog(t_cmd *cmd)
 {
-	int	s;
-
 	cmd->pid = fork();
 	if (cmd->pid < 0)
 	{

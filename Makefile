@@ -10,8 +10,6 @@ OBJSPATH = ./objs/
 
 vpath %.c ${SRCSPATH}
 
-# SRCS = $(foreach D, ${SRCSPATH}, $(wildcard ${D}*.c))
-
 SRCS = ./src/syntax_analysis/parenthesis_parse.c \
 ./src/syntax_analysis/redirection_parse.c \
 ./src/syntax_analysis/syntax_analysis.c \
@@ -433,7 +431,7 @@ CC = gcc
 # DEBUG = -fsanitize=address
 DEBUG = -g
 WFLAGS = -Wall -Wextra -Werror
-CFLAGS = $(foreach H, $(INCPATH), -I$(H)) ${DEBUG} -Werror #${WFLAGS}
+CFLAGS = $(foreach H, $(INCPATH), -I$(H)) ${DEBUG} -Werror ${WFLAGS}
 
 UNAME = $(shell uname -s)
 ifeq ($(UNAME), Darwin)
@@ -480,8 +478,6 @@ oda :
 
 leaks : all
 	valgrind --leak-check=full --show-leak-kinds=all --suppressions=.vlgignore ./${NAME}
-
-#
 
 config:
 	mkdir -p readline_local

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   __strtrim.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 20:19:38 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 21:30:11 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/11 11:14:03 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,4 @@ static void	_move_ptrs(char **left, char **right, char *set)
 		++(*left);
 	while (((*right) >= (*left)) && __strchr(set, **right))
 		--(*right);
-}
-
-static char	*_allocate_null(void)
-{
-	char	*dst;
-
-	dst = (char *)malloc(1);
-	*dst = '\0';
-	return (dst);
 }

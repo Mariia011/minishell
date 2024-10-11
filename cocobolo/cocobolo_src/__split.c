@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   __split.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 21:21:48 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 21:33:03 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/11 11:17:07 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static t_matrix	_allocate(char const *str, char *set, size_t const SIZE)
 		arr[i] = (char *)__malloc(current_len + 1);
 		arr[i][current_len] = '\0';
 		j = -1;
-		while (++j < current_len)
+		while (++j < (int)current_len)
 			arr[i][j] = tmp[j];
 		i++;
 	}

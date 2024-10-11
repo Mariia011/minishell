@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:01:15 by marikhac          #+#    #+#             */
-/*   Updated: 2024/10/04 21:07:32 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/11 11:08:09 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ static int	______i_a_g_t_c_i_m_p_f_n_________(char *expr,
 				t_list *tokens, t_shell *shell);
 
 static int	size_2(t_shell *shell, t_list *tokens);
-
-static int	foo(int x, t_list *tokens);
 
 static bool	not_equal_sign(t_listnode *const node)
 {

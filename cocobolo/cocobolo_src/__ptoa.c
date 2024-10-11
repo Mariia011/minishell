@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   __ptoa.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 21:01:00 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 22:42:21 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/11 11:16:09 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,13 @@ static size_t	_digit_count(size_t const n)
 
 static size_t	_calculate_size(size_t const n)
 {
-	if (n <= 0)
-		return (_digit_count(n) + 1);
+	if (n == 0)
+		return (1);
 	return (_digit_count(n));
 }
 
 static char	_to_char(size_t n)
 {
-	if (n < 0)
-		n *= -1;
 	return (n + '0');
 }
 
@@ -47,9 +45,7 @@ static char	*_allocate(size_t n)
 {
 	char	*dst;
 	size_t	size;
-	size_t	sign;
 
-	sign = (n < 0);
 	size = _calculate_size(n);
 	dst = __malloc(size + 1);
 	if (!dst)
@@ -61,7 +57,5 @@ static char	*_allocate(size_t n)
 		n /= 10;
 		size--;
 	}
-	if (sign)
-		dst[0] = '-';
 	return (dst);
 }

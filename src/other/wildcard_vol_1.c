@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard_vol_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:48:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/10/10 22:44:15 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/11 11:07:43 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,9 @@ t_list	*get_cwd_files(void)
 static bool	check_node(char *dirname, t_list *reqs)
 {
 	t_listnode		*cur;
-	char			*dir_p;
 	t_wildcard_fptr	fptr;
 
 	cur = reqs->head;
-	dir_p = dirname;
 	fptr = contains_it;
 	while (cur)
 	{
@@ -95,7 +93,6 @@ static t_list	*check_all_dirs(t_list *dir, t_list *reqs)
 void	wildcard_resolve(t_list *tokens, t_shell *shell)
 {
 	t_list		*dir;
-	int			i;
 	t_listnode	*wild;
 	t_list		*reqs;
 	t_listnode	*save;
@@ -103,7 +100,6 @@ void	wildcard_resolve(t_list *tokens, t_shell *shell)
 	dir = get_cwd_files();
 	if (empty(dir))
 		return ;
-	i = 0;
 	reqs = NULL;
 	wild = shfind_if(tokens->head, tokens->tail, is_wildcard_token, shell);
 	while (wild)

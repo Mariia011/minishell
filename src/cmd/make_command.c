@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/11 10:26:32 by kali             ###   ########.fr       */
+/*   Updated: 2024/10/11 11:09:43 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static t_cmd	*make_command_core(t_list *tokens, t_shell *shell);
 t_cmd	*make_command(t_list *tokens, t_shell *shell)
 {
 	t_cmd		*cmd;
-	t_listnode	*possible_name;
 
 	if (empty(tokens) || !shell)
 	{

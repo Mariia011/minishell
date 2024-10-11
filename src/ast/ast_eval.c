@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 01:43:14 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/11 10:41:36 by kali             ###   ########.fr       */
+/*   Updated: 2024/10/11 11:12:49 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	dfs(t_ast_node *root, t_ast *ast, t_authorized_fds fds);
 static int	ast_handle_pipe(t_ast_node *root, t_ast *ast, t_authorized_fds fds);
-static int	ast_handle_cmd(t_ast_node *root, t_ast *ast, t_authorized_fds fds);
+static int	ast_handle_cmd(t_ast_node *root);
 
 void	ast_eval(t_ast *ast)
 {
@@ -49,7 +49,7 @@ static int	dfs(t_ast_node *root, t_ast *ast, t_authorized_fds fds)
 	else if (root->type == PIPE)
 		return (ast_handle_pipe(root, ast, fds));
 	else if (root->type == CMD)
-		return (ast_handle_cmd(root, ast, fds));
+		return (ast_handle_cmd(root));
 	else
 	{
 		newfds = redirect(root, fds);
@@ -88,7 +88,7 @@ static int	ast_handle_pipe(t_ast_node *root, t_ast *ast, t_authorized_fds fds)
 	return (y);
 }
 
-static int	ast_handle_cmd(t_ast_node *root, t_ast *ast, t_authorized_fds fds)
+static int	ast_handle_cmd(t_ast_node *root)
 {
 	pid_t	x;
 

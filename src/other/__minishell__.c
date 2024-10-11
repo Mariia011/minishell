@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   __minishell__.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 22:32:24 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/10 22:32:46 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/11 11:06:25 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	__minishell__(char **env)
+void	__minishell__(int __attribute__((unused)) ac, char __attribute__((unused)) **av, char **env)
 {
 	t_shell	*shell;
 	char	*line;
