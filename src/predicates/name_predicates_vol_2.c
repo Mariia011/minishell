@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   name_predicates_vol_2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 18:26:29 by marikhac          #+#    #+#             */
-/*   Updated: 2024/10/11 10:37:36 by kali             ###   ########.fr       */
+/*   Updated: 2024/10/11 15:07:41 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ bool	not_name_part(char c)
 
 bool	is_space_token(t_listnode *token, t_shell *shell)
 {
-	return (string_equal(token->val, " ") && !find_addr(shell->quoted_tokens, token));
+	return (string_equal(token->val, " ")
+		&& !find_addr(shell->quoted_tokens, token));
 }

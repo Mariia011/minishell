@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_eval.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 01:43:14 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/11 11:12:49 by kali             ###   ########.fr       */
+/*   Updated: 2024/10/11 15:12:22 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int	dfs(t_ast_node *root, t_ast *ast, t_authorized_fds fds);
 static int	ast_handle_pipe(t_ast_node *root, t_ast *ast, t_authorized_fds fds);
 static int	ast_handle_cmd(t_ast_node *root);
+static bool	__that_damn_condition__(t_ast_node *root);
 
 void	ast_eval(t_ast *ast)
 {
@@ -74,7 +75,7 @@ static int	ast_handle_pipe(t_ast_node *root, t_ast *ast, t_authorized_fds fds)
 	new_fds.stdout.fd = pipes[out];
 	new_fds.stdout.author = root;
 	dfs(root->left, ast, new_fds);
-	if (!root->p || root->p->type != REDIRECTION || root->p->redirection_type != redirect_in)
+	if (__that_damn_condition__(root))
 		dup2(pipes[in], STDIN_FILENO);
 	__va_close(&pipes[in], &pipes[out], NULL);
 	dup2(fds.stdout.fd, STDOUT_FILENO);
@@ -103,4 +104,10 @@ static int	ast_handle_cmd(t_ast_node *root)
 		waitcmd(root->cmd_ptr->pid, &x);
 	}
 	return (!get_exit_status());
+}
+
+static bool	__that_damn_condition__(t_ast_node *root)
+{
+	return (!root->p || root->p->type != REDIRECTION
+		|| root->p->redirection_type != redirect_in);
 }
