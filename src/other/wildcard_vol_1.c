@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:48:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/10/11 11:07:43 by kali             ###   ########.fr       */
+/*   Updated: 2024/10/11 11:28:11 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,10 @@ void	wildcard_resolve(t_list *tokens, t_shell *shell)
 
 	dir = get_cwd_files();
 	if (empty(dir))
+	{
+		list_clear(&dir);
 		return ;
+	}
 	reqs = NULL;
 	wild = shfind_if(tokens->head, tokens->tail, is_wildcard_token, shell);
 	while (wild)

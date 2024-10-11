@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:19:13 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/04 21:04:18 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/11 11:36:02 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void	pwd(t_cmd *cmd)
 	}
 	else
 	{
-		path = __strdup(get_val(cmd->shell->export, "PWD"));
-		if (!path || !(*path))
-		{
-			__delete_string(&path);
+		// path = __strdup(get_val(cmd->shell->export, "PWD"));
+		// if (!path || !(*path))
+		// {
+		// 	__delete_string(&path);
 			path = _getcwd(cmd->shell);
-		}
+		// }
 		printf("%s\n", path);
 		__delete_string(&path);
 	}
@@ -45,7 +45,10 @@ char	*_getcwd(t_shell *shell)
 	if (NULL == getcwd(path, SIZE))
 	{
 		__delete_string(&path);
-		path = __make_string(get_val(shell->export, "PWD"), "/../", NULL);
+		if (!ends_with(get_val(shell->export, "PWD"), "/../"))
+			path = __make_string(get_val(shell->export, "PWD"), "/../", NULL);
+		else
+			path = __strdup(get_val(shell->export, "PWD"));
 	}
 	return (path);
 }
