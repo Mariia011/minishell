@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/11 15:37:55 by kali             ###   ########.fr       */
+/*   Updated: 2024/10/11 16:04:11 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ struct				s_shell
 {
 	t_tree			*env;
 	t_tree			*export;
-	t_list			*history;
 
 	t_descriptor	*stddesc;
 	t_set			*quoted_tokens;
@@ -128,7 +127,6 @@ void				env(t_cmd *cmd);
 void				unset(t_cmd *cmd);
 void				export(t_cmd *cmd);
 void				echo(t_cmd *cmd);
-void				history(t_cmd *cmd);
 void				msh_exit(t_cmd *cmd);
 void				errcmd(t_cmd *cmd);
 

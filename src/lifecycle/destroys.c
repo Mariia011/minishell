@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/11 15:35:31 by kali             ###   ########.fr       */
+/*   Updated: 2024/10/11 16:04:11 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	__t_shell__(t_shell *shell)
 {
 	if (NULL == shell)
 		return ;
-	list_clear(&shell->history);
 	tree_clear(&shell->env);
 	tree_clear(&shell->export);
 	tree_clear(&shell->orig_values);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_lookup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/10 22:24:03 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/11 16:07:39 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ int	cmd_lookup(t_cmd *cmd)
 	if (!string_equal(cmd->name, ""))
 	{
 		x = cmd_lookup_core(cmd);
-		if (x != 2)
-			return (x);
+		return (x);
 	}
 	cmd->err = __make_string(cmd->orig_name, ": command not found", NULL);
 	cmd->exit_status = NOT_FOUND;
@@ -42,18 +41,20 @@ int	cmd_lookup(t_cmd *cmd)
 static int	cmd_lookup_core(t_cmd *cmd)
 {
 	t_list *path	__attribute__((cleanup(list_clear)));
+	int	y;
 
 	path = get_path(cmd->shell);
 	if (find_range(path, cmd->name, __cmd_exists__))
 		return (replace_cmd_name(cmd, find_range(path, cmd->name,
 					__cmd_exists__)));
-	if (__strchr(cmd->name, '/') && absolute_path_lookup(cmd) == -1)
+	y = absolute_path_lookup(cmd);
+	if (__strchr(cmd->name, '/') && y == -1)
 	{
 		cmd->eval = errcmd;
 		return (-1);
 	}
 	cmd->eval = eval_prog;
-	return (2);
+	return (y);
 }
 
 int	set_eval_to_prog_i_love_norminette(t_cmd *cmd)
@@ -77,8 +78,6 @@ static int	builtin_lookup(t_cmd *cmd)
 {
 	if (string_equal(cmd->name, "pwd"))
 		cmd->eval_core = pwd;
-	else if (string_equal(cmd->name, "history"))
-		cmd->eval_core = history;
 	else if (string_equal(cmd->name, "export"))
 		cmd->eval_core = export;
 	else if (string_equal(cmd->name, "echo"))

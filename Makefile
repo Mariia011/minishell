@@ -98,7 +98,6 @@ SRCS = ./src/syntax_analysis/parenthesis_parse.c \
 ./src/builtins/unset.c \
 ./src/builtins/exit.c \
 ./src/builtins/export.c \
-./src/builtins/history.c \
 ./src/builtins/env.c \
 ./src/builtins/echo_utils.c \
 ./src/builtins/errcmd.c \

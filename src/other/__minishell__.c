@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   __minishell__.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 22:32:24 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/11 15:08:40 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/11 16:04:11 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	__minishell__(int __attribute__((unused)) ac,
 			ast_eval(shell->ast);
 			if (__strlen(line) > 0)
 			{
-				push_back(shell->history, line);
 				add_history(line);
 			}
 		}

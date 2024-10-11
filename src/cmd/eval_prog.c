@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:37:44 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/11 11:09:58 by kali             ###   ########.fr       */
+/*   Updated: 2024/10/11 15:59:09 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	eval_prog_core(t_cmd *cmd)
 	list_move_back(args_copy, options_copy);
 	_args = make_matrix_from_list(options_copy);
 	_env = make_matrix_from_tree(cmd->shell->env);
+	list_clear(&options_copy);
 	execve(cmd->name, _args, _env);
 	__t_shell__(cmd->shell);
 	exit(EXIT_FAILURE);

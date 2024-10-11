@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:27:35 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/11 15:35:31 by kali             ###   ########.fr       */
+/*   Updated: 2024/10/11 16:04:11 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_shell	*make_shell(char **env)
 	shell = __malloc(sizeof(t_shell));
 	shell->env = make_tree_from_matrix(env, string_less);
 	shell->export = make_export(shell);
-	shell->history = make_list();
 	shell->quoted_tokens = make_set();
 	shell->dollar_tokens = make_set();
 	shell->orig_values = make_tree(string_less);
