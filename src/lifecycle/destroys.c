@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destroys.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/10 22:08:25 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/11 15:35:31 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	__t_shell__(t_shell *shell)
 	__va_close(&shell->stddesc->stdin, &shell->stddesc->stdout,
 		&shell->stddesc->stderr, NULL);
 	free(shell->stddesc);
-	__putstr_fd(LOG_SEPARATOR, shell->logfile);
-	close(shell->logfile);
 	__delete_string(&shell->prompt);
 	free(shell);
 	shell = NULL;

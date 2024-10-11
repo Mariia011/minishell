@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:27:35 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/10 22:12:32 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/11 15:35:31 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ t_shell	*make_shell(char **env)
 	unset_var(shell, "_");
 	export_update(shell, "__HOME_CACHE__", get_val(shell->export, "HOME"));
 	shell->ast = NULL;
-	shell->logfile = make_logfile(shell);
 	make_prompt(shell);
 	return (shell);
 }

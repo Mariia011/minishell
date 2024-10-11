@@ -19,7 +19,6 @@ SRCS = ./src/syntax_analysis/parenthesis_parse.c \
 ./src/list_extensions/shremove_if.c \
 ./src/list_extensions/shfind_if.c \
 ./src/lifecycle/make_heredoc.c \
-./src/lifecycle/make_logfile.c \
 ./src/lifecycle/make_shell.c \
 ./src/lifecycle/destroys.c \
 ./src/lifecycle/make_export.c \
@@ -31,7 +30,6 @@ SRCS = ./src/syntax_analysis/parenthesis_parse.c \
 ./src/other/signals_vol_2.c \
 ./src/other/signals_vol_1.c \
 ./src/other/wildcard_vol_1.c \
-./src/other/logcmd.c \
 ./src/other/read_line.c \
 ./src/other/wildcard_vol_2.c \
 ./src/other/status_modifiers.c \
@@ -213,7 +211,6 @@ SRCS = ./src/syntax_analysis/parenthesis_parse.c \
 ./src/list_extensions/shremove_if.c \
 ./src/list_extensions/shfind_if.c \
 ./src/lifecycle/make_heredoc.c \
-./src/lifecycle/make_logfile.c \
 ./src/lifecycle/make_shell.c \
 ./src/lifecycle/destroys.c \
 ./src/lifecycle/make_export.c \
@@ -225,7 +222,6 @@ SRCS = ./src/syntax_analysis/parenthesis_parse.c \
 ./src/other/signals_vol_2.c \
 ./src/other/signals_vol_1.c \
 ./src/other/wildcard_vol_1.c \
-./src/other/logcmd.c \
 ./src/other/read_line.c \
 ./src/other/wildcard_vol_2.c \
 ./src/other/status_modifiers.c \

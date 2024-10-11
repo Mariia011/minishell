@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/11 11:05:49 by kali             ###   ########.fr       */
+/*   Updated: 2024/10/11 15:35:55 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@
 # define PIPE_MAX 2
 # define HEREDOC_MAX 16
 
-# define LOG_SEPARATOR "\n\n\n----------------------\n\n\n"
-
 # define MINISHELL_PROMPT "\033[1;35m\e[3mminishell\033[1;32m > $ \033[0m"
 
 struct				s_shell
@@ -60,7 +58,6 @@ struct				s_shell
 
 	t_ast			*ast;
 
-	t_fd			logfile;
 	char			*prompt;
 };
 
@@ -205,7 +202,6 @@ t_list				*make_partition(t_shell *shell, t_listnode *first,
 						t_listnode *last) __attribute__((warn_unused_result));
 t_cmd				**make_cmd_arr(t_list *tokens, t_shell *shell)
 					__attribute__((warn_unused_result));
-void				logcmd(const char *line, t_fd logfile);
 
 // list extensions
 size_t				shcount_if(t_listnode *first, t_listnode *last,
