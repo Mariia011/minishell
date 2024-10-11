@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:47:09 by marikhac          #+#    #+#             */
-/*   Updated: 2024/10/11 10:37:25 by kali             ###   ########.fr       */
+/*   Updated: 2024/10/11 10:44:52 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,9 @@ int		redirection_resolver(t_list *tokens, t_cmd *cmd);
 int		sort_tokens(t_cmd *cmd, t_list *tokens);
 void	merge_tokens(t_shell *shell, t_list *tokens);
 void	merge_redirections(t_list *tokens);
+
+void	merge_inside_quotes(t_list *tokens);
+void	merge_inside_quotes_the_good_part(t_list *tokens, t_listnode **t,
+				t_listnode **next);
 
 #endif // __MINISHELL_LEXER___H

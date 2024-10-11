@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   preprocessing.c                                    :+:      :+:    :+:   */
+/*   remove_spaces.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/09 17:21:34 by aamirkha          #+#    #+#             */
+/*   Created: 2024/10/11 10:42:49 by kali              #+#    #+#             */
 /*   Updated: 2024/10/11 10:43:05 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// handles redirections and $variables
-t_list	*preprocess(t_list *tokens, t_shell *shell)
+void	remove_spaces(t_shell *shell, t_list *tokens)
 {
-	if (empty(tokens) || !shell)
-		return (NULL);
-	dollar_sign_resolver(tokens, shell);
-	merge_tokens(shell, tokens);
-	remove_spaces(shell, tokens);
-	recover_variables(tokens, shell);
-	if (!syntax_analysis(tokens, shell))
+	t_listnode	*curr;
+	t_listnode	*next;
+
+	if (!shell || empty(tokens))
+		return ;
+	curr = shfind_if(tokens->head, tokens->tail, is_space_token, shell);
+	while (curr)
 	{
-		set_exit_status_no_of(258);
-		list_clear(&tokens);
+		next = curr->next;
+		pop(tokens, curr);
+		curr = shfind_if(next, tokens->tail, is_space_token, shell);
 	}
-	if (count_range(tokens, "<<") > HEREDOC_MAX)
-	{
-		list_clear(&tokens);
-		__t_shell__(shell);
-		__perror("maximum here-document count exceeded");
-		exit(2);
-	}
-	return (tokens);
 }
