@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/10 21:06:48 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/11 10:26:32 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@ t_cmd	*make_command(t_list *tokens, t_shell *shell)
 	t_listnode	*possible_name;
 
 	if (empty(tokens) || !shell)
+	{
+		if (empty(tokens))
+			list_clear(&tokens);
 		return (NULL);
+	}
 	cmd = make_command_core(tokens, shell);
 	return (cmd);
 }

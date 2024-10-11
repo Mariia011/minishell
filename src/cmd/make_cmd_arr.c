@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_cmd_arr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:29:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/10 22:07:38 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/11 10:26:32 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_cmd	**make_cmd_arr(t_list *tokens, t_shell *shell)
 
 	if (empty(tokens) || !shell)
 		return (NULL);
-	size = shcount_if(tokens->head, tokens->tail, is_special_symbol, shell) + 2;
+	size = shcount_if(tokens->head, tokens->tail, is_binary_operator, shell) + 2;
 	res = __calloc(sizeof(t_cmd *) * size);
 	res[size - 1] = NULL;
 	make_cmd_arr_core(tokens, shell, res);
