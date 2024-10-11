@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 18:57:53 by marikhac          #+#    #+#             */
-/*   Updated: 2024/10/10 22:01:37 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/11 15:17:48 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	__cd_no_arg__(t_cmd *cmd)
 		status = 1;
 		__perror("cd: HOME not set");
 	}
+	else if (string_equal(home, ""))
+		return ;
 	else
 		_chdir(cmd, home, &status);
 	set_exit_status(status);
