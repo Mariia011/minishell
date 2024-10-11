@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:19:13 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/11 11:36:02 by kali             ###   ########.fr       */
+/*   Updated: 2024/10/11 11:41:13 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,7 @@ void	pwd(t_cmd *cmd)
 	}
 	else
 	{
-		// path = __strdup(get_val(cmd->shell->export, "PWD"));
-		// if (!path || !(*path))
-		// {
-		// 	__delete_string(&path);
-			path = _getcwd(cmd->shell);
-		// }
+		path = _getcwd(cmd->shell);
 		printf("%s\n", path);
 		__delete_string(&path);
 	}
