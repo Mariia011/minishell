@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 18:57:53 by marikhac          #+#    #+#             */
-/*   Updated: 2024/10/11 15:17:48 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/11 16:42:55 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,10 @@ void	cd_minus(int *status, t_cmd *cmd)
 	if (!path || *path == '\0')
 	{
 		*status = 1;
-		__perror("cd: OLDPWD not set");
+		if (!path)
+			__perror("cd: OLDPWD not set");
+		else
+			printf("\n");
 	}
 	else
 	{
