@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:21:34 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/07 00:47:30 by kali             ###   ########.fr       */
+/*   Updated: 2024/10/11 10:38:58 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,18 @@ t_list	*preprocess(t_list *tokens, t_shell *shell)
 	return (tokens);
 }
 
-void	remove_spaces(t_shell *shell, t_list *tokens) // deprecated
+void	remove_spaces(t_shell *shell, t_list *tokens)
 {
 	t_listnode	*curr;
 	t_listnode	*next;
 
 	if (!shell || empty(tokens))
 		return ;
-	curr = front(tokens);
+	curr = shfind_if(tokens->head, tokens->tail, is_space_token, shell);
 	while (curr)
 	{
 		next = curr->next;
-		if (string_equal(curr->val, " ")
-			&& !find_addr(shell->quoted_tokens, curr))
-		{
-			pop(tokens, curr);
-		}
-		curr = next;
+		pop(tokens, curr);
+		curr = shfind_if(next, tokens->tail, is_space_token, shell);
 	}
 }

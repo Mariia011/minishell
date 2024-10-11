@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_eval.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 01:43:14 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/10 22:53:34 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/11 10:41:36 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ast_eval(t_ast *ast)
 	fds.stdin.author = NULL;
 	fds.stdout.fd = ast->shell->stddesc->stdout;
 	fds.stdout.author = NULL;
-	dfs(ast->root, ast, fds);
+	set_exit_status(dfs(ast->root, ast, fds));
 	while (-1 != wait(NULL))
 		;
 	dup2(ast->shell->stddesc->stdin, STDIN_FILENO);

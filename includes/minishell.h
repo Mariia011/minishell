@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/10 22:41:31 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/11 10:37:25 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,27 +97,9 @@ bool				__cmd_exists__(const char *path, const char *name);
 int					killall(t_ast *ast);
 
 // name predicates
-bool				is_quote(char *s);
-bool				is_single_redirection(char *val);
-bool				is_redirection(const char *val);
-bool				is_name(char *s);
-bool				is_alpha(const char c);
-bool				is_digit(const char c);
-bool				is_name_part(const char c);
-bool				not_name_part(char c);
 bool				find_addr(t_set *set, t_listnode *token);
 char				*get_orig_val(t_listnode *token, t_shell *shell);
 void				save_orig_value(t_listnode *address, t_shell *shell);
-
-bool				is_parenthesis_token(t_listnode *token, t_shell *shell);
-bool				not_parenthesis_token(t_listnode *token, t_shell *shell);
-bool				is_closing_parenthesis(char *text);
-bool				is_opening_parenthesis(char *text);
-bool				is_opening_parenthesis_token(t_listnode *token,
-						t_shell *shell);
-bool				is_closing_parenthesis_token(t_listnode *token,
-						t_shell *shell);
-bool				is_parenthesis(char *text);
 
 int					process_infile(t_ast_node *r);
 int					process_outfile(t_ast_node *r);
@@ -194,10 +176,7 @@ int					absolute_path_lookup(t_cmd *cmd);
 int					quote_parse(t_list *tokens);
 bool				not_space(t_listnode *node);
 
-bool				is_redirection_token(t_listnode *node, t_shell *shell);
-
 void				erase_quotes(t_list *tokens);
-bool				is_quote_node(t_listnode *const node);
 void				mark_quoted_tokens(t_shell *shell, t_list *tokens);
 
 // signals
@@ -221,8 +200,6 @@ int					pop_redirections(t_list *partition, t_shell *shell);
 bool				parenthesis_parse(t_list *tokens, t_shell *shell);
 
 bool				syntax_analysis(t_list *tokens, t_shell *shell);
-bool				is_invokable(t_cmd *cmd);
-bool				is_program(t_cmd *cmd);
 
 t_list				*make_partition(t_shell *shell, t_listnode *first,
 						t_listnode *last) __attribute__((warn_unused_result));
